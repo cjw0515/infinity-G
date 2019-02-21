@@ -8,7 +8,7 @@ const cors = require('cors')({origin: true});
 app.use(cors);
 
 app.get('/', (req, res) => {
-    res.send('hello world');
+    res.send('hello world111');
 })
 
 exports.v1 = functions.https.onRequest(app);
