@@ -1,6 +1,6 @@
 import TestComponent from '../components/TestComponent.vue'
 import TestComponent2 from '../components/TestComponent2.vue'
-
+import Login from '../components/Login/Login.vue'
 /**
  * path : 도메인을 제외한 url 경로를 지정
  * name: 이름을 정의
@@ -18,4 +18,9 @@ import TestComponent2 from '../components/TestComponent2.vue'
         name: 'TestComponent2',
         component: TestComponent2
     },    
+    {
+        path:'/login',
+        name: 'login',
+        component: Login
+    }    
  ]
