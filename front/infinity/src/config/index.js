@@ -1,10 +1,10 @@
 import firebase from 'firebase/app'
 
 let firebaseAppConfig = {
-    apiKey: "AIzaSyDgt6zindww-GZFIOLXsVcEhZijs631Rcw",
-    authDomain: "chatty-f2692.firebaseapp.com",
-    databaseURL: "https://chatty-f2692.firebaseio.com",
-    storageBucket: "chatty-f2692.appspot.com",
+    apiKey: process.env.VUE_APP_FIREBASE_APIKEY,
+    authDomain: process.env.VUE_APP_AUTHDOMAIN,
+    databaseURL: process.env.VUE_APP_DATABASEURL,
+    storageBucket: process.env.VUE_APP_STORAGEBUCKET,
   };
 
 const firebaseApp = firebase.initializeApp(firebaseAppConfig);  
