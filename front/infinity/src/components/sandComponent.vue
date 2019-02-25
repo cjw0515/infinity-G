@@ -1,10 +1,9 @@
-<!-- TabContainer.vue -->
 <template>
-   <div>안녕</div>
+    <div>두두</div>
+    
 </template>
-
 <script>
 export default {
-  
+     name: "sandboxcomponent"
 }
 </script>
