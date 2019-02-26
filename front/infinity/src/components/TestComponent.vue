@@ -3,7 +3,7 @@
 </template>
 
 <script>
-console.log(process.env.BASE_URL)
+console.log(process.env.VUE_APP_FIREBASE_APIKEY)
 export default {};
 </script>
 <style>
