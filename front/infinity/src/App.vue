@@ -1,10 +1,9 @@
-<template>
-  <div id="app">
-    <router-view/>
-  </div>
+<template>  
+    <Main></Main>      
 </template>
 
 <script>
+import Main from './views/Main.vue'
 export default {
   name: "app"
 };

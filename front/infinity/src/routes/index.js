@@ -6,7 +6,7 @@ import CodeEditor from '../views/tools/codeeditor.vue'
 import JsonView from '../views/tools/jsonview.vue'
 import Scrum from '../views/tools/scrumboard.vue'
 import Sandbox from '../views/sandbox.vue'
-
+import App from '../App.vue'
 /**
  * path : 도메인을 제외한 url 경로를 지정
  * name: 이름을 정의
@@ -16,7 +16,7 @@ import Sandbox from '../views/sandbox.vue'
  export default [
     {
         path:'/',
-        name: 'TestComponent',
+        name: 'App',
         component: TestComponent
     },    
     {
