@@ -5,13 +5,184 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title>infinity</title>
+    <title>infinity Band</title>
+    <!-- ========== Css Files ========== -->
+    <link href="<%= BASE_URL %>css/prism.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="<%= BASE_URL %>css/bootstrap.css">
+    <link href="<%= BASE_URL %>css/root.css" rel="stylesheet">
   </head>
   <body>
-    <noscript>
-      <strong>We're sorry but infinity doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
+    
+<!-- Start Page Loading -->
+<div class="loading"><img src="img/loading.gif" alt="loading-img"></div>
+<!-- End Page Loading -->
+<!-- //////////////////////////////////////////////////////////////////////////// --> 
+<!-- START TOP -->
+<div id="top" class="clearfix">
+
+  <!-- Start App Logo -->
+  <div class="applogo">
+    <a href="/" class="logo">Infinity <span>Band</span></a>
+  </div>
+  <!-- End App Logo -->
+
+  <!-- Start Sidebar Show Hide Button -->
+  <a href="javascript:void(0);" class="sidebar-open-button"><i class="fa fa-bars"></i></a>
+  <a href="javascript:void(0);" class="sidebar-open-button-mobile"><i class="fa fa-bars"></i></a>
+  <!-- End Sidebar Show Hide Button -->
+
+  <!-- Start Searchbox -->
+  <form class="searchform">
+    <input type="text" class="searchbox" id="searchbox" placeholder="Search">
+    <span class="searchbutton"><i class="fa fa-search"></i></span>
+  </form>
+  <!-- End Searchbox -->
+
+  <!-- Start Top Menu -->
+  <ul class="topmenu">
+    <li><a href="javascript:void(0);">젠킨스</a></li>
+    <li><a href="javascript:void(0);">파이어베이스</a></li>
+    <li><a href="javascript:void(0);">회원가입</a></li>
+    <li><a href="javascript:void(0);">로그인</a></li>    
+    <li class="dropdown">
+      <a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">알림 <span class="caret"></span></a>
+      <ul class="dropdown-menu">
+        <li><a href="javascript:void(0);">알림1</a></li>
+        <li><a href="javascript:void(0);">알림2</a></li>
+        <li><a href="javascript:void(0);">로그아웃</a></li>
+      </ul>
+    </li>
+  </ul>
+  <!-- End Top Menu -->
+
+</div>
+<!-- END TOP -->
+<!-- //////////////////////////////////////////////////////////////////////////// --> 
+
+
+<!-- //////////////////////////////////////////////////////////////////////////// --> 
+<!-- START SIDEBAR -->
+<div class="sidebar clearfix">
+<div id="documenter_sidebar">
+  <div id="scrollholder" class="scrollholder">
+    <div id="scroll" class="scroll">
+      <ol id="documenter_nav" class="sidebar-panel nav">
+        <li><a class="current" href="#documenter-1"><i class="fa fa-home"></i> Home</a></li>
+        <li><a href="#documenter-2"><i class="fa fa-code"></i> 밴드만들기 </a> </li>
+        <li><a href="#documenter-3"><i class="fa fa-flask"></i> 밴드목록 </a>
+           
+        </li>
+        <li><a href="#documenter-4"><i class="fa fa-th"></i> 게시판 </a>
+          <ol>
+            <li><a href="#documenter-4-1">보통게시판</a></li>
+            <li><a href="#documenter-4-2">갤러리</a></li>
+          </ol>
+        </li>
+        
+      </ol>
+      <ul class="sidebar-panel nav">
+        <li class="sidetitle"><span>More</span></li>
+        <li><a href="/tools/code"><i class="fa fa-link"></i> 코드에디터</a></li>
+        <li><a href="/tools/json"><i class="fa fa-link"></i> JsonViewer</a></li>
+        <li><a href="/tools/scrum"><i class="fa fa-link"></i> Scrum Board</a></li>
+        <li><a href="/sandbox"><i class="fa fa-link"></i> Sandbox</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+
+</div>
+<!-- END SIDEBAR -->
+<!-- //////////////////////////////////////////////////////////////////////////// --> 
+
+<!-- //////////////////////////////////////////////////////////////////////////// --> 
+<!-- START CONTENT -->
+<div class="content">
+<!-- Start Page Header -->
+<div id="app"></div>
+<!-- End Page Header -->
+
+<!-- START CONTAINER -->
+
+
+<!-- Start Footer -->
+<div class="row footer">
+  <div class="col-md-6 col-xs-6 text-left">
+    Copyright © 2019 <a href="#" target="_blank">Infinity Band</a> All rights reserved.
+  </div>
+  <div class="col-md-6 col-xs-6 text-right">
+    Develop by <a href="#" target="_blank">Infinity</a>
+  </div>
+</div>
+<!-- End Footer -->
+</div>
+
+<!-- END CONTAINER -->
+<!-- //////////////////////////////////////////////////////////////////////////// --> 
+
+
+
+
+<!-- End Content -->
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+
+
+<!-- ================================================
+jQuery Library
+================================================ -->
+  <script src="<%= BASE_URL %>js/jquery.1.6.4.js"></script>
+  <script src="<%= BASE_URL %>js/jquery.min.js"></script>
+  <script src="<%= BASE_URL %>js/jquery.min.js"></script>
+
+<!-- ================================================
+Bootstrap Core JavaScript File
+================================================ -->
+<script src="<%= BASE_URL %>js/bootstrap/bootstrap.min.js"></script>
+
+
+<!-- ================================================
+Plugin.js - Some Specific JS codes for Plugin Settings
+================================================ -->
+<script src="<%= BASE_URL %>js/plugins.js"></script>
+
+<!-- ================================================
+Data Tables
+================================================ -->
+<script src="<%= BASE_URL %>js/datatables/datatables.min.js"></script>
+
+<!-- ================================================
+jQuery UI
+================================================ -->
+<script src="<%= BASE_URL %>js/jquery-ui/jquery-ui.min.js"></script>
+
+<!-- ================================================
+Moment.js
+================================================ -->
+<script src="<%= BASE_URL %>js/moment/moment.min.js"></script>
+
+<!-- ================================================
+Prism
+================================================ -->
+<script src="<%= BASE_URL %>js/prism.js"></script>
+  <script>document.createElement('section');
+  var duration = 500, easing = 'swing';</script>
+  <!-- ================================================
+Sidebar Scroll
+================================================ -->
+  <!-- ================================================
+Scroll
+================================================ -->
+<script src="<%= BASE_URL %>js/jquery.scrollTo-1.4.2-min.js"></script>
+<script src="<%= BASE_URL %>js/jquery.easing.js"></script>
+<script src="<%= BASE_URL %>js/script.js"></script>
+<script src="<%= BASE_URL %>js/scroll.js"></script>
+<script src="<%= BASE_URL %>js/common.js"></script>
+<script src="<%= BASE_URL %>js/jquery.mobile-menu.min.js"></script>
+
+
+
+    
     <!-- built files will be auto injected -->
   </body>
 </html>
