@@ -4,6 +4,7 @@ import TestComponent3 from '../components/TestComponent3.vue'
 import CodeEditor from '../views/tools/codeeditor.vue'
 import JsonView from '../views/tools/jsonview.vue'
 import Scrum from '../views/tools/scrumboard.vue'
+import Sandbox from '../views/sandbox.vue'
 
 /**
  * path : 도메인을 제외한 url 경로를 지정
@@ -37,5 +38,9 @@ import Scrum from '../views/tools/scrumboard.vue'
         path:'/tools/scrum',
         name: 'Scrum',
         component: Scrum
+    },{
+        path:'/sandbox',
+        name: 'Sandbox',
+        component: Sandbox
     },    
  ]
