@@ -21,6 +21,7 @@ import Main from '../views/Main.vue'
         children: [
             {
                 path: 'login',
+                name: 'login',
                 component: Login
             }
         ]        
