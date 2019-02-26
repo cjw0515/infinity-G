@@ -1,10 +1,14 @@
 import TestComponent from '../components/TestComponent.vue'
 import TestComponent2 from '../components/TestComponent2.vue'
+
 import TestComponent3 from '../components/TestComponent3.vue'
 import CodeEditor from '../views/tools/codeeditor.vue'
 import JsonView from '../views/tools/jsonview.vue'
 import Scrum from '../views/tools/scrumboard.vue'
 import Sandbox from '../views/sandbox.vue'
+
+
+import Login from '../components/Login/Login.vue'
 
 /**
  * path : 도메인을 제외한 url 경로를 지정
@@ -43,4 +47,9 @@ import Sandbox from '../views/sandbox.vue'
         name: 'Sandbox',
         component: Sandbox
     },    
+    {
+        path:'/login',
+        name: 'login',
+        component: Login
+    }    
  ]
