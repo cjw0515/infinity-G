@@ -1,14 +1,20 @@
 <template>
-    <div class="content">
-        <Content></Content>
-        <Footer></footer>
-    </div>
+  <div class="content">
+    <Container></Container>
+    <Footer></Footer>
+  </div>
 </template>
 
 <script>
-import Footer from './Footer.vue'
-import Content from './Content.vue'
-export default {};
+import Container from "./Container.vue";
+import Footer from "./Footer.vue";
+
+export default {
+  components: {
+    Container,
+    Footer
+  }
+};
 </script>
 
 <style>

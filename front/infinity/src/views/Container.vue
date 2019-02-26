@@ -1,12 +1,10 @@
 <template>
-    <div class="content">
-        <router-view/>
-        <Footer></Footer>
-    </div>
+  <div>
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
-import Footer from './Footer.vue'
 export default {};
 </script>
 <style>
