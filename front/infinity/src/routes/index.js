@@ -1,15 +1,12 @@
 import TestComponent from '../components/TestComponent.vue'
 import TestComponent2 from '../components/TestComponent2.vue'
-<<<<<<< HEAD
 import Login from '../components/Login/Login.vue'
-=======
 import TestComponent3 from '../components/TestComponent3.vue'
 import CodeEditor from '../views/tools/codeeditor.vue'
 import JsonView from '../views/tools/jsonview.vue'
 import Scrum from '../views/tools/scrumboard.vue'
 import Sandbox from '../views/sandbox.vue'
 
->>>>>>> feature/week1
 /**
  * path : 도메인을 제외한 url 경로를 지정
  * name: 이름을 정의
