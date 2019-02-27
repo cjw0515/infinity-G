@@ -7,6 +7,7 @@ import JsonView from '../views/tools/jsonview.vue'
 import Scrum from '../views/tools/scrumboard.vue'
 import Sandbox from '../views/sandbox.vue'
 import Main from '../views/Main.vue'
+import Todokki from '../views/todokki/todomain.vue'
 /**
  * path : 도메인을 제외한 url 경로를 지정
  * name: 이름을 정의
@@ -23,6 +24,12 @@ import Main from '../views/Main.vue'
                 path: 'login',
                 name: 'login',
                 component: Login
+            },
+            {
+                path:'todokki',
+                name:'TodoKKi',
+                component:Todokki
+
             }
         ]        
     },    
@@ -50,5 +57,5 @@ import Main from '../views/Main.vue'
         path:'/sandbox',
         name: 'Sandbox',
         component: Sandbox
-    }
+    } 
  ]

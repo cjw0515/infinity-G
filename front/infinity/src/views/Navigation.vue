@@ -21,7 +21,9 @@
                 <li><a href="/tools/code"><i class="fa fa-link"></i> 코드에디터</a></li>
                 <li><a href="/tools/json"><i class="fa fa-link"></i> JsonViewer</a></li>
                 <li><a href="/tools/scrum"><i class="fa fa-link"></i> Scrum Board</a></li>
-                <li><a href="/sandbox"><i class="fa fa-link"></i> Sandbox</a></li>            
+                <li><a href="/sandbox"><i class="fa fa-link"></i> Sandbox</a></li>    
+                <li><a href="/todokki"><i class="fa fa-link"></i> Todokki</a></li>    
+                        
             </ul>
             </div>
         </div>
