@@ -33,24 +33,24 @@
               </ol>
             </li>
             <li>
-              <a href="#documenter-5">
+              <a href="javascript:void(0)">
                 <i class="fa fa-th"></i> todolist
               </a>
               <ol>
                 <li>
-                  <a href="#documenter-5-1">이종화</a>
+                  <router-link to="/todolists/TodoComponent1">이종화</router-link>
                 </li>
                 <li>
-                  <a href="#documenter-5-2">김광일</a>
+                  <router-link to="/todolists/TodoComponent2">김광일</router-link>
                 </li>
                 <li>
-                  <a href="#documenter-5-3">임보라</a>
+                  <router-link to="/todolists/TodoComponent3">임보라</router-link>
                 </li>
                 <li>
-                  <a href="#documenter-5-4">최종원</a>
+                  <router-link to="/todolists/TodoComponent4">최종원</router-link>
                 </li>
                 <li>
-                  <a href="#documenter-5-5">김송이</a>
+                  <router-link to="/todolists/TodoComponent5">김송이</router-link>
                 </li>
               </ol>
             </li>

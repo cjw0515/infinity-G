@@ -19,11 +19,11 @@ import TodoComponent5 from "./TodoComponent5.vue";
 // } from "./";
 
 let currentComponentName = TodoComponent4;
-
+// console.log(this.name);
 export default {
   data() {
     return {
-      currentView: TodoComponent4
+      currentView: this.name
     };
   },
   components: {
@@ -32,6 +32,13 @@ export default {
     TodoComponent3,
     TodoComponent4,
     TodoComponent5
+  },
+  props: ["name"],
+  created: function() {
+    console.log("created");
+  },
+  beforeUpdate: function() {
+    console.log("beforeUpdate");
   }
 };
 </script>

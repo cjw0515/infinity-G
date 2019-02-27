@@ -29,7 +29,7 @@ import TodoContainer from '../components/todolists/TodoContainer.vue'
                 path:'/todolists/:name',
                 name: 'todolists',
                 component: TodoContainer,                
-                props: { newsletterPopup: true }
+                props: true 
             }            
         ]        
     },        
