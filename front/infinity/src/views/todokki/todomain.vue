@@ -44,7 +44,7 @@ export default {
                 }
           },
           deleteTodo(i){
-              this.todos.splice(0,1);
+              this.todos.splice(i,1);
           }
       }
   }   
