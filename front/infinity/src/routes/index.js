@@ -7,6 +7,7 @@ import JsonView from '../views/tools/jsonview.vue'
 import Scrum from '../views/tools/scrumboard.vue'
 import Sandbox from '../views/sandbox.vue'
 import Main from '../views/Main.vue'
+import TodoContainer from '../components/todolists/TodoContainer.vue'
 /**
  * path : 도메인을 제외한 url 경로를 지정
  * name: 이름을 정의
@@ -22,10 +23,16 @@ import Main from '../views/Main.vue'
             {
                 path: 'login',
                 name: 'login',
-                component: Login
-            }
+                component: Login                
+            },
+            {
+                path:'/todolists/:name',
+                name: 'todolists',
+                component: TodoContainer,                
+                props: { newsletterPopup: true }
+            }            
         ]        
-    },    
+    },        
     {
         path:'/storeTest',
         name: 'TestComponent2',
