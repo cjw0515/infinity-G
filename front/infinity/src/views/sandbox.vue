@@ -1,5 +1,12 @@
 <template >
+
+
    <div>
+   
+ 
+  <vuenut :store="$store.state"/>
+ 
+
       <sandcoponent></sandcoponent>
       <p>{{ message }}</p>
       
@@ -13,7 +20,9 @@
    <button v-on:click="message='cccc'" >
       ffff
    </button>
-
+ <div class="con-my-app">
+        <vuenut :store='$store.state'/>
+      </div>
       </div>      
 </template>
 <script>
@@ -45,4 +54,5 @@ export default {
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
+ 
 </style>
