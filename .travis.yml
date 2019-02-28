@@ -1,1 +1,13 @@
 language: node_js
+node_js:
+  - "lts/*"
+
+before_install:
+  - cd $TRAVIS_BUILD_DIR/front/infinity/  
+
+install:
+  - npm install
+
+script:
+  - npm run build
+  - npm run lint
