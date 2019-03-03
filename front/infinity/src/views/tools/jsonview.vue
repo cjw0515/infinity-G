@@ -1,52 +1,26 @@
 <template>
-<div>
+
 <div class="page-header">
   <h1 class="title">Json Viewer</h1>
     <div class="discription">
-      <span class="active">Json Viewer</span> 
-  </div>
-</div>
-
-<div class="container">
-<!-- Start Top Stats -->
-   <div class="mb-20">
-                <div class="">
-                  <h4>Json Beautifuler</h4>
-                 <div id="documenter-3-1" class="method">
-        <div class="method-area">
-          <div class="method-copy">
-            <div >
-              <div class="mb-20">
-                <div class="">                  
-                  <div class="col-md-5 col-sm-4"><i class="fa fa-adjust" aria-hidden="true"></i> Text</div>
-                  <div class="col-md-1 col-sm-4">&nbsp;</div>
-                  <div class="col-md-6 col-sm-4"><i class="fa fa-anchor" aria-hidden="true"></i> Convert</div>
-                  <div class="col-md-5">
-                  <textarea class="col-md-12" style="height:600px" />
-                  </div>
-                  <div class="col-md-1" >
-                    <a href="#" class="btn btn-default">Convert</a>
-                    <a href="#" class="btn btn-default">Convert</a>
-                  </div>
-                  <div class="col-md-6">
-                  <textarea class="col-md-12" style="height:600px"/>
-                  </div>
-              
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-                </div>
-              </div>
-
-</div> 
+      <span class="active">Json Viewer</span>       
+    </div>
+     {{MSG}}
 </div>
 </template>
 <script>
-export default {};
+import {myvar} from './Toolglobal.vue'
+
+export default {  
+   name:'json',
+   data(){     
+       return  {
+                MSG:myvar
+              } 
+      }
+};
 </script>
 <style>
+
+
 </style>

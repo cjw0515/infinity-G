@@ -22,8 +22,9 @@
                 <li><a href="/tools/json"><i class="fa fa-link"></i> JsonViewer</a></li>
                 <li><a href="/tools/scrum"><i class="fa fa-link"></i> Scrum Board</a></li>
                 <li><a href="/sandbox"><i class="fa fa-link"></i> Sandbox</a></li>    
-                <li><a href="/todokki"><i class="fa fa-link"></i> Todokki</a></li>    
-                        
+                <li><a href="/todokki"><i class="fa fa-link"></i> Todokki</a></li>                   
+               <li><a href="/tools/commonboard"><i class="fa fa-link"></i> board</a></li>    
+               <li><a href="/view/testpage.html"><i class="fa fa-link"></i> htmlpage</a></li>    
             </ul>
             </div>
         </div>

@@ -8,7 +8,8 @@ import Scrum from '../views/tools/scrumboard.vue'
 import Sandbox from '../views/sandbox.vue'
 import Main from '../views/Main.vue'
 import Todokki from '../views/todokki/todomain.vue'
- 
+import Board from '../views/board/BoardMain.vue'
+
 /**
  * path : 도메인을 제외한 url 경로를 지정
  * name: 이름을 정의
@@ -43,7 +44,13 @@ import Todokki from '../views/todokki/todomain.vue'
                 path:'/tools/scrum',
                 name: 'Scrum',
                 component: Scrum
+            },{
+                path:'/tools/commonboard',
+                name: 'Board',
+                component: Board
             }
+
+            
         ]        
     },    
     {
