@@ -1,10 +1,15 @@
 <template>
-  <div>helloworld1</div>
+    <div>
+        내용1
+    </div>
 </template>
 
 <script>
+export default {
 
-export default {};
+}
 </script>
+
 <style>
+
 </style>
