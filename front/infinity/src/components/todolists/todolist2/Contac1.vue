@@ -1,5 +1,5 @@
 <template>
-    <div>
+   <div style="background-color:rgb(222, 255, 128);">
         내용1
         {{message}} /
         {{todo.no}} /
