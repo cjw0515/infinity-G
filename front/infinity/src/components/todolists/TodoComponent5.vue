@@ -6,7 +6,7 @@
       <TodoList v-bind:tododata="todos" v-on:delTodo="delTodo" ></TodoList>
       
       <TodoContact ></TodoContact>
-      <component :is="currentView"></component>
+      <component :is="currentView" :todo="todo" ></component>
       <TodoFooter></TodoFooter>
   </div>
 </template>
@@ -32,8 +32,7 @@ export default {
       this.fetchCompo(0);
       eventBus.$on("CallContainer", (no) => {
           this.currentView = null;
-          this.fetchCompo(no);
-          
+          this.fetchCompo(no);          
           
       });
     },
@@ -62,6 +61,7 @@ export default {
             this.currentView=ContainerMain;
             break;
             case 1:
+            this.todo={no:1,name:'이름',address:'주소'};
             this.currentView=Contac1;
             break;
             case 2:
