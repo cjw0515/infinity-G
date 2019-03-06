@@ -1,10 +1,13 @@
 <template>
-  <div>helloworld1</div>
+    <div>Footer</div>
 </template>
 
 <script>
+export default {
 
-export default {};
+}
 </script>
+
 <style>
+
 </style>
