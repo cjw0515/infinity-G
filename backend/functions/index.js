@@ -12,11 +12,16 @@ app.get('/', (req, res) => {
 })
 
 app.get('/todolist', (req, res) => {
-    let cname = req.body;
-    res.send(req.body)
-    // createTodo(cname);
-    // res.header('Content-Type', 'application/json; charset=utf-8');
-    // res.status(201).json({result: 'ok'});
+    let todoRef = admin.database().ref('todolist');
+    todoRef.once('value', (snapshot) => {
+        let items = new Array();
+        snapshot.forEach((childSnapshot) => {
+            let todo = childSnapshot;
+            items.push(todo);
+        })
+        res.header('Content-Type', 'application/json; charset=utf-8')
+        res.send({todoList: items});
+    })
 });
 
 app.post('/todolist', (req, res) => {    
@@ -29,7 +34,7 @@ app.post('/todolist', (req, res) => {
         // body: req.body.body,
         // user: req.user        
     };
-    let messagesRef = admin.database().ref(`todolist/todos`);
+    let messagesRef = admin.database().ref(`todolist/`);
     messagesRef.push(message);
     res.header('Content-Type', 'application/json; charset=utf-8');
     res.status(201).send({result: "ok"});

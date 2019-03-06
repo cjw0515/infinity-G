@@ -1,7 +1,7 @@
 <template>
     <div>
         <ul>
-            <li v-for="(todo, index) in propsData" :key="index">{{todo}}
+            <li v-for="(todo, index) in propsData" :key="index">{{todo.todo}}
                 <button v-on:click="deleteTodo(index)">삭제</button>
             </li>
         </ul>

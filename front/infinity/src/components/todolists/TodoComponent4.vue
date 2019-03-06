@@ -16,10 +16,9 @@ import TodoList from './todolist4/TodoList.vue'
 export default {
   data(){
     return{
-      todos: ["씻기","밥먹기","일하기"]
+      todos: []
     }
-  }
-  ,
+  },
   methods:{
     //삽입
     addTodo(text){
@@ -35,6 +34,23 @@ export default {
     TodoInput,
     Footer,
     TodoList
+  },
+  mounted: function(){
+    async function fetch_api(){
+      let apiUrl = process.env.VUE_APP_ENV == "development" ? 
+      'http://localhost:5001/infinity-g-cd058/us-central1/v1/todolist' 
+      : 'https://us-central1-demoapp-1779c.cloudfunctions.net/v1/todolist'
+      // console.log(apiUrl)  
+      const response = await fetch(apiUrl)
+      const json = await response.json();    
+      // this.todos = json.todoList;
+      return json.todoList;
+    }
+    this.todos = fetch_api().then(data => {
+      this.todos = data       
+    }).catch(error => {
+      console.error(error)
+    });    
   }
 };
 </script>
