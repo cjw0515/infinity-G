@@ -8,6 +8,8 @@
       <TodoContact ></TodoContact>
       <component :is="currentView" :todo="todo" ></component>
       <TodoFooter></TodoFooter>
+      {{Showmsg}}
+      <button @click="action_list()" >show</button>
   </div>
 </template>
 <script>
@@ -21,6 +23,8 @@ import Contac2  from './todolist2/Contac2.vue';
 import Contac3  from './todolist2/Contac3.vue';
 import ContainerMain  from './todolist2/ContainerMain.vue';
 import eventBus from '../../EventBus.js';
+import Contants from '../../config/constans.js';
+
 
 export default {
     name:"Todo",
@@ -32,8 +36,7 @@ export default {
       this.fetchCompo(0);
       eventBus.$on("CallContainer", (no) => {
           this.currentView = null;
-          this.fetchCompo(no);          
-          
+          this.fetchCompo(no); 
       });
     },
 
@@ -41,7 +44,8 @@ export default {
       return {
         todo:{no:0,name:'',address:''},        
         todos :["아예","우예","저예"],
-        currentView:null
+        currentView:null,
+        Showmsg :Contants.HELLO
       }
     },
     methods:{
@@ -71,7 +75,28 @@ export default {
             this.currentView=Contac3;
             break;
           }
+        },
+        async Call_Test(){
+             let apiUrl=Contants.HELLO
+             const response = await fetch(apiUrl)
+             const rtdata= await response.text();
+             alert(rtdata);
+        },
+        async Call_Todo(){
+          console.log(Contants.TODO_LIST);
+          const response = await fetch(Contants.TODO_LIST);
+          const  json =await response.json();
+          return json.todoList;
+        },
+        action_list:function(){
+             this.todos = this.Call_Todo().then(data=>{
+               this.todos=data
+             }).catch(error=>{
+                console.error(error);
+             });
         }
+
+         
     }
 
   
