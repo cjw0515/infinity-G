@@ -16,8 +16,12 @@ install:
 script:
   - npm run build
   
+after_script:
+  - cd $TRAVIS_BUILD_DIR/backend/
+
+after_success:
+  - firebase deploy --token $FIREBASE_TOKEN
+
 #https://docs.travis-ci.com/user/deployment/firebase/#generating-your-firebase-token
-deploy:
-  - proviter: firebase
-  token:
-    secure: ""
+
+    
