@@ -2,8 +2,8 @@
     <div>
         <h3>할일리스트</h3>
     <ul>
-         <li v-for="(todo,index) in tododata" :key ="index">  {{todo}} 
-           <button v-on:click="delTodo(index)" >삭제</button></li>
+         <li v-for="(todo,index) in tododata" :key ="index">  {{todo.Title}} 
+           <button v-on:click="delTodo(todo.Uid)" >삭제</button></li>
     </ul>
     </div>
 </template>
