@@ -30,7 +30,13 @@ import TodoContainer from '../components/todolists/TodoContainer.vue'
                 name: 'todolists',
                 component: TodoContainer,                
                 props: true 
-            }            
+            } ,
+            {
+                path:'/tools/scrum',
+                name: 'Scrum',
+                component: Scrum,                
+                props: true 
+            }           
         ]        
     },        
     {
@@ -49,13 +55,9 @@ import TodoContainer from '../components/todolists/TodoContainer.vue'
         path:'/tools/json',
         name: 'JsonView',
         component: JsonView
-    },{
-        path:'/tools/scrum',
-        name: 'Scrum',
-        component: Scrum
-    },{
+    } ,{
         path:'/sandbox',
         name: 'Sandbox',
         component: Sandbox
-    }
+    } 
  ]
