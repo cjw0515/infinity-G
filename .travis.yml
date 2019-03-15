@@ -15,7 +15,7 @@ branches:
 
 before_install:   
   - npm install -g firebase-tools
-  - cd $TRAVIS_BUILD_DIR/  
+  - cd $TRAVIS_BUILD_DIR/backend/  
   - |
     if [ $TRAVIS_BRANCH = "master" ]; then
       firebase use infinity-g      
