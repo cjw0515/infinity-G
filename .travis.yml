@@ -23,7 +23,7 @@ before_install:
       firebase use infinity-g-dev
     fi
 
-    firebase functions:config:get > front/infinity/src/config/runtimeconfig.json      
+    firebase functions:config:get > ../front/infinity/src/config/runtimeconfig.json      
 install:  
 #백엔드 의존성 설치
   - cd $TRAVIS_BUILD_DIR/backend/functions/      
