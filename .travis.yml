@@ -3,31 +3,40 @@ node_js:
   - "lts/*"
 
 #This caches $HOME/.npm or node_modules, depending on the repository’s structure.
-cache:
-  directories:
-    - node_modules
+cache: npm
     
 # safelist
 branches:
   only:
   - master  
+  - develop  
 
 #[skip <빌드스킵>]
 
-before_install:
+before_install:   
   - npm install -g firebase-tools
-  - cd $TRAVIS_BUILD_DIR/backend/functions/    
+  - cd $TRAVIS_BUILD_DIR/  
+  - |
+    if [ $TRAVIS_BRANCH = "master" ]; then
+      firebase use infinity-g      
+    else
+      firebase use infinity-g-dev
+    fi
+
+    firebase functions:config:get > front/src/config/runtimeconfig.json      
+install:  
+#백엔드 의존성 설치
+  - cd $TRAVIS_BUILD_DIR/backend/functions/      
   - npm install
+#프론트엔드 의존성 설치  
   - cd $TRAVIS_BUILD_DIR/front/infinity/  
-  - npm install
-
-script:
-  - npm run build
+  - npm install  
+#프론트엔드 빌드  
+  - npm run build  
+before_deploy:
   - cd $TRAVIS_BUILD_DIR/backend/  
-
 after_success:
-  - firebase deploy --token $FIREBASE_TOKEN
-
-#https://docs.travis-ci.com/user/deployment/firebase/#generating-your-firebase-token
+#배포
+  - firebase deploy --token $FIREBASE_TOKEN        
 
     

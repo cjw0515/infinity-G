@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "infinity-g-cd058"
+    "infinity-g": "infinity-g-cd058",
+    "infinity-g-dev": "infinity-g-dev"
   }
 }
