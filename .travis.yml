@@ -34,9 +34,10 @@ install:
 #프론트엔드 빌드  
   - npm run build  
 before_deploy:
-  - cd $TRAVIS_BUILD_DIR/backend/  
+  
 after_success:
 #배포
+  - cd $TRAVIS_BUILD_DIR/backend/  
   - firebase deploy --token $FIREBASE_TOKEN        
 
     
