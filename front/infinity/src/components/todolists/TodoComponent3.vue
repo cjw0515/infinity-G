@@ -1,120 +1,126 @@
 <template>
   <div id="app">
-    <Header />
-    <TodoList 
+    <Header/>
+    <TodoList
       :todosData="filteredTodos"
       :edit="edit"
       @setEdit="setEdit"
       @editTodo="editTodo"
       @removeTodo="removeTodo"
-      @toggleIsDone="toggleIsDone" />
-    <Footer :count="filteredTodos.length" @setFilterType="setFilterType" />
-    <TodoInput @addTodo="addTodo" />
-    <Spec />
+      @toggleIsDone="toggleIsDone"
+    />
+    <Footer :count="filteredTodos.length" @setFilterType="setFilterType"/>
+    <TodoInput @addTodo="addTodo"/>
+    <Spec/>
   </div>
 </template>
 
 <script>
-import Header from './components/Header'
-import TodoInput from './components/TodoInput'
-import TodoList from './components/TodoList'
-import Footer from './components/Footer'
-import Spec from './components/Spec'
+import Header from "./todolist3/Header.vue";
+import TodoInput from "./todolist3/TodoInput.vue";
+import TodoList from "./todolist3/TodoList.vue";
+import Footer from "./todolist3/Footer.vue";
+import Spec from "./todolist3/Spec.vue";
 
 export default {
-  name:'app',
-  components:{
+  name: "app",
+  components: {
     Header,
     TodoInput,
     TodoList,
     Footer,
     Spec
   },
-  data(){
+  data() {
     return {
       todos: [
         {
-          date: new Date,
-          text: 'HTML',
+          date: new Date(),
+          text: "HTML",
           isDone: true
         },
         {
-          date: new Date,
-          text: 'CSS',
+          date: new Date(),
+          text: "CSS",
           isDone: true
         },
         {
-          date: new Date,
-          text: 'Javascript',
+          date: new Date(),
+          text: "Javascript",
           isDone: false
         },
         {
-          date: new Date,
-          text: 'Vue',
+          date: new Date(),
+          text: "Vue",
           isDone: false
         }
       ],
-      edit:{
+      edit: {
         index: -1,
-        text: ''
+        text: ""
       },
-      filterType: 'all'
-    }
+      filterType: "all"
+    };
   },
-  methods:{
-    addTodo(text){
-      this.todos = [...this.todos, {
-        date: new Date,
-        text,
-        isDone: false
-      }]
+  methods: {
+    addTodo(text) {
+      this.todos = [
+        ...this.todos,
+        {
+          date: new Date(),
+          text,
+          isDone: false
+        }
+      ];
     },
-    removeTodo(date){
-      this.todos = this.todos.filter((todo) => todo.date !== date)
+    removeTodo(date) {
+      this.todos = this.todos.filter(todo => todo.date !== date);
     },
-    setEdit(index,text){
-      alert( (index+1) + "번째 글 '" + text + "' 수정시작~")
-      this.edit = { index, text }
+    setEdit(index, text) {
+      alert(index + 1 + "번째 글 '" + text + "' 수정시작~");
+      this.edit = { index, text };
     },
-    editTodo(text){
-      alert(text + "로 수정됩니다.")
-      const newTodos = [...this.todos]
-      const { index } = this.edit
-      
-      newTodos[index] = {...newTodos[index],text}
-      this.todos = newTodos
-      this.edit = {}
+    editTodo(text) {
+      alert(text + "로 수정됩니다.");
+      const newTodos = [...this.todos];
+      const { index } = this.edit;
+
+      newTodos[index] = { ...newTodos[index], text };
+      this.todos = newTodos;
+      this.edit = {};
     },
-    toggleIsDone(date){
-      const newTodos = [...this.todos]
-      const todo = newTodos.find( (todo) => todo.date === date )
-      if(todo){
-        todo.isDone = !todo.isDone
-        this.todos = newTodos
+    toggleIsDone(date) {
+      const newTodos = [...this.todos];
+      const todo = newTodos.find(todo => todo.date === date);
+      if (todo) {
+        todo.isDone = !todo.isDone;
+        this.todos = newTodos;
       }
     },
     setFilterType(type) {
-      this.filterType = type
+      this.filterType = type;
     }
   },
   computed: {
-    filteredTodos(){
-      switch (this.filterType){
-        case 'active': {
-          return [...this.todos.filter( (todo) => !todo.isDone )]
+    filteredTodos() {
+      switch (this.filterType) {
+        case "active": {
+          return [...this.todos.filter(todo => !todo.isDone)];
         }
-        case 'complete': {
-          return [...this.todos.filter( (todo) => todo.isDone )]
+        case "complete": {
+          return [...this.todos.filter(todo => todo.isDone)];
         }
         default: {
-          return [...this.todos]
+          return [...this.todos];
         }
       }
     }
   }
-}
+};
 </script>
 
 <style>
-body {text-align:center;}
+body {
+  text-align: center;
+}
 </style>
