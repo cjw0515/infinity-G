@@ -1,4 +1,6 @@
 {
-  "runtimeconfig": {
+  "runtimeconfig": {},
+  "apiurl": {
+    "url": ""
   }
 }
