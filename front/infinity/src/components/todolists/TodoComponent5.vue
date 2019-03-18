@@ -127,7 +127,7 @@ export default {
                   'Accept': 'application/json',
               })
             });
-           await this.Call_TodoList();;
+           await this.Call_TodoList();
         } 
 
          

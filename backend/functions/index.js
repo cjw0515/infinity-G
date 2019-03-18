@@ -135,6 +135,90 @@ app.post('/kki',(req,res)=>{
         }); 
     })
 
+    /*
+       CAVANA BOARD/* kkitodo 
+            C R U D
+
+*/
+const dbCavanname='/cavan';
+
+
+app.post('/cavan',(req,res)=>{
+    /*
+    if(!req.body["password"] || !req.body["name"]){
+               result["success"] = 0;
+               result["error"] = "invalid request";
+               res.json(result);
+               return;
+           }
+    */ 
+       let message = {
+           date: new Date().toJSON(),
+           kind : req.body["kind"],
+           titledata:  req.body["titledata"],
+           todoval:  req.body["todoval"],
+           pri:  req.body["pri"],
+           id: req.body["id"]  
+       }; 
+       return  admin.database().ref(dbCavanname).push(message).then((snapshot)=>
+       { 
+              //return res.redirect(303,snapshot.ref.toString()); 
+           
+           return res.send(snapshot);
+       }
+       );  
+   })
+
+
+   app.get('/cavan/list',(req,res)=>{
+    return  admin.database().ref(dbCavanname).once('value').then( (snapshot)=>
+    {
+        let items =new Array();
+        snapshot.forEach((childSnapshot) => {
+
+            let todo={
+                date :childSnapshot.val().date,
+                kind :childSnapshot.val().kind,
+                titledata :childSnapshot.val().titledata,
+                todoval:childSnapshot.val().todoval,
+                pri:childSnapshot.val().pri,
+                id:childSnapshot.val().id,
+                uid:childSnapshot.key
+              }; 
+            
+            items.push(todo);
+        })
+        res.header('Content-Type', 'application/json; charset=utf-8')
+        return res.send({cavanlist: items});        
+        }); 
+   })
+
+   app.put('/cavan', (req, res) => {     
+    let key = req.query.uid;
+    let message = {
+        date: new Date().toJSON(),
+        kind : req.body["kind"],
+        titledata:  req.body["titledata"],
+        todoval:  req.body["todoval"],
+        pri:  req.body["pri"],
+        id: req.body["id"]  
+    }; 
+    
+        return admin.database().ref(dbCavanname+'/'+key).update(message).then((snapshot)=>{       
+            return res.send('ok');
+        }); 
+    })
+
+    app.delete('/cavan', (req, res) => {     
+        
+        let key = req.query.uid; 
+        return admin.database().ref(dbCavanname+'/'+key).remove().then((snapshot)=>{
+           
+            return res.send('ok');
+          }); 
+    })
+
+
 
 exports.v1 = functions.https.onRequest(app);
 
