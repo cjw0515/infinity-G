@@ -3,19 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve --mode development",
+    "serve": "concurrently \"vue-cli-service serve --mode development\" \"cd ../../backend && firebase serve\"",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "dependencies": {
+    "concurrently": "^4.1.0",
     "firebase": "^5.8.4",
     "firebaseui": "^3.5.2",
     "v-drag-drop": "^0.2.1",
     "vue": "^2.6.6",
     "vue-router": "^3.0.2",
-    "vuex": "^3.1.0",
-    "vuedraggable": "^2.19.1"
+    "vuedraggable": "^2.19.1",
+    "vuex": "^3.1.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.4.0",
