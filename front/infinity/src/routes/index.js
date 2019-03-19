@@ -8,6 +8,8 @@ import Scrum from '../views/tools/scrumboard.vue'
 import Sandbox from '../views/sandbox.vue'
 import Main from '../views/Main.vue'
 import TodoContainer from '../components/todolists/TodoContainer.vue'
+import TestModule from '../Module/TestModule/testview.vue'
+
 /**
  * path : 도메인을 제외한 url 경로를 지정
  * name: 이름을 정의
@@ -35,6 +37,12 @@ import TodoContainer from '../components/todolists/TodoContainer.vue'
                 path:'/tools/scrum',
                 name: 'Scrum',
                 component: Scrum,                
+                props: true 
+            } ,
+            {
+                path:'/module/test',
+                name: 'TestModule',
+                component: TestModule,                
                 props: true 
             }           
         ]        

@@ -79,6 +79,11 @@
                 <i class="fa fa-link"></i> Sandbox
               </a>
             </li>
+            <li>
+              <a href="/module/test">
+                <i class="fa fa-link"></i> Module1
+              </a>
+            </li>
           </ul>
         </div>
       </div>
