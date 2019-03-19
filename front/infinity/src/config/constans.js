@@ -1,5 +1,5 @@
-var BASE_URL="http://localhost:5001/infinity-g-cd058/us-central1/v1/kki";
-var CANVAN_URL="http://localhost:5001/infinity-g-cd058/us-central1/v1/cavan";
+var BASE_URL="http://localhost:5001/infinity-g-dev/us-central1/v1/kki";
+var CANVAN_URL="http://localhost:5001/infinity-g-dev/us-central1/v1/cavan";
 
 export default{    
     HELLO:BASE_URL,   
