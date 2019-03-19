@@ -1,6 +1,8 @@
 <template>
     
         <li class="list-group-item" >            
+            
+
             {{tododata.titledata}}
             {{tododata.todoval}}
 

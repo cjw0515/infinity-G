@@ -79,6 +79,11 @@
                 <i class="fa fa-link"></i> Sandbox
               </a>
             </li>
+            <li>
+              <a href="../boards/board.html">
+                <i class="fa fa-link"></i> Board
+              </a>
+            </li>
           </ul>
         </div>
       </div>
