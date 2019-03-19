@@ -41,6 +41,8 @@ export default {
    
     log: function(evt) {
       
+    //  window.console.log(evt);
+      
       if(evt.added !=undefined)
       {
         eventBus.$emit("UpdateCavan",evt.added.element.uid);
@@ -51,7 +53,8 @@ export default {
     onMove({ relatedContext, draggedContext }) {
       const relatedElement = relatedContext.element;
       const draggedElement = draggedContext.element;
-      
+      window.console.log(relatedElement);
+      window.console.log(draggedElement);
       return (
         true//(!relatedElement || !relatedElement.fix) && !draggedElement.fix
       );
