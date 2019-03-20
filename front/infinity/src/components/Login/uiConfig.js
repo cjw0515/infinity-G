@@ -3,9 +3,9 @@ import firebase from 'firebase/app'
 export default {
     callbacks: {
       signInSuccessWithAuthResult: function(authResult) {//authResult, redirectUrl
-        // console.log(authResult)
+        window.console.log(authResult)
         // console.log(redirectUrl)
-        console.log(firebase.auth().currentUser)
+        window.console.log(firebase.auth().currentUser)
         return true;        
       },
       uiShown: function() {

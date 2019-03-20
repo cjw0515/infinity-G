@@ -8,6 +8,7 @@ import Scrum from '../views/tools/scrumboard.vue'
 import Sandbox from '../views/sandbox.vue'
 import Main from '../views/Main.vue'
 import TodoContainer from '../components/todolists/TodoContainer.vue'
+import NavigationManager from '../components/navigations/NavigationManager.vue'
 /**
  * path : 도메인을 제외한 url 경로를 지정
  * name: 이름을 정의
@@ -23,7 +24,7 @@ import TodoContainer from '../components/todolists/TodoContainer.vue'
             {
                 path: 'login',
                 name: 'login',
-                component: Login                
+                component: Login
             },
             {
                 path:'/todolists/:name',
@@ -31,6 +32,14 @@ import TodoContainer from '../components/todolists/TodoContainer.vue'
                 component: TodoContainer,                
                 props: true 
             } ,
+            {
+                path:'/navigations',
+                name: 'navigations',
+                component: NavigationManager,                
+                meta: {
+                    requiresAuth: true
+                }
+            } ,            
             {
                 path:'/tools/scrum',
                 name: 'Scrum',

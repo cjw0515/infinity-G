@@ -13,6 +13,7 @@ import TodoInput from "./todolist4/TodoInput.vue";
 import Footer from "./todolist4/Footer.vue";
 import TodoList from "./todolist4/TodoList.vue";
 import { LIST } from "@/api/todolist/";
+import firebase from "firebase/app";
 
 export default {
   data() {
@@ -37,6 +38,7 @@ export default {
     TodoList
   },
   mounted: function() {
+    console.log(firebase.auth.currentUser);
     async function fetch_api() {
       let apiUrl = LIST;
       // console.log(apiUrl)
