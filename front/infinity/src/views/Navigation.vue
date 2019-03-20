@@ -79,6 +79,12 @@
                 <i class="fa fa-link"></i> Sandbox
               </a>
             </li>
+            <li>
+              <a href="/tools/canvan">
+                <i class="fa fa-link"></i> canvan
+              </a>
+            </li>
+            
           </ul>
         </div>
       </div>

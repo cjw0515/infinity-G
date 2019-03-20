@@ -8,6 +8,9 @@ import Scrum from '../views/tools/scrumboard.vue'
 import Sandbox from '../views/sandbox.vue'
 import Main from '../views/Main.vue'
 import TodoContainer from '../components/todolists/TodoContainer.vue'
+
+import canvan from '../views/tools/canvanboard.vue'
+
 /**
  * path : 도메인을 제외한 url 경로를 지정
  * name: 이름을 정의
@@ -36,7 +39,15 @@ import TodoContainer from '../components/todolists/TodoContainer.vue'
                 name: 'Scrum',
                 component: Scrum,                
                 props: true 
-            }           
+            }     ,
+            {
+                path:'/tools/canvan',
+                name: 'Cavan',
+                component: canvan,                
+                props: true 
+            }    
+            
+            
         ]        
     },        
     {
