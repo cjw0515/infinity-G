@@ -1,19 +1,23 @@
-const { functions } = require('./config/config.js')
+const {
+    functions
+} = require('./config/config.js')
 const express = require('express');
 const app = express();
-const cors = require('cors')({origin: true});
+const cors = require('cors')({
+    origin: true
+});
 const todolist = require('./routes/todolist/');
 const cavan = require('./routes/cavan/');
 app.use(cors);
 app.use('/todolist', todolist)
-app.use('/cavan', cavan)
+app.use('/canvan', cavan)
 
 // vvvvvvvvvvvvvvvvvvvv  이하 정리부탁드립니다.  vvvvvvvvvvvvvvvvvvvvvvvv
 /* kkitodo 
 C R U D
 
 */
- 
+
 
 
 
