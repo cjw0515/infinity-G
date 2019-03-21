@@ -39,7 +39,7 @@
           v-for="(element, index) in completeprocess"
           :key="element.uid"
         >
-          {{ element.title }} {{ index }}
+          {{ element.title }} {{ index }}  <button >삭제</button>
         </div>
       </draggable>
     </div>
@@ -89,8 +89,8 @@ export default {
     onMove({ relatedContext, draggedContext }) {
       const relatedElement = relatedContext.element;
       const draggedElement = draggedContext.element;
-      console.log('onmove:'+relatedElement);
-      console.log('onmove:'+draggedElement);
+      //console.log('onmove:'+relatedElement);
+      //console.log('onmove:'+draggedElement);
       return (
         (!relatedElement || !relatedElement.fix) && !draggedElement.fix
       );
