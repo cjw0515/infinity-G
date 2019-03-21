@@ -1,6 +1,9 @@
 <template>
- <div class="page-header">
-  <h1 class="title">Scrum Board</h1>
+<div class="container-widget">
+    <div class="col-md-12">
+    <div id="documenter_content" class="method-area-wrapper">
+      <div id="documenter-3-2" class="method"> 
+     <h1 class="title">Scrum Board</h1>
     <div class="discription">
       <span class="active">Scrum Board</span>
       <div class="content" >          
@@ -12,7 +15,11 @@
      <TODOBOARD :Title="ComTitle" :ListData="completeprocess" ></TODOBOARD>
       </div>
     </div>
+
+    </div>   
+</div>       
 </div>   
+</div>
 </template>
 
 <script>

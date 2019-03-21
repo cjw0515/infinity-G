@@ -25,7 +25,7 @@
               </a>
               <ol>
                 <li>
-                  <a href="#documenter-4-1">보통게시판</a>
+                  <a href="/boards/commonboard">보통게시판</a>
                 </li>
                 <li>
                   <a href="#documenter-4-2">갤러리</a>

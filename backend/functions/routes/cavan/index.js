@@ -3,23 +3,10 @@ const router = express.Router();
 const { defaultApp } = require('../../config/config.js');
 
 const dbCavanname='/cavan';
+ 
 
 
-router.get('/cavan', (req, res) => {
-    let todoRef = defaultApp.database().ref('todolist');
-    todoRef.once('value', (snapshot) => {
-        let items = new Array();
-        snapshot.forEach((childSnapshot) => {
-            let todo = childSnapshot;
-            items.push(todo);
-        })
-        res.header('Content-Type', 'application/json; charset=utf-8')
-        res.send({todoList: items});
-    })
-})
-
-
-router.post('/cavan',(req,res)=>{
+router.post('/',(req,res)=>{
     /*
     if(!req.body["password"] || !req.body["name"]){
                result["success"] = 0;
@@ -46,7 +33,7 @@ router.post('/cavan',(req,res)=>{
    })
 
 
-   router.get('/cavan/list',(req,res)=>{
+   router.get('/list',(req,res)=>{
     return  defaultApp.database().ref(dbCavanname).once('value').then( (snapshot)=>
     {
         let items =new Array();
@@ -69,7 +56,7 @@ router.post('/cavan',(req,res)=>{
         }); 
    })
 
-   router.put('/cavan', (req, res) => {     
+   router.put('/', (req, res) => {     
     let key = req.query.uid;
     let message = {
         date: new Date().toJSON(),

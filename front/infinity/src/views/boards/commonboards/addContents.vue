@@ -1,12 +1,15 @@
 <template>
     <div>
-        test
-        <button @click="test()" >ttt</button>
+        add
     </div>
 </template>
-<script>
 
+<script>
+export default {
+
+}
 </script>
+
 <style>
 
 </style>

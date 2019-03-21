@@ -8,7 +8,7 @@ import Scrum from '../views/tools/scrumboard.vue'
 import Sandbox from '../views/sandbox.vue'
 import Main from '../views/Main.vue'
 import TodoContainer from '../components/todolists/TodoContainer.vue'
-
+import commonboard from '../views/boards/commonboards/boardmain.vue'
 import canvan from '../views/tools/canvanboard.vue'
 
 /**
@@ -44,6 +44,12 @@ import canvan from '../views/tools/canvanboard.vue'
                 path:'/tools/canvan',
                 name: 'Cavan',
                 component: canvan,                
+                props: true 
+            }     ,
+            {
+                path:'/boards/commonboard',
+                name: 'commonboard',
+                component: commonboard,                
                 props: true 
             }    
             
