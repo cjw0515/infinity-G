@@ -1,6 +1,7 @@
 // import TestComponent from '../components/TestComponent.vue'
 import Router from 'vue-router'
 import Vue from 'vue';
+import authChk from "../components/Login/authChk";
 // import { firebase } from '@/config/'
 
 import TestComponent2 from '../components/TestComponent2.vue'
@@ -19,7 +20,7 @@ Vue.use(Router);
  * name: 이름을 정의
  * component: 렌더링할 컴포넌트를 지정
  */
- export default new Router({
+const router = new Router({
     mode: 'history',
     scrollBehavior: () => ({y:0}),
     routes: [
@@ -70,4 +71,12 @@ Vue.use(Router);
         } 
      ]
  }) 
+
+ router.beforeEach((to, from, next) => {
+    authChk.authUser().then(() => {
+      next()
+    })
+  }) 
+
+ export default router
  
