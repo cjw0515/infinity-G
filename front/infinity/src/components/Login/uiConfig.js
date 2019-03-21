@@ -1,12 +1,19 @@
-import firebase from 'firebase/app'
+import { firebase } from '@/config/'
 
 export default {
     callbacks: {
       signInSuccessWithAuthResult: function(authResult) {//authResult, redirectUrl
-        // console.log(authResult)
-        // console.log(redirectUrl)
-        console.log(firebase.auth().currentUser)
-        return true;        
+        if (authResult.user) {
+          window.console.log(authResult.user);
+          // handleSignedInUser(authResult.user);
+        }
+        // if (authResult.additionalUserInfo) {
+        //   document.getElementById('is-new-user').textContent =
+        //       authResult.additionalUserInfo.isNewUser ?
+        //       'New User' : 'Existing User';
+        // }
+        // Do not redirect.
+        return false;
       },
       uiShown: function() {
         // The widget is rendered.
