@@ -1,230 +1,230 @@
 <template>
- <div class="page-header">
-  <h1 class="title">Scrum Board</h1>
-    <div class="discription">
-      <span class="active">Scrum Board</span>
-      <div class="content" >          
-        <TODOINPUT  v-on:addTodo="AddTodo"></TODOINPUT>
-        
- 
-     <TODOBOARD :Title="TodoTitle" :ListData="todoprocess" ></TODOBOARD>
-     <TODOBOARD :Title="IngTitle" :ListData="inprocess" ></TODOBOARD>
-     <TODOBOARD :Title="ComTitle" :ListData="completeprocess" ></TODOBOARD>
+  <div class="container-widget">
+    <!-- Start Top Stats -->
+    <div class="col-md-12">
+      <div class="method-area-wrapper">
+        <div id="documenter-1" class="method">
+          <div class="method-area">
+            <h1 class="title">Scrum Board</h1>
+            <span class="active">Scrum Board</span>
+            <div class="content">
+              <TODOINPUT v-on:addTodo="AddTodo"></TODOINPUT>
+              <TODOBOARD :Title="TodoTitle" :ListData="todoprocess"></TODOBOARD>
+              <TODOBOARD :Title="IngTitle" :ListData="inprocess"></TODOBOARD>
+              <TODOBOARD :Title="ComTitle" :ListData="completeprocess"></TODOBOARD>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-</div>   
+  </div>
 </template>
 
 <script>
 import draggable from "vuedraggable";
 import TODOINPUT from "./cavan/todoinput.vue";
 import TODOBOARD from "./cavan/todoboard.vue";
-import eventBus from '../../EventBus.js';
-import Contants from '../../config/constans.js';
+import eventBus from "../../EventBus.js";
+import Contants from "../../config/constans.js";
 
-
-const todoprocess =[];
-const inprocess =[];
-const completeprocess =[];
-const isbusy=false;
+const todoprocess = [];
+const inprocess = [];
+const completeprocess = [];
+const isbusy = false;
 
 export default {
-    components:{
-        TODOINPUT,draggable,TODOBOARD
-    },mounted() {
-         this.GetCavan();
-         eventBus.$on("UpdateCavan", (no) => {
-          this.UpdateCavan(no);
-          //this.fetchCompo(no); 
-        });
-        eventBus.$on("DeleteCavan", (no) => {
-          this.DeleteCavan(no);
-          //this.fetchCompo(no); 
-        });
-    }    
-    ,data() {
-        return {
-            todoprocess,inprocess,completeprocess
-            ,TodoTitle:"할일"
-            ,IngTitle:"진행"
-            ,ComTitle:"완료"
-             
-        }
-    }, computed: { 
+  components: {
+    TODOINPUT,
+    draggable,
+    TODOBOARD
   },
-    methods: {     
-        AddTodo(todoata){           
-             
-            this.AddCavan(todoata);
-            console.log(todoprocess);
-        },
-        async AddCavan(tododata) {
-            let apiurl=Contants.CAVAN_ADD;
-
-            const response = await fetch(apiurl,{method:'post',
-            headers: new Headers({
-                  'Content-Type': 'application/json',
-                  'Accept': 'application/json',
-              }),
-              body:JSON.stringify({
-                kind:"todo",
-                titledata:tododata.titledata,
-                todoval:tododata.todoval,
-                pri:tododata.pri ,
-                id:"daniel"
-              })
-            });
-            const rtdata= await response.text();
-            console.log(rtdata); 
-            this.GetCavan();
-        },
-        async GetCavan() {
-            
-            let apiUrl=Contants.CAVAN_LIST;
-            const response = await fetch(apiUrl);
-            const  json =await response.json();
-            this.clearCavan(); 
-            this.Bind_CavanList(json);
-        },
-        clearCavan(){
-          this.todoprocess.splice(0,this.todoprocess.length);
-          this.inprocess.splice(0,this.inprocess.length);
-          this.completeprocess.splice(0,this.completeprocess.length);
-        },
-        Bind_CavanList(cavandata){
-            let datatod =[];
-            let dataing=[];
-            let datacom =[];
-
-             $.each(cavandata, function (i, member) {
-              for (var i in member) {
-                if(member[i].kind=="todo")
-                {
-                    datatod.push({
-                    kind: member[i].kind,
-                    uid:member[i].uid,
-                    titledata:member[i].titledata,
-                    todoval:member[i].todoval,
-                    pri:member[i].pri,
-                    id:member[i].id
-                    });
-                }
-                if(member[i].kind=="ing")
-                {
-                    dataing.push({
-                    kind: member[i].kind,
-                    uid:member[i].uid,
-                    titledata:member[i].titledata,
-                    todoval:member[i].todoval,
-                    pri:member[i].pri,
-                    id:member[i].id
-                    });
-                }
-                if(member[i].kind=="com")
-                {
-                    datacom.push({
-                    kind: member[i].kind,
-                    uid:member[i].uid,
-                    titledata:member[i].titledata,
-                    todoval:member[i].todoval,
-                    pri:member[i].pri,
-                    id:member[i].id
-                    });
-                }
-              }
-            });
-            this.todoprocess=datatod;
-            this.inprocess=dataing;
-            this.completeprocess=datacom;
-        },
-        async UpdateCavan(uid){
-            this.isbusy=true;
-            //데이타 찾기
-             let seldata;
-             for (var i = 0; i < this.todoprocess.length; i++) 
-             {
-                 if(this.todoprocess[i].uid==uid)
-                 {
-                    seldata=this.todoprocess[i];
-                    seldata.kind="todo";
-                 }    
-             }
-             for (var i = 0; i < this.inprocess.length; i++) 
-             {
-                 if(this.inprocess[i].uid==uid)
-                 {
-                    seldata=this.inprocess[i];
-                    seldata.kind="ing";
-                 }    
-             }
-             for (var i = 0; i < this.completeprocess.length; i++) 
-             {
-                 if(this.completeprocess[i].uid==uid)
-                 {
-                     seldata=this.completeprocess[i];
-                     seldata.kind="com";                    
-                 }    
-             }
-
-             window.console.log(seldata);
-             
-             let apiUrl=Contants.CAVAN_UPD+"?uid="+uid;
-             const response = await fetch(apiUrl,{method:'put',
-                headers: new Headers({
-                  'Content-Type': 'application/json',
-                  'Accept': 'application/json',
-              }),
-              body:JSON.stringify({
-                kind:seldata.kind,
-                titledata:seldata.titledata,
-                todoval:seldata.todoval,
-                pri:seldata.pri ,
-                id:"daniel"
-              })
-            });
-            const rtdata= await response.text();
-            console.log(rtdata); 
-            this.isbusy=false;
-        },
-        async DeleteCavan(uid){
-            let apiUrl=Contants.CAVAN_DELETE+"?uid="+uid;
-             const response = await fetch(apiUrl,{method:'delete',
-            headers: new Headers({
-                  'Content-Type': 'application/json',
-                  'Accept': 'application/json',
-              })
-            });
-
-            await this.GetCavan();
-        }
+  mounted() {
+    this.GetCavan();
+    eventBus.$on("UpdateCavan", no => {
+      this.UpdateCavan(no);
+      //this.fetchCompo(no);
+    });
+    eventBus.$on("DeleteCavan", no => {
+      this.DeleteCavan(no);
+      //this.fetchCompo(no);
+    });
+  },
+  data() {
+    return {
+      todoprocess,
+      inprocess,
+      completeprocess,
+      TodoTitle: "할일",
+      IngTitle: "진행",
+      ComTitle: "완료"
+    };
+  },
+  computed: {},
+  methods: {
+    AddTodo(todoata) {
+      this.AddCavan(todoata);
+      console.log(todoprocess);
     },
-}
+    async AddCavan(tododata) {
+      let apiurl = Contants.CAVAN_ADD;
+
+      const response = await fetch(apiurl, {
+        method: "post",
+        headers: new Headers({
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        }),
+        body: JSON.stringify({
+          kind: "todo",
+          titledata: tododata.titledata,
+          todoval: tododata.todoval,
+          pri: tododata.pri,
+          id: "daniel"
+        })
+      });
+      const rtdata = await response.text();
+      console.log(rtdata);
+      this.GetCavan();
+    },
+    async GetCavan() {
+      let apiUrl = Contants.CAVAN_LIST;
+      const response = await fetch(apiUrl);
+      const json = await response.json();
+      this.clearCavan();
+      this.Bind_CavanList(json);
+    },
+    clearCavan() {
+      this.todoprocess.splice(0, this.todoprocess.length);
+      this.inprocess.splice(0, this.inprocess.length);
+      this.completeprocess.splice(0, this.completeprocess.length);
+    },
+    Bind_CavanList(cavandata) {
+      let datatod = [];
+      let dataing = [];
+      let datacom = [];
+
+      $.each(cavandata, function(i, member) {
+        for (var i in member) {
+          if (member[i].kind == "todo") {
+            datatod.push({
+              kind: member[i].kind,
+              uid: member[i].uid,
+              titledata: member[i].titledata,
+              todoval: member[i].todoval,
+              pri: member[i].pri,
+              id: member[i].id
+            });
+          }
+          if (member[i].kind == "ing") {
+            dataing.push({
+              kind: member[i].kind,
+              uid: member[i].uid,
+              titledata: member[i].titledata,
+              todoval: member[i].todoval,
+              pri: member[i].pri,
+              id: member[i].id
+            });
+          }
+          if (member[i].kind == "com") {
+            datacom.push({
+              kind: member[i].kind,
+              uid: member[i].uid,
+              titledata: member[i].titledata,
+              todoval: member[i].todoval,
+              pri: member[i].pri,
+              id: member[i].id
+            });
+          }
+        }
+      });
+      this.todoprocess = datatod;
+      this.inprocess = dataing;
+      this.completeprocess = datacom;
+    },
+    async UpdateCavan(uid) {
+      this.isbusy = true;
+      //데이타 찾기
+      let seldata;
+      for (var i = 0; i < this.todoprocess.length; i++) {
+        if (this.todoprocess[i].uid == uid) {
+          seldata = this.todoprocess[i];
+          seldata.kind = "todo";
+        }
+      }
+      for (var i = 0; i < this.inprocess.length; i++) {
+        if (this.inprocess[i].uid == uid) {
+          seldata = this.inprocess[i];
+          seldata.kind = "ing";
+        }
+      }
+      for (var i = 0; i < this.completeprocess.length; i++) {
+        if (this.completeprocess[i].uid == uid) {
+          seldata = this.completeprocess[i];
+          seldata.kind = "com";
+        }
+      }
+
+      window.console.log(seldata);
+
+      let apiUrl = Contants.CAVAN_UPD + "?uid=" + uid;
+      const response = await fetch(apiUrl, {
+        method: "put",
+        headers: new Headers({
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        }),
+        body: JSON.stringify({
+          kind: seldata.kind,
+          titledata: seldata.titledata,
+          todoval: seldata.todoval,
+          pri: seldata.pri,
+          id: "daniel"
+        })
+      });
+      const rtdata = await response.text();
+      console.log(rtdata);
+      this.isbusy = false;
+    },
+    async DeleteCavan(uid) {
+      let apiUrl = Contants.CAVAN_DELETE + "?uid=" + uid;
+      const response = await fetch(apiUrl, {
+        method: "delete",
+        headers: new Headers({
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        })
+      });
+
+      await this.GetCavan();
+    }
+  }
+};
 </script>
 
 <style>
-    .flip-list-move {
-    transition: transform 0.5s;
-    }
+.flip-list-move {
+  transition: transform 0.5s;
+}
 
-    .no-move {
-    transition: transform 0s;
-    }
+.no-move {
+  transition: transform 0s;
+}
 
-    .ghost {
-    opacity: 0.5;
-    background: #c8ebfb;
-    }
+.ghost {
+  opacity: 0.5;
+  background: #c8ebfb;
+}
 
-    .list-group {
-    min-height: 100px;
-    background-color:aqua;
-    }
+.list-group {
+  min-height: 100px;
+  background-color: aqua;
+}
 
-    .list-group-item {
-    cursor: move;
-    }
+.list-group-item {
+  cursor: move;
+}
 
-    .list-group-item i {
-    cursor: pointer;
-    }
+.list-group-item i {
+  cursor: pointer;
+}
 </style>

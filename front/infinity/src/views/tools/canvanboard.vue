@@ -6,8 +6,7 @@
 </template>
 
 <script>
-import testdata from '../../blc/canvan/CanvanModule.ts'
-import teitem from '../../blc/canvan/CanavanItemEntity.ts'
+
 
 export default {
     methods: {

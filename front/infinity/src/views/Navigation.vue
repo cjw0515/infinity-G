@@ -25,7 +25,7 @@
               </a>
               <ol>
                 <li>
-                  <a href="#documenter-4-1">보통게시판</a>
+                  <a href="/board/common">보통게시판</a>
                 </li>
                 <li>
                   <a href="#documenter-4-2">갤러리</a>
@@ -84,7 +84,6 @@
                 <i class="fa fa-link"></i> canvan
               </a>
             </li>
-            
           </ul>
         </div>
       </div>

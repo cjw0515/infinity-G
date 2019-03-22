@@ -10,6 +10,7 @@ import Main from '../views/Main.vue'
 import TodoContainer from '../components/todolists/TodoContainer.vue'
 
 import canvan from '../views/tools/canvanboard.vue'
+import cboard from '../views/boards/commonboards/boardmain.vue'
 
 /**
  * path : 도메인을 제외한 url 경로를 지정
@@ -17,58 +18,61 @@ import canvan from '../views/tools/canvanboard.vue'
  * component: 렌더링할 컴포넌트를 지정
  */
 
- export default [
-    {
-        path:'/',
+export default [{
+        path: '/',
         name: 'main',
         component: Main,
-        children: [
-            {
+        children: [{
                 path: 'login',
                 name: 'login',
-                component: Login                
+                component: Login
             },
             {
-                path:'/todolists/:name',
+                path: '/todolists/:name',
                 name: 'todolists',
-                component: TodoContainer,                
-                props: true 
-            } ,
+                component: TodoContainer,
+                props: true
+            },
             {
-                path:'/tools/scrum',
+                path: '/tools/scrum',
                 name: 'Scrum',
-                component: Scrum,                
-                props: true 
-            }     ,
+                component: Scrum,
+                props: true
+            },
             {
-                path:'/tools/canvan',
+                path: '/tools/canvan',
                 name: 'Cavan',
-                component: canvan,                
-                props: true 
-            }    
-            
-            
-        ]        
-    },        
+                component: canvan,
+                props: true
+            }, {
+                path: '/board/common',
+                name: 'cboard',
+                component: cboard,
+                props: true
+            }
+
+
+        ]
+    },
     {
-        path:'/storeTest',
+        path: '/storeTest',
         name: 'TestComponent2',
         component: TestComponent2
-    },{
-        path:'/week1',
+    }, {
+        path: '/week1',
         name: 'TestComponent3',
         component: TestComponent3
-    },{
-        path:'/tools/code',
+    }, {
+        path: '/tools/code',
         name: 'CodeEditor',
         component: CodeEditor
-    },{
-        path:'/tools/json',
+    }, {
+        path: '/tools/json',
         name: 'JsonView',
         component: JsonView
-    } ,{
-        path:'/sandbox',
+    }, {
+        path: '/sandbox',
         name: 'Sandbox',
         component: Sandbox
-    } 
- ]
+    }
+]
