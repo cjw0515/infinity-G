@@ -23,6 +23,10 @@ const router = new Router({
     scrollBehavior: () => ({y:0}),
     routes: [
         {
+            path: '*',
+            redirect: '/'
+        },
+        {
             path:'/',
             name: 'main',
             component: Main,
@@ -39,7 +43,8 @@ const router = new Router({
                     component: Scrum,                
                     props: true 
                 }           
-            ]        
+            ],
+            meta: { requiresAuth: true }        
         },        
         {
             path: '/login',
@@ -69,10 +74,25 @@ const router = new Router({
         } 
      ]
  }) 
-
- router.beforeEach((to, from, next) => {
-    authChk.authUser().then(() => {
-      next()
+//전역 가드
+/**
+ * beforeEach - 가드 전 훅
+ * next() - 항상 호출
+ */
+ router.beforeEach((to, from, next) => {     
+    authChk.authUser().then((user) => {  
+        // window.console.log('guard')    
+        if(to.matched.some(record => record.meta.requiresAuth)){
+            if(user) next();
+            else next('login')            
+        }else{
+            next()
+        }
+        /* if(!user) next('login');
+        else if(user) next('main');
+        else next(); */
+    }, (error)=>{
+      window.error(error)
     })
   }) 
 

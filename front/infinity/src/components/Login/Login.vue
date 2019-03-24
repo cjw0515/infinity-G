@@ -1,7 +1,6 @@
 <template>
   <div>
-    <!-- <div v-on:click="popupLogin();">login</div>
-    <div v-on:click="logOut();">logOut</div>-->
+    <login-form></login-form>
     <div id="firebaseui-container"></div>
     <div id="loader">Loading...</div>
     <button v-on:click="logOut();">로그아웃</button>
@@ -15,11 +14,17 @@ import { firebaseApp, firebase } from "../../config";
 import * as firebaseui from "firebaseui";
 import uiconfig from "./uiConfig";
 import authChk from "@/auth/";
+import LoginForm from "./LoginForm.vue";
 let ui = new firebaseui.auth.AuthUI(firebase.auth());
 
 export default {
+  components: {
+    "login-form": LoginForm
+  },
   data() {
     return {
+      email: "",
+      password: "",
       user: {}
     };
   },
@@ -34,6 +39,19 @@ export default {
         .catch(function(error) {
           alert(error);
         });
+    },
+    login() {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.email, this.password)
+        .then(
+          user => {
+            this.$router.replace("home");
+          },
+          err => {
+            alert("Oops. " + err.message);
+          }
+        );
     }
   },
   mounted: function() {
@@ -44,4 +62,4 @@ export default {
   beforeCreate() {}
 };
 </script>
-<style src="../../../node_modules/firebaseui/dist/firebaseui.css" />
+<style src="../../../node_modules/firebaseui/dist/firebaseui.css" />  

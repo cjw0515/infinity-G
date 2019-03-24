@@ -1,17 +1,17 @@
 import { firebase } from '@/config/'
+import router from '@/router'
 
 export default {
     callbacks: {
       signInSuccessWithAuthResult: function(authResult) {//authResult, redirectUrl
         if (authResult.user) {
-          window.console.log(authResult.user);          
+          router.push('main')
         }
         return false;
       },
       uiShown: function() {
         // The widget is rendered.
-        // Hide the loader.
-        document.getElementById('loader').style.display = 'none';
+        // Hide the loader.        
       }
     },
     // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
