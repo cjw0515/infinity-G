@@ -1,8 +1,6 @@
-// import TestComponent from '../components/TestComponent.vue'
 import Router from 'vue-router'
 import Vue from 'vue';
-import authChk from "../components/Login/authChk";
-// import { firebase } from '@/config/'
+import authChk from "@/auth/";
 
 import TestComponent2 from '../components/TestComponent2.vue'
 import Login from '../components/Login/Login.vue'
@@ -28,12 +26,7 @@ const router = new Router({
             path:'/',
             name: 'main',
             component: Main,
-            children: [
-                {
-                    path: 'login',
-                    name: 'login',
-                    component: Login                
-                },
+            children: [                
                 {
                     path:'/todolists/:name',
                     name: 'todolists',
@@ -47,6 +40,11 @@ const router = new Router({
                     props: true 
                 }           
             ]        
+        },        
+        {
+            path: '/login',
+            name: 'login',
+            component: Login                
         },        
         {
             path:'/storeTest',

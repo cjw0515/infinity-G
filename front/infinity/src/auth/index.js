@@ -1,26 +1,44 @@
 import { firebase } from '@/config/'
 
 const currentUser = {
-    name: ""
+    name: "",
+    email: "",
+    emailVerified: "",
+    photoURL: "",
+    uid: "",
+    phoneNumber: "",
+    providerData: "",
 }
 
 const authUser = () => {
     return new Promise((resolve, reject) => {
-      firebase.auth().onAuthStateChanged((theUser) => {
-        _checkUser(theUser)
-        resolve(theUser)
+      firebase.auth().onAuthStateChanged((user) => {
+        _checkUser(user)
+        resolve(user)
       }, (error) => {
-        console.log(error)
+        window.error.log(error)
       })
     })
   }
 
-  const _checkUser = (theUser) => {
-    if (theUser) {
-        currentUser.name = theUser.displayName
-        window.console.log(`theUser.displayName : ${currentUser.name}`)
+  const _checkUser = (user) => {
+    if (user) {
+      currentUser.name = user.displayName
+      currentUser.email = user.email
+      currentUser.emailVerified = user.emailVerified
+      currentUser.photoURL = user.photoURL
+      currentUser.uid = user.uid
+      currentUser.phoneNumber = user.phoneNumber
+      currentUser.providerData = user.providerData
+      window.console.log(`user.displayName : ${currentUser.name}`)
     } else {
-        currentUser.name = ''
+      currentUser.name = ''
+      currentUser.email = ''
+      currentUser.emailVerified = ''
+      currentUser.photoURL = ''
+      currentUser.uid = ''
+      currentUser.phoneNumber = ''
+      currentUser.providerData = ''        
     }
   }
 

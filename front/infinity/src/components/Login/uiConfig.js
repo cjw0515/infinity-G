@@ -4,15 +4,8 @@ export default {
     callbacks: {
       signInSuccessWithAuthResult: function(authResult) {//authResult, redirectUrl
         if (authResult.user) {
-          window.console.log(authResult.user);
-          // handleSignedInUser(authResult.user);
+          window.console.log(authResult.user);          
         }
-        // if (authResult.additionalUserInfo) {
-        //   document.getElementById('is-new-user').textContent =
-        //       authResult.additionalUserInfo.isNewUser ?
-        //       'New User' : 'Existing User';
-        // }
-        // Do not redirect.
         return false;
       },
       uiShown: function() {

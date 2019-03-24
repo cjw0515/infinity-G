@@ -5,7 +5,7 @@
     <div id="firebaseui-container"></div>
     <div id="loader">Loading...</div>
     <button v-on:click="logOut();">로그아웃</button>
-    <div>{{name}}</div>
+    <div>{{user.name}}</div>
     <!-- <router-link :to="{name: 'HelloWorld', params: ''}">홈으로</router-link> -->
   </div>
 </template>  
@@ -14,17 +14,12 @@
 import { firebaseApp, firebase } from "../../config";
 import * as firebaseui from "firebaseui";
 import uiconfig from "./uiConfig";
-import authChk from "./authChk";
+import authChk from "@/auth/";
 let ui = new firebaseui.auth.AuthUI(firebase.auth());
-
-// console.log(firebase.auth().currentUser);
 
 export default {
   data() {
     return {
-      userid: "",
-      name: "",
-      email: "",
       user: {}
     };
   },
@@ -43,8 +38,7 @@ export default {
   },
   mounted: function() {
     ui.start("#firebaseui-container", uiconfig);
-    this.name = authChk.getUser();
-    // console.log(authChk.getUser());
+    this.user = authChk.getUser();
   },
   created() {},
   beforeCreate() {}
