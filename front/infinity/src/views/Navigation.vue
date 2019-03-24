@@ -30,6 +30,11 @@
                 <li>
                   <a href="#documenter-4-2">갤러리</a>
                 </li>
+                <li>
+                  <a href="/pratice/multi">연습1</a>
+                </li>
+
+                
               </ol>
             </li>
             <li>

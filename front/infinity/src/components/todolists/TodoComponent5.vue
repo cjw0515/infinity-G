@@ -6,6 +6,7 @@
       <TodoList v-bind:tododata="todos" v-on:delTodo="delTodo" ></TodoList>
       
       <TodoContact ></TodoContact>
+      
       <component :is="currentView" :todo="todo" ></component>
       <TodoFooter></TodoFooter>
       {{Showmsg}}

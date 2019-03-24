@@ -11,6 +11,9 @@ import TodoContainer from '../components/todolists/TodoContainer.vue'
 
 import canvan from '../views/tools/canvanboard.vue'
 import cboard from '../views/boards/commonboards/boardmain.vue'
+import multimain from '../views/multi/multimain.vue'
+
+
 
 /**
  * path : 도메인을 제외한 url 경로를 지정
@@ -49,8 +52,13 @@ export default [{
                 name: 'cboard',
                 component: cboard,
                 props: true
-            }
-
+            },
+            {
+                path: '/pratice/multi',
+                name: 'multimain',
+                component: multimain,
+                props: true
+            } 
 
         ]
     },
