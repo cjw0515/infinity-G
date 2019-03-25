@@ -31,6 +31,7 @@ const db = firebase.firestore();
 
 export{
   firebaseApp,
-  db
+  db,
+  firebase
 }
 

@@ -1,5 +1,6 @@
 <template>
   <div>
+    {{user}}
     <Header></Header>
     <TodoInput v-on:addTodo="addTodo"></TodoInput>
     <TodoList v-bind:propsData="todos" v-on:removeTodo="removeTodo"></TodoList>
@@ -12,12 +13,14 @@ import Header from "./todolist4/Header.vue";
 import TodoInput from "./todolist4/TodoInput.vue";
 import Footer from "./todolist4/Footer.vue";
 import TodoList from "./todolist4/TodoList.vue";
+import authChk from "@/auth/";
 import { LIST } from "@/api/todolist/";
 
 export default {
   data() {
     return {
-      todos: []
+      todos: [],
+      user: ""
     };
   },
   methods: {
@@ -37,12 +40,11 @@ export default {
     TodoList
   },
   mounted: function() {
+    this.user = authChk.getUser().name;
     async function fetch_api() {
       let apiUrl = LIST;
-      // console.log(apiUrl)
       const response = await fetch(apiUrl);
       const json = await response.json();
-      // this.todos = json.todoList;
       return json.todoList;
     }
     this.todos = fetch_api()
