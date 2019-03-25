@@ -50,7 +50,7 @@
                   <router-link to="/todolists/TodoComponent4">최종원</router-link>
                 </li>
                 <li>
-                  <router-link to="/todolists/TodoComponent5">김송이</router-link>
+                  <router-link to="/todolists/TodoComponent5">xxx</router-link>
                 </li>
               </ol>
             </li>
@@ -60,24 +60,28 @@
               <span>More</span>
             </li>
             <li>
-              <a href="/tools/code">
+              <router-link to="/tools/code">
                 <i class="fa fa-link"></i> 코드에디터
-              </a>
+              </router-link>
             </li>
             <li>
-              <a href="/tools/json">
-                <i class="fa fa-link"></i> JsonViewer
-              </a>
+              <router-link to="/tools/json">
+              <i class="fa fa-link"></i>              
+                 JsonViewer
+              </router-link>
             </li>
             <li>
-              <a href="/tools/scrum">
-                <i class="fa fa-link"></i> Scrum Board
-              </a>
+              
+              <router-link to="/tools/scrum">
+              <i class="fa fa-link"></i>
+                 Scrum Board
+             </router-link>
             </li>
             <li>
-              <a href="/sandbox">
-                <i class="fa fa-link"></i> Sandbox
-              </a>
+              <router-link to="/sandbox">              
+              <i class="fa fa-link"></i>
+                 Sandbox
+              </router-link >
             </li>
           </ul>
         </div>
