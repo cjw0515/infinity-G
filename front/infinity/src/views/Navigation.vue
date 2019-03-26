@@ -59,29 +59,12 @@
             <li class="sidetitle">
               <span>More</span>
             </li>
+
             <li>
-              <router-link to="/tools/code">
-                <i class="fa fa-link"></i> 코드에디터
-              </router-link>
-            </li>
-            <li>
-              <router-link to="/tools/json">
-              <i class="fa fa-link"></i>              
-                 JsonViewer
-              </router-link>
-            </li>
-            <li>
-              
               <router-link to="/tools/scrum">
-              <i class="fa fa-link"></i>
-                 Scrum Board
-             </router-link>
-            </li>
-            <li>
-              <router-link to="/sandbox">              
-              <i class="fa fa-link"></i>
-                 Sandbox
-              </router-link >
+                <i class="fa fa-link"></i>
+                Scrum Board
+              </router-link>
             </li>
           </ul>
         </div>
