@@ -8,8 +8,7 @@ import TestComponent3 from '../components/TestComponent3.vue'
 import CodeEditor from '../views/tools/codeeditor.vue'
 import JsonView from '../views/tools/jsonview.vue'
 import Scrum from '../views/tools/scrumboard.vue'
-import Sandbox from '../views/sandbox.vue'
-import Main from '../views/Main.vue'
+import Home from '../views/Home.vue'
 import TodoContainer from '../components/todolists/TodoContainer.vue'
 
 Vue.use(Router);
@@ -28,8 +27,8 @@ const router = new Router({
         },
         {
             path:'/',
-            name: 'main',
-            component: Main,
+            name: 'Home',
+            component: Home,
             children: [                
                 {
                     path:'/todolists/:name',
@@ -67,10 +66,6 @@ const router = new Router({
             path:'/tools/json',
             name: 'JsonView',
             component: JsonView
-        } ,{
-            path:'/sandbox',
-            name: 'Sandbox',
-            component: Sandbox
         } 
      ]
  }) 
@@ -79,22 +74,22 @@ const router = new Router({
  * beforeEach - 가드 전 훅
  * next() - 항상 호출
  */
- router.beforeEach((to, from, next) => {     
-    authChk.authUser().then((user) => {  
-        // window.console.log('guard')    
-        if(to.matched.some(record => record.meta.requiresAuth)){
-            if(user) next();
-            else next('login')            
-        }else{
-            next()
-        }
-        /* if(!user) next('login');
-        else if(user) next('main');
-        else next(); */
-    }, (error)=>{
-      window.error(error)
-    })
-  }) 
+//  router.beforeEach((to, from, next) => {     
+//     authChk.authUser().then((user) => {  
+//         // window.console.log('guard')    
+//         if(to.matched.some(record => record.meta.requiresAuth)){
+//             if(user) next();
+//             else next('login')            
+//         }else{
+//             next()
+//         }
+//         /* if(!user) next('login');
+//         else if(user) next('main');
+//         else next(); */
+//     }, (error)=>{
+//       window.error(error)
+//     })
+//   }) 
 
  export default router
  
