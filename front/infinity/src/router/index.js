@@ -8,8 +8,7 @@ import TestComponent3 from '../components/TestComponent3.vue'
 import CodeEditor from '../views/tools/codeeditor.vue'
 import JsonView from '../views/tools/jsonview.vue'
 import Scrum from '../views/tools/scrumboard.vue'
-import Sandbox from '../views/sandbox.vue'
-import Main from '../views/Main.vue'
+import Content from '../views/Content.vue'
 import TodoContainer from '../components/todolists/TodoContainer.vue'
 
 Vue.use(Router);
@@ -28,8 +27,8 @@ const router = new Router({
         },
         {
             path:'/',
-            name: 'main',
-            component: Main,
+            name: 'content',
+            component: Content,
             children: [                
                 {
                     path:'/todolists/:name',
