@@ -66,10 +66,6 @@ const router = new Router({
             path:'/tools/json',
             name: 'JsonView',
             component: JsonView
-        } ,{
-            path:'/sandbox',
-            name: 'Sandbox',
-            component: Sandbox
         } 
      ]
  }) 
