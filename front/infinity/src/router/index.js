@@ -43,7 +43,7 @@ const router = new Router({
                     props: true 
                 }           
             ],
-            meta: { requiresAuth: true }        
+            // meta: { requiresAuth: true }        
         },        
         {
             path: '/login',
