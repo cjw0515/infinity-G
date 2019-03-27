@@ -112,7 +112,10 @@
           <p class="settings-heading border-top-0 mb-3 pl-3 pt-0 border-bottom-0 pb-0">Friends</p>
           <small
             class="settings-heading border-top-0 mb-3 pt-0 border-bottom-0 pb-0 pr-3 font-weight-normal"
-          >See All</small>
+          >
+            See
+            All
+          </small>
         </div>
         <ul class="chat-list">
           <li class="list active">
