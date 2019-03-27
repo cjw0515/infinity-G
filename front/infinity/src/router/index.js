@@ -18,7 +18,7 @@ Vue.use(Router);
  * component: 렌더링할 컴포넌트를 지정
  */
 const router = new Router({
-    mode: 'history',
+    // mode: 'history',
     scrollBehavior: () => ({y:0}),
     routes: [
         {
