@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "concurrently \"vue-cli-service serve --mode development\" \"cd ../../backend && firebase serve\"",
+    "frontserve": "vue-cli-service serve --mode development",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "storybook": "start-storybook -p 9001 -c .storybook"

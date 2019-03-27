@@ -1,6 +1,7 @@
 <template>
   <div class="content-wrapper">
-    <div class="row">
+    <router-view :key="$route.path"></router-view>
+    <!-- <div class="row">
       <div class="col-md-12 grid-margin">
         <div class="row">
           <div class="col-12 col-xl-5 mb-4 mb-xl-0">
@@ -32,7 +33,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div>-->
   </div>
 </template>
 <script>
