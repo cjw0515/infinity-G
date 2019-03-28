@@ -8,6 +8,7 @@ import TestComponent3 from '../components/TestComponent3.vue'
 import CodeEditor from '../views/tools/codeeditor.vue'
 import JsonView from '../views/tools/jsonview.vue'
 import Scrum from '../views/tools/scrumboard.vue'
+import Timer from '../views/tools/timer.vue'
 import Home from '../views/Home.vue'
 import TodoContainer from '../components/todolists/TodoContainer.vue'
 
@@ -19,56 +20,60 @@ Vue.use(Router);
  */
 const router = new Router({
     // mode: 'history',
-    scrollBehavior: () => ({y:0}),
-    routes: [
-        {
+    scrollBehavior: () => ({
+        y: 0
+    }),
+    routes: [{
             path: '*',
             redirect: '/'
         },
         {
-            path:'/',
+            path: '/',
             name: 'Home',
             component: Home,
-            children: [                
-                {
-                    path:'/todolists/:name',
+            children: [{
+                    path: '/todolists/:name',
                     name: 'todolists',
-                    component: TodoContainer,                
-                    props: true 
-                } ,
+                    component: TodoContainer,
+                    props: true
+                },
                 {
-                    path:'/tools/scrum',
+                    path: '/tools/scrum',
                     name: 'Scrum',
-                    component: Scrum,                
-                    props: true 
-                }           
+                    component: Scrum,
+                    props: true
+                }
             ],
             // meta: { requiresAuth: true }        
-        },        
+        },
         {
             path: '/login',
             name: 'login',
-            component: Login                
-        },        
+            component: Login
+        },
         {
-            path:'/storeTest',
+            path: '/storeTest',
             name: 'TestComponent2',
             component: TestComponent2
-        },{
-            path:'/week1',
+        }, {
+            path: '/week1',
             name: 'TestComponent3',
             component: TestComponent3
-        },{
-            path:'/tools/code',
+        }, {
+            path: '/tools/code',
             name: 'CodeEditor',
             component: CodeEditor
-        },{
-            path:'/tools/json',
+        }, {
+            path: '/tools/json',
             name: 'JsonView',
             component: JsonView
-        } 
-     ]
- }) 
+        }, {
+            path: '/tools/timer',
+            name: 'Timer',
+            component: Timer
+        }
+    ]
+})
 //전역 가드
 /**
  * beforeEach - 가드 전 훅
@@ -91,5 +96,4 @@ const router = new Router({
 //     })
 //   }) 
 
- export default router
- 
+export default router

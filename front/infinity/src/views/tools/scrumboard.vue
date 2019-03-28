@@ -1,9 +1,9 @@
 <template>
-  <div class="page-header">
-    <h1 class="title">Scrum Board</h1>
-    <div class="discription">
-      <span class="active">Scrum Board</span>
-      <div class="content">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="font-weight-bold">Scrum Board</h4>
+
         <TODOINPUT v-on:addTodo="AddTodo"></TODOINPUT>
 
         <TODOBOARD :Title="TodoTitle" :ListData="todoprocess"></TODOBOARD>

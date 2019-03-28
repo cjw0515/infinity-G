@@ -22,47 +22,43 @@
           aria-controls="ui-basic"
         >
           <i class="ti-palette menu-icon"></i>
-          <span class="menu-title">UI Elements</span>
+          <span class="menu-title">TO DO</span>
           <i class="menu-arrow"></i>
         </a>
         <div class="collapse" id="ui-basic">
           <ul class="nav flex-column sub-menu">
             <li class="nav-item">
-              <a class="nav-link" href="pages/ui-features/accordions.html">Accordions</a>
+              <router-link to="/todolists/TodoComponent1" class="nav-link">ToDo1</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a>
+              <router-link to="/todolists/TodoComponent2" class="nav-link">ToDO2</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="pages/ui-features/badges.html">Badges</a>
+              <router-link to="/todolists/TodoComponent3" class="nav-link">보라</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="pages/ui-features/breadcrumbs.html">Breadcrumbs</a>
+              <router-link to="/todolists/TodoComponent4" class="nav-link">ToDO4</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="pages/ui-features/dropdowns.html">Dropdowns</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="pages/ui-features/modals.html">Modals</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="pages/ui-features/progress.html">Progress bar</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="pages/ui-features/pagination.html">Pagination</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="pages/ui-features/tabs.html">Tabs</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="pages/ui-features/typography.html">Typography</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="pages/ui-features/tooltips.html">Tooltips</a>
+              <router-link to="/todolists/TodoComponent5" class="nav-link">광일</router-link>
             </li>
           </ul>
         </div>
       </li>
+      <li class="nav-item">
+        <router-link to="/tools/scrum" class="nav-link">
+          <i class="ti-bell menu-icon"></i>
+          <span class="menu-title">CanvanBoard</span>
+        </router-link>
+      </li>
+
+      <li class="nav-item">
+        <router-link to="/tools/timer" class="nav-link">
+          <i class="ti-bell menu-icon"></i>
+          <span class="menu-title">Timer</span>
+        </router-link>
+      </li>
+
       <li class="nav-item">
         <a
           class="nav-link"
@@ -434,10 +430,10 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="pages/apps/gallery.html">
+        <router-link to="pages/apps/gallery.html">
           <i class="ti-gallery menu-icon"></i>
           <span class="menu-title">Gallery</span>
-        </a>
+        </router-link>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="pages/documentation/documentation.html">

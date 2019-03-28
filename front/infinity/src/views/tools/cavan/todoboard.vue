@@ -1,34 +1,44 @@
 <template>
-   <div class="col-3">
-      <h3>{{Title}}</h3>        
-       <draggable class="list-group" :list="ListData" v-bind="dragOptions" group="todo" @change="log" :move="onMove">
-        <div
-          class="list-group-item"
-          v-for="(element, index) in ListData"
-          :key="element.uid"  >
-        <TODOITEM :tododata=element></TODOITEM>          
-        </div>
-      </draggable>
-   </div>
+  <div class="col-lg-12 col-12 p-0">
+    <h4 class="card-title">{{Title}}</h4>
+    <draggable
+      class="list-wrapper"
+      :list="ListData"
+      v-bind="dragOptions"
+      group="todo"
+      @change="log"
+      :move="onMove"
+    >
+      <ul
+        class="d-flex flex-column-reverse todo-list"
+        v-for="(element, index) in ListData"
+        :key="element.uid"
+      >
+        <TODOITEM :tododata="element"></TODOITEM>
+      </ul>
+    </draggable>
+  </div>
 </template>
 
 <script>
-import  TODOITEM from "./todoitem.vue";
-import eventBus from '../../../EventBus.js';
+import TODOITEM from "./todoitem.vue";
+import eventBus from "../../../EventBus.js";
 import draggable from "vuedraggable";
 
 export default {
-  components:{
-       TODOITEM,draggable
-    },
-    props:["Title","ListData"],
-    data() {
-       return {          
-            editable: true,
-            isDragging: true,
-            delayedDragging: false
-       }
-   }, computed: {
+  components: {
+    TODOITEM,
+    draggable
+  },
+  props: ["Title", "ListData"],
+  data() {
+    return {
+      editable: true,
+      isDragging: true,
+      delayedDragging: false
+    };
+  },
+  computed: {
     dragOptions() {
       return {
         animation: 0,
@@ -36,16 +46,14 @@ export default {
         disabled: !this.editable,
         ghostClass: "ghost"
       };
-    } 
-  },methods: {
-   
+    }
+  },
+  methods: {
     log: function(evt) {
-      
-    //  window.console.log(evt);
-      
-      if(evt.added !=undefined)
-      {
-        eventBus.$emit("UpdateCavan",evt.added.element.uid);
+      //  window.console.log(evt);
+
+      if (evt.added != undefined) {
+        eventBus.$emit("UpdateCavan", evt.added.element.uid);
       }
       //window.console.log(evt.moved);
       //window.console.log("added="+evt.added.element.uid);
@@ -55,15 +63,13 @@ export default {
       const draggedElement = draggedContext.element;
       window.console.log(relatedElement);
       window.console.log(draggedElement);
-      return (
-        true//(!relatedElement || !relatedElement.fix) && !draggedElement.fix
-      );
+      return true; //(!relatedElement || !relatedElement.fix) && !draggedElement.fix
     }
   }
-}
+};
 </script> 
 <style>
- .flip-list-move {
+.flip-list-move {
   transition: transform 0.5s;
 }
 
@@ -78,7 +84,7 @@ export default {
 
 .list-group {
   min-height: 100px;
-  background-color:aqua;
+  background-color: aqua;
 }
 
 .list-group-item {
