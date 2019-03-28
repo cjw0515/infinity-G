@@ -58,6 +58,13 @@
           <span class="menu-title">Timer</span>
         </router-link>
       </li>
+      <li class="nav-item">
+        <router-link to="/boards/common" class="nav-link">
+          <i class="ti-bell menu-icon"></i>
+          <span class="menu-title">Common Board</span>
+        </router-link>
+      </li>
+      
 
       <li class="nav-item">
         <a

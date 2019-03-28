@@ -11,6 +11,7 @@ import Scrum from '../views/tools/scrumboard.vue'
 import Timer from '../views/tools/timer.vue'
 import Home from '../views/Home.vue'
 import TodoContainer from '../components/todolists/TodoContainer.vue'
+import CommonBoard from '../views/board/common/boardmain.vue'
 
 Vue.use(Router);
 /**
@@ -47,6 +48,12 @@ const router = new Router({
                     path: '/tools/timer',
                     name: 'Timer',
                     component: Timer,
+                    props: true
+                },
+                {
+                    path: '/boards/common',
+                    name: 'commonboard',
+                    component: CommonBoard,
                     props: true
                 }
             ],
