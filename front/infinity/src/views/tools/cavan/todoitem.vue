@@ -1,14 +1,16 @@
 <template>
-  <li>
-    <div class="form-check">
-      <label class="form-check-label">
-        {{tododata.titledata}} {{tododata.todoval}}
-        <i class="input-helper">{{tododata.pri}}</i>
-        <i class="input-helper"></i>
-      </label>
-      <i class="remove ti-close" @click="delbtn(tododata.uid)">삭제</i>
-    </div>
-  </li>
+
+<li >
+												<div class="form-check form-check-flat bg-gray">
+													<label class="form-check-label">
+														{{tododata.titledata}} : {{tododata.todoval}}
+                            
+													<i class="input-helper"></i></label>
+												</div>
+												<i class="remove ti-close" @click="delbtn(tododata.uid)"></i>
+</li>
+
+
 </template>
 
 <script>

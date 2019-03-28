@@ -1,17 +1,22 @@
 <template>
-  <div class="col-12 grid-margin">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="font-weight-bold">Scrum Board</h4>
-
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="col-md-12 grid-margin ">
+      <div class="row justify-content-center">
+        <h4 class="font-weight-bold ">Scrum Board</h4>
+      </div>
+      <div class="row">
         <TODOINPUT v-on:addTodo="AddTodo"></TODOINPUT>
+      </div>
 
         <TODOBOARD :Title="TodoTitle" :ListData="todoprocess"></TODOBOARD>
         <TODOBOARD :Title="IngTitle" :ListData="inprocess"></TODOBOARD>
         <TODOBOARD :Title="ComTitle" :ListData="completeprocess"></TODOBOARD>
       </div>
+  
     </div>
-  </div>
+  
+</div>
 </template>
 
 <script>

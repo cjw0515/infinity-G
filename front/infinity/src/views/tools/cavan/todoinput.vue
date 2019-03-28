@@ -1,35 +1,37 @@
 <template>
-  <div class="card">
-    <div class="card-body">
-      <form class="form-inline">
-        <label class="sr-only" for="inlineFormInputName2">Name</label>
-        <input
-          type="text"
-          refs="t"
-          v-model="Title"
-          class="form-control mb-2 mr-sm-2"
-          placeholder="제목"
-        >
-        <input
-          type="text"
-          refs="to"
-          v-model="TODO"
-          class="form-control mb-2 mr-sm-2"
-          placeholder="할일"
-        >
-        <div class="form-group row">
-          <div class="col-sm-9">
-            <select class="form-control mb-2 mr-sm-2" v-model="SEL">
-              <option disabled value>중요도</option>
-              <option>A</option>
-              <option>B</option>
-              <option>C</option>
-            </select>
+<div class="col-md-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <form class="form-inline">
+          <label class="sr-only" for="inlineFormInputName2">Name</label>
+          <input
+            type="text"
+            refs="t"
+            v-model="Title"
+            class="form-control mb-2 mr-sm-2"
+            placeholder="제목"
+          >
+          <input
+            type="text"
+            refs="to"
+            v-model="TODO"
+            class="form-control mb-2 mr-sm-2"
+            placeholder="할일"
+          >
+          <div class="form-group row">
+            <div class="col-sm-9">
+              <select class="form-control mb-2 mr-sm-2" v-model="SEL">
+                <option disabled value>중요도</option>
+                <option>A</option>
+                <option>B</option>
+                <option>C</option>
+              </select>
+            </div>
           </div>
-        </div>
 
-        <button type="submit" class="btn btn-primary mb-2" @click="RegAction()">등록</button>
-      </form>
+          <button type="submit" class="btn btn-primary mb-2" @click="RegAction()">등록</button>
+        </form>
+      </div>
     </div>
   </div>
 </template>

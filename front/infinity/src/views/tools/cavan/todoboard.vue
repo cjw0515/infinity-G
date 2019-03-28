@@ -1,8 +1,8 @@
 <template>
-  <div class="col-lg-12 col-12 p-0">
-    <h4 class="card-title">{{Title}}</h4>
+  <div class="col-lg-12 col-12 p-0 ">
+    <h4 class="bg-silver text-black md-5">{{Title}}</h4>
     <draggable
-      class="list-wrapper"
+      class="list-wrapper card border-0 position-relative"
       :list="ListData"
       v-bind="dragOptions"
       group="todo"

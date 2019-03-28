@@ -42,6 +42,12 @@ const router = new Router({
                     name: 'Scrum',
                     component: Scrum,
                     props: true
+                },
+                {
+                    path: '/tools/timer',
+                    name: 'Timer',
+                    component: Timer,
+                    props: true
                 }
             ],
             // meta: { requiresAuth: true }        
@@ -67,11 +73,7 @@ const router = new Router({
             path: '/tools/json',
             name: 'JsonView',
             component: JsonView
-        }, {
-            path: '/tools/timer',
-            name: 'Timer',
-            component: Timer
-        }
+        } 
     ]
 })
 //전역 가드

@@ -10,13 +10,9 @@
 import moment from "moment";
 
 export default {
-  props: {
-    time: { type: [Date, Number, moment], default: () => Date.now() },
-    end: { type: [Date, Number, moment], required: true },
-    format: { type: String, default: "HH : mm : ss" }
-  },
+  
   data() {
-    return { now: this.time / 1000, intervalId: null };
+    return { now: Date.now()  / 1000, intervalId: null,end:Date.now()+100*500*1000,format:"HH : mm : ss" };
   },
   computed: {
     remain() {
