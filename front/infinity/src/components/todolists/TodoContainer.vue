@@ -23,7 +23,7 @@ export default {
     TodoComponent1,
     TodoComponent2,
     TodoComponent3,
-    TodoComponent4,
+    'todocomponent4':TodoComponent4,
     TodoComponent5
   },
   props: ["name"],
