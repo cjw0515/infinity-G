@@ -43,7 +43,7 @@ const router = new Router({
                     props: true 
                 }           
             ],
-            // meta: { requiresAuth: true }        
+            meta: { requiresAuth: true }        
         },        
         {
             path: '/login',
@@ -74,6 +74,7 @@ const router = new Router({
  * beforeEach - 가드 전 훅
  * next() - 항상 호출
  */
+
 //  router.beforeEach((to, from, next) => {     
 //     authChk.authUser().then((user) => {  
 //         // window.console.log('guard')    

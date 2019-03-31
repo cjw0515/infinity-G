@@ -45,3 +45,9 @@ export default {
   }
 };
 </script>
+<style scoped>
+.content-wrapper {
+  background-color: gray;
+}
+</style>
+

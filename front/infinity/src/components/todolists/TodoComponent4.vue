@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="todoapp">
     {{user}}
     <Header></Header>
     <TodoInput v-on:addTodo="addTodo"></TodoInput>
@@ -58,5 +58,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+#todo {
+  background-color: black;
+}
 </style>
