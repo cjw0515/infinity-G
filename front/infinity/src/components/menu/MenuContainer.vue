@@ -1,85 +1,55 @@
 <template>
-    <ul class="nav">
-      <li class="nav-item">
-        <a class="nav-link" href="index.html">
-          <i class="ti-home menu-icon"></i>
-          <span class="menu-title">Dashboard</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="pages/widgets/widgets.html">
-          <i class="ti-settings menu-icon"></i>
-          <span class="menu-title">Widgets</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a
-          class="nav-link"
-          data-toggle="collapse"
-          href="#ui-basic"
-          aria-expanded="false"
-          aria-controls="ui-basic"
-        >
-          <i class="ti-palette menu-icon"></i>
-          <span class="menu-title">UI Elements</span>
-          <i class="menu-arrow"></i>
-        </a>
-        <div class="collapse">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item">
-              <a class="nav-link" href="pages/ui-features/accordions.html">Accordions</a>
-            </li>
-          </ul>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a
-          class="nav-link"
-          data-toggle="collapse"
-          href="#ui-advanced"
-          aria-expanded="false"
-          aria-controls="ui-advanced"
-        >
-          <i class="ti-view-list menu-icon"></i>
-          <span class="menu-title">Advanced UI</span>
-          <i class="menu-arrow"></i>
-        </a>
-        <div class="collapse">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item">
-              <a class="nav-link" href="pages/ui-features/dragula.html">Dragula</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="pages/ui-features/clipboard.html">Clipboard</a>
-            </li>
-          </ul>
-        </div>
-      </li>
-    </ul>
+  <ul class="nav" v-if="menuItems.length">
+    <collapse-menu
+      v-for="(item, idx) in menuItems"
+      :key="idx"
+      v-if="item.isCollapseMenu"
+      :menuItem="item"
+    ></collapse-menu>
+    <normal-menu v-else :menuItem="item"></normal-menu>
+  </ul>
 </template>
 <script>
+import Menu from "./Menu.vue";
+import CollapseMenu from "./CollapseMenu.vue";
+
 export default {
-    data(){
-        return{
-            menuItems:[
-                {
-                    menuTitle: 'Dashboard',
-                    menuLink: ''
-                },
-                {
-                    menuTitle: 'Widgets',
-                    menuLink: ''
-                },
-                {
-                    menuTitle: 'UI Elements',
-                    menuLink: ''
-                },
-                {
-                    menuTitle: 'Advanced UI',
-                    menuLink: ''
-                },
-            ]
-        }
+  props: {
+    menuItems: {
+      type: Array,
+      default: function() {
+        return [];
+      }
     }
-}
+  },
+  data() {
+    return {
+      collapseMenuCtr: false
+    };
+  },
+  methods: {
+    toggleCollapseMenu() {
+      this.collapseMenuCtr = !this.collapseMenuCtr;
+    }
+  },
+  computed: {
+    /* 
+    collapseMenu: function() {
+      return this.menuItems.filter(item => {
+        return item.isCollapseMenu;
+      });
+    },
+    noneCollapseMenu: function() {
+      return this.menuItems.filter(item => {
+        return !item.isCollapseMenu;
+      });
+    }
+    */
+  },
+  components: {
+    "normal-menu": Menu,
+    "collapse-menu": CollapseMenu
+  }
+};
 </script>
+
