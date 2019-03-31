@@ -1,67 +1,130 @@
 <template>
-  <div class="col-12 grid-margin stretch-card">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="card-title">Basic form elements</h4>
-        <p class="card-description">Basic form elements</p>
-        <form class="forms-sample">
-          <div class="form-group">
-            <label for="exampleInputName1">Name</label>
-            <input type="text" class="form-control" id="exampleInputName1" placeholder="Name">
-          </div>
-          <div class="form-group">
-            <label for="exampleInputEmail3">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Email">
-          </div>
-          <div class="form-group">
-            <label for="exampleInputPassword4">Password</label>
-            <input
-              type="password"
-              class="form-control"
-              id="exampleInputPassword4"
-              placeholder="Password"
-            >
-          </div>
-          <div class="form-group">
-            <label for="exampleSelectGender">Gender</label>
-            <select class="form-control" id="exampleSelectGender">
-              <option>Male</option>
-              <option>Female</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>File upload</label>
-            <input type="file" name="img[]" class="file-upload-default">
-            <div class="input-group col-xs-12">
-              <input
-                type="text"
-                class="form-control file-upload-info"
-                disabled
-                placeholder="Upload Image"
-              >
-              <span class="input-group-append">
-                <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
-              </span>
+<div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                   
+                    <div class="col-lg-12">
+                      <div class="d-flex justify-content-between">
+                        <div>
+                          <button class="btn btn-outline-primary" @click="CurrentViewIndex=1">List</button>
+                          <button class="btn btn-outline-primary m-3" @click="CurrentViewIndex=2">WRITE</button>
+                          <button class="btn btn-outline-primary m-3" @click="CallBlc()">WRITE</button>
+                        </div>
+                      </div>
+                      <div class="mt-4 py-2 border-top border-bottom">
+                        <ul class="nav profile-navbar">
+                          <li class="nav-item">
+                            <a class="nav-link" href="#">
+                              <i class="ti-user"></i>
+                              Info
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link active" href="#">
+                              <i class="ti-receipt"></i>
+                              Feed
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="#">
+                              <i class="ti-calendar"></i>
+                              Agenda
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="#">
+                              <i class="ti-clip"></i>
+                              Resume
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="profile-feed">
+                      
+                        <div class="d-flex align-items-start profile-feed-item">
+                           
+                        </div>
+                        <div class="d-flex align-items-start profile-feed-item">
+                          
+                          <div class="ml-4">
+                            <!-- 여기에 COMPONENT -->
+                             <transition >
+                           <component :is="GeneratedView(CurrentViewIndex)" ></component>
+                             </transition>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="form-group">
-            <label for="exampleInputCity1">City</label>
-            <input type="text" class="form-control" id="exampleInputCity1" placeholder="Location">
-          </div>
-          <div class="form-group">
-            <label for="exampleTextarea1">Textarea</label>
-            <textarea class="form-control" id="exampleTextarea1" rows="4"></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary mr-2">Submit</button>
-          <button class="btn btn-light">Cancel</button>
-        </form>
+        </div>
+         
       </div>
-    </div>
-  </div>
 </template>
 
 <script>
-export default {};
+import BoardList from './boardlist.vue'
+import BoardInput from './boardinput.vue'
+import BoardView from './boardview.vue'
+import BoardBLC from './boardblc.js'
+import BoardEntity from './boardentity'
+
+const BLC=new BoardBLC();
+
+export default {
+   components: {
+     BoardList,BoardInput,BoardView
+   },
+   data() {
+      return {
+        CurrentViewIndex:2
+        
+      }
+   },
+   computed: {
+     
+   },
+   mounted() {
+      
+   },
+   methods: {  
+    CallBlc(){
+      let be =new BoardEntity();
+      be.name ="니미라아아";
+      let d= BLC.GetData("ccc");
+      //be.callback(this.ErroCallback);
+      window.console.log('test:'+be.name);
+      window.console.log(d);
+
+      //alert( BLC.testmethod("fff"));
+    },
+    ErroCallback(arg){
+      alert("CallBack"+arg);
+    },
+    GeneratedView : function(uiNumber) {
+            switch (uiNumber) {
+                case 1 :
+                    return BoardList;
+                case 2 :
+                    return BoardInput;
+                case 3: 
+                    return BoardView;                
+                default : 
+                    return ''
+            }
+      }
+
+    }
+ }
+
 </script>
 
 <style>
