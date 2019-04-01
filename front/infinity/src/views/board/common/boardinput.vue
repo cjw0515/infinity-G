@@ -51,7 +51,7 @@
         </form>
       </div>
     </div>
-    <ModalPopup title1="안녕" content1="오예"></ModalPopup>
+    <ModalPopup title1="안녕" content1="오예" timer="3"></ModalPopup>
   </div>
 </template>
 

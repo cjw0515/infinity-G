@@ -5,7 +5,7 @@
       <div class="swal-text" style>{{content1}}</div>
       <div class="swal-footer">
         <div class="swal-button-container">
-          <button class="swal-button swal-button--confirm btn btn-primary">OK</button>
+          <button class="swal-button swal-button--confirm btn btn-primary" @click="GetCount()">OK</button>
 
           <div class="swal-button__loader">
             <div></div>
@@ -26,7 +26,12 @@ export default {
       message: "내용"
     };
   },
-  props: ["title1", "content1"]
+  props: ["title1", "content1", "timer"],
+  methods: {
+    GetCount() {
+      alert(this.timer);
+    }
+  }
 };
 </script>
 
