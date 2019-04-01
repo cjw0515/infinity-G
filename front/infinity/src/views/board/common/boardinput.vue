@@ -7,14 +7,14 @@
         <form class="forms-sample">
           <div class="form-group">
             <label for="exampleInputName1">이름</label>
-            <input type="text" class="form-control" id="exampleInputName1" placeholder="이름을 입력해주세요">
+            <input type="text" class="form-control" id="exampleInputName1" v-model="name" placeholder="이름을 입력해주세요">
           </div>
           <div class="form-group">
             <label for="exampleInputEmail3">제목</label>
-            <input
-              type="email"
+            <input              
               class="form-control"
               id="exampleInputEmail3"
+              v-model="title"
               placeholder="제목을 입력해주세요"
             >
           </div>
@@ -51,7 +51,7 @@
         </form>
       </div>
     </div>
-    <ModalPopup title1="안녕" content1="오예" timer="3"></ModalPopup>
+    <ModalPopup    ref="popup"  ></ModalPopup>
   </div>
 </template>
 
@@ -65,16 +65,24 @@ export default {
   },
   data() {
     return {
+      name:'',
+      title:'',
+      gender:'',
+      cotent:'',
       isEdit: false
     };
   },
   methods: {
     AddContent() {
-      alert("");
+      //alert("");
+      this.$refs.popup.popupSet('고고','구구',3);
+      //this.ModalPopup.popupSet('고고','구구',3);
+      //foo.popupSet('고고','구구',3);
+      //this.popupCall('가가','나나',3);
       //this.ModalPopup.vshop = true;
     },
     CancelButton() {},
-    IsAction() {}
+    IsAction() {} 
   }
 };
 </script>

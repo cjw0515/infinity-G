@@ -51,6 +51,7 @@
                         <div class="d-flex align-items-start profile-feed-item">
                           
                           <div class="ml-4">
+                            <Progress></Progress>
                             <!-- 여기에 COMPONENT -->
                              <transition >
                            <component :is="GeneratedView(CurrentViewIndex)" ></component>
@@ -76,12 +77,14 @@ import BoardInput from './boardinput.vue'
 import BoardView from './boardview.vue'
 import BoardBLC from './boardblc.js'
 import BoardEntity from './boardentity'
+import ModalPopup from "./modalpopup.vue";
+import Progress from "./progressbar.vue";
 
 const BLC=new BoardBLC();
 
 export default {
    components: {
-     BoardList,BoardInput,BoardView
+     BoardList,BoardInput,BoardView,Progress
    },
    data() {
       return {
