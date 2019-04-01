@@ -1,10 +1,9 @@
 <template>
-
-  <div class="col-12 grid-margin stretch-card">
+  <div class="grid-margin stretch-card col-12" style="width:1000px">
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">게시물 입력</h4>
-        
+
         <form class="forms-sample">
           <div class="form-group">
             <label for="exampleInputName1">이름</label>
@@ -12,9 +11,14 @@
           </div>
           <div class="form-group">
             <label for="exampleInputEmail3">제목</label>
-            <input type="email" class="form-control" id="exampleInputEmail3" placeholder="제목을 입력해주세요">
+            <input
+              type="email"
+              class="form-control"
+              id="exampleInputEmail3"
+              placeholder="제목을 입력해주세요"
+            >
           </div>
-           
+
           <div class="form-group">
             <label for="exampleSelectGender">성별</label>
             <select class="form-control" id="exampleSelectGender">
@@ -37,7 +41,7 @@
               </span>
             </div>
           </div>
-          
+
           <div class="form-group">
             <label for="exampleTextarea1">내용</label>
             <textarea class="form-control" id="exampleTextarea1" rows="4"></textarea>
@@ -47,28 +51,28 @@
         </form>
       </div>
     </div>
+    <ModalPopup title1="안녕" content1="오예"></ModalPopup>
   </div>
 </template>
 
 <script>
+import BoardEntity from "./boardentity.js";
+import ModalPopup from "./modalpopup.vue";
+
 export default {
+  components: {
+    ModalPopup
+  },
   data() {
     return {
-      isEdit :false
-    }
+      isEdit: false
+    };
   },
   methods: {
-    AddContent() {
-      
-    },
-    CancelButton(){
-
-    },
-    IsAction(){
-
-    }  
-  },  
-  
+    AddContent() {},
+    CancelButton() {},
+    IsAction() {}
+  }
 };
 </script>
 

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "concurrently \"vue-cli-service serve --mode development\" \"cd ../../backend && firebase serve\"",
+    "serve": "concurrently \"vue-cli-service serve --mode development\" \"cd ../../backend && firebase.cmd serve\"",
     "frontserve": "vue-cli-service serve --mode development",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
