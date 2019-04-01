@@ -1,5 +1,5 @@
 <template>
-  <div class="swal-overlay swal-overlay--show-modal" tabindex="-1">
+  <div class="swal-overlay swal-overlay--show-modal" tabindex="-1" v-show="vshop">
     <div class="swal-modal" role="dialog" aria-modal="true">
       <div class="swal-title" style>{{title1}}</div>
       <div class="swal-text" style>{{content1}}</div>
@@ -23,12 +23,14 @@ export default {
   data() {
     return {
       title: "제목",
-      message: "내용"
+      message: "내용",
+      vshop: true
     };
   },
   props: ["title1", "content1", "timer"],
   methods: {
     GetCount() {
+      this.vshop = false;
       alert(this.timer);
     }
   }

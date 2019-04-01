@@ -46,7 +46,7 @@
             <label for="exampleTextarea1">내용</label>
             <textarea class="form-control" id="exampleTextarea1" rows="4"></textarea>
           </div>
-          <button type="submit" class="btn btn-primary mr-2">Submit</button>
+          <button type="submit" class="btn btn-primary mr-2" @click="AddContent()">Submit</button>
           <button class="btn btn-light">Cancel</button>
         </form>
       </div>
@@ -69,7 +69,10 @@ export default {
     };
   },
   methods: {
-    AddContent() {},
+    AddContent() {
+      alert("");
+      //this.ModalPopup.vshop = true;
+    },
     CancelButton() {},
     IsAction() {}
   }
