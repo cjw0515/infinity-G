@@ -25,7 +25,7 @@ export default {
         {
           menuTitle: "todolists",
           menuIcon: "ti-view-list",
-          menuLink: "/todolists/todocomponent4",
+          menuLink: "",
           isActive: false,
           isCollapseMenu: true,
           subMenu: [
@@ -52,38 +52,9 @@ export default {
           ]
         },
         {
-          menuTitle: "todolistss",
-          menuIcon: "ti-view-list",
-          menuLink: "/todolists/todocomponent4",
-          isActive: false,
-          isCollapseMenu: true,
-          subMenu: [
-            {
-              subMenuName: "이종화",
-              subMenuLink: "/todolists/todocomponent1/",
-              isActive: false
-            },
-            {
-              subMenuName: "김광일",
-              subMenuLink: "/todolists/todocomponent2/",
-              isActive: false
-            },
-            {
-              subMenuName: "임보라",
-              subMenuLink: "/todolists/todocomponent3/",
-              isActive: false
-            },
-            {
-              subMenuName: "최종원",
-              subMenuLink: "/todolists/todocomponent4/",
-              isActive: false
-            }
-          ]
-        },
-        {
-          menuTitle: "UI Elements",
+          menuTitle: "menus",
           menuIcon: "ti-settings",
-          menuLink: "/todolists/todocomponent4",
+          menuLink: "/menu",
           isActive: false,
           isCollapseMenu: false
         }
