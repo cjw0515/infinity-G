@@ -82,19 +82,19 @@ const router = new Router({
  * beforeEach - 가드 전 훅
  * next() - 항상 호출
  */
- router.beforeEach((to, from, next) => {        
-    authChk.authUser().then((user) => {          
-        if(to.matched.some(record => record.meta.requiresAuth)){
-            if(user) next();
-            else next('login')            
-        }else{
-            next()
-        }        
-    }, (error)=>{
-      window.error(error)
-    })
-    next()
-  }) 
+//  router.beforeEach((to, from, next) => {        
+//     authChk.authUser().then((user) => {          
+//         if(to.matched.some(record => record.meta.requiresAuth)){
+//             if(user) next();
+//             else next('login')            
+//         }else{
+//             next()
+//         }        
+//     }, (error)=>{
+//       window.error(error)
+//     })
+//     next()
+//   }) 
 
  export default router
  

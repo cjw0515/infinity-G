@@ -8,6 +8,6 @@ export const utils = {
         linkTo(link) {
         // window.console.log(link);
         this.$router.push(link);
-        },
+        },        
     }
 }
