@@ -26,12 +26,12 @@ let firebaseAppConfig = {
   projectId: projectId
 };
 
-const firebaseApp = firebase.initializeApp(firebaseAppConfig);  
-const db = firebase.firestore();
+const firebaseApp = firebase.initializeApp(firebaseAppConfig);
+const firestore = firebaseApp.firestore()
 
 export{
   firebaseApp,
-  db,
+  firestore,
   firebase
 }
 

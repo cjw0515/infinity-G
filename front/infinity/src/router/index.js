@@ -12,6 +12,7 @@ import Scrum from '../views/tools/scrumboard.vue'
 import Home from '../views/Home.vue'
 import TodoContainer from '../components/todolists/TodoContainer.vue'
 import Menu from '@/pages/menu/Index.vue'
+import Chat from '@/pages/chat/Index.vue'
 
 Vue.use(Router);
 /**
@@ -48,6 +49,12 @@ const router = new Router({
                     path:'/menu',
                     name: 'menu',
                     component: Menu,                
+                    props: true 
+                },
+                {
+                    path:'/chat',
+                    name: 'chat',
+                    component: Chat,                
                     props: true 
                 }                           
             ],
