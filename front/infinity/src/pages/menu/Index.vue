@@ -1,119 +1,6 @@
 <template>
   <div>
-    <div class="row">
-      <div class="col-lg-5 grid-margin stretch-card">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="card-title">Hoverable Table</h4>
-            <p class="card-description">
-              Add class
-              <code>.table-hover</code>
-            </p>
-            <div class="table-responsive">
-              <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th>User</th>
-                    <th>Product</th>
-                    <th>Sale</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Jacob</td>
-                    <td>Photoshop</td>
-                    <td class="text-danger">
-                      28.76%
-                      <i class="ti-arrow-down"></i>
-                    </td>
-                    <td>
-                      <label class="badge badge-danger">Pending</label>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Messsy</td>
-                    <td>Flash</td>
-                    <td class="text-danger">
-                      21.06%
-                      <i class="ti-arrow-down"></i>
-                    </td>
-                    <td>
-                      <label class="badge badge-warning">In progress</label>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>John</td>
-                    <td>Premier</td>
-                    <td class="text-danger">
-                      35.00%
-                      <i class="ti-arrow-down"></i>
-                    </td>
-                    <td>
-                      <label class="badge badge-info">Fixed</label>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Peter</td>
-                    <td>After effects</td>
-                    <td class="text-success">
-                      82.00%
-                      <i class="ti-arrow-up"></i>
-                    </td>
-                    <td>
-                      <label class="badge badge-success">Completed</label>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Dave</td>
-                    <td>53275535</td>
-                    <td class="text-success">
-                      98.05%
-                      <i class="ti-arrow-up"></i>
-                    </td>
-                    <td>
-                      <label class="badge badge-warning">In progress</label>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-body">
-              <nav>
-                <ul
-                  class="pagination flex-wrap pagination-rounded-flat pagination-success justify-content-center"
-                >
-                  <li class="page-item">
-                    <a class="page-link" href="#">
-                      <i class="ti-angle-left"></i>
-                    </a>
-                  </li>
-                  <li class="page-item active">
-                    <a class="page-link" href="#">1</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">2</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">3</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">4</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">
-                      <i class="ti-angle-right"></i>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <table-paging col-size="7" :table-data="menus"></table-paging>
     <div class="row grid-margin">
       <div class="col-lg-5">
         <div class="card">
@@ -298,11 +185,35 @@
 </template>
 <script>
 import { utils } from "@/components/mixins/utils";
+import TableWithPaging from "@/components/table/TableWithPaging.vue";
+import { LIST } from "@/api/menus/";
 
 export default {
   data() {
-    return {};
+    return {
+      menus: []
+    };
   },
-  mounted: function() {}
+  methods: {
+    async getMenuList() {
+      let apiUrl = LIST;
+      const response = await fetch(apiUrl);
+      const json = await response.json();
+      return json.menus;
+    }
+  },
+  components: {
+    "table-paging": TableWithPaging
+  },
+  mounted: function() {
+    this.getMenuList()
+      .then(data => {
+        this.menus = data;
+        // console.log(data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
 };
 </script>

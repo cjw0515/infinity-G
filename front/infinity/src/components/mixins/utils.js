@@ -1,9 +1,4 @@
-export const utils = {
-    data(){
-        return{
-
-        }
-    },
+export const utils = {    
     methods:{
         linkTo(link) {
         // window.console.log(link);

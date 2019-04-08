@@ -21,7 +21,6 @@ export default {
   methods: {
     setMnuesInactive() {
       for (let i in this.menuItems) {
-        // console.log(this.menuItems[i].isActive);
         this.menuItems[i].isActive = false;
       }
     },
@@ -41,6 +40,12 @@ export default {
         return tmpArr;
       });
       this.menuItems = modifiedArr;
+    },
+    async getMenuList() {
+      let apiUrl = LIST;
+      const response = await fetch(apiUrl);
+      const json = await response.json();
+      return json.menus;
     }
   },
   created: function() {
@@ -51,16 +56,10 @@ export default {
     });
   },
   mounted: function() {
-    this.setCurrentMenu();
-    async function fetch_api() {
-      let apiUrl = LIST;
-      const response = await fetch(apiUrl);
-      const json = await response.json();
-      return json.menus;
-    }
-    fetch_api()
+    this.getMenuList()
       .then(data => {
         this.menuItems = data;
+        this.setCurrentMenu();
       })
       .catch(error => {
         console.error(error);
