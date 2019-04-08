@@ -11,12 +11,14 @@ export default class  BoardsData{
     nowpage =1;
     showpage=20;
 
-    boardlist ={};
+    boardlist =new Set();
 
 
-    addBorad(data)
+    addBoard(data)
     {        
-        this.boardlist.push(data);
+        
+        this.boardlist.add(data);
+        //this.boardlist.push(data);
         //newTodos[index] = { ...newTodos[index], text };
         //const todo = newTodos.find(todo => todo.date === date);
         //const newTodos = [...this.todos];
@@ -25,9 +27,9 @@ export default class  BoardsData{
         //this.todos = this.todos.filter(todo => todo.date !== date);
     }
 
-    getListBorad(data)
+    getListBorad()
     {        
-        
+        return this.boardlist;
     }
 
     RemoveBorad(data)

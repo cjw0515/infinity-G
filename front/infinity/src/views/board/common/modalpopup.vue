@@ -2,7 +2,9 @@
   <div class="swal-overlay swal-overlay--show-modal" tabindex="-1" v-show="vshop">
     <div class="swal-modal" role="dialog" aria-modal="true">
       <div class="swal-title" style>{{title}}</div>
-      <div class="swal-text" style>{{message}}</div>
+      <div class="swal-text" style  v-html="message" >
+          
+      </div>
       <div class="swal-footer">
         <div class="swal-button-container">
      
@@ -10,10 +12,7 @@
       <button class="swal-button swal-button--confirm btn btn-primary" @click="GetCount()">
         {{CountText}}</button>
 
-    </transition>
-
-          
-
+    </transition> 
           <div class="swal-button__loader">
             <div></div>
             <div></div>

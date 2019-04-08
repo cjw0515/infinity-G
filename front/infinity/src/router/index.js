@@ -12,6 +12,7 @@ import Timer from '../views/tools/timer.vue'
 import Home from '../views/Home.vue'
 import TodoContainer from '../components/todolists/TodoContainer.vue'
 import CommonBoard from '../views/board/common/boardmain.vue'
+import Sandbox from '../views/sandbox/sandbox.vue'
 
 Vue.use(Router);
 /**
@@ -54,6 +55,12 @@ const router = new Router({
                     path: '/boards/common',
                     name: 'commonboard',
                     component: CommonBoard,
+                    props: true
+                },
+                {
+                    path: '/sandbox',
+                    name: 'sandbox',
+                    component: Sandbox,
                     props: true
                 }
             ],

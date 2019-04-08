@@ -54,7 +54,7 @@
                             <Progress></Progress>
                             <!-- 여기에 COMPONENT -->
                              <transition >
-                           <component :is="GeneratedView(CurrentViewIndex)" ></component>
+                           <component :is="GeneratedView(CurrentViewIndex)" v-on:AddBoard="AddBoard"></component>
                              </transition>
 
                           </div>
@@ -79,6 +79,10 @@ import BoardBLC from './boardblc.js'
 import BoardEntity from './boardentity'
 import ModalPopup from "./modalpopup.vue";
 import Progress from "./progressbar.vue";
+import eventBus from '@/EventBus.js';
+import {Showlog} from "./utility.js";
+
+
 
 const BLC=new BoardBLC();
 
@@ -94,11 +98,21 @@ export default {
    },
    computed: {
      
+
    },
    mounted() {
-      
+      eventBus.$on("AddBoard", (data) => {
+          alert(data);
+      });
    },
    methods: {  
+    AddBoard:function(data)
+    {
+         Showlog(data);
+        BLC.addBoard(data);
+        Showlog(BLC.getListBorad(1));
+        this.CurrentViewIndex=1;
+    },
     CallBlc(){
       let be =new BoardEntity();
       be.name ="니미라아아";

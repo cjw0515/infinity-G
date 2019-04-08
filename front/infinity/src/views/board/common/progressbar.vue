@@ -15,6 +15,10 @@ export default {
         return {
             vshow:false
         }
+
+    },
+    methods: {
+        
     },
 }
 </script>
