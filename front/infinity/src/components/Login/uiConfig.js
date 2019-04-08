@@ -1,5 +1,5 @@
-import { firebase } from './node_modules/@/config/'
-import router from './node_modules/@/router'
+import { firebase } from '@/config/'
+import router from '@/router'
 
 export default {
     callbacks: {
