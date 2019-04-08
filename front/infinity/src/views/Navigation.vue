@@ -7,6 +7,7 @@
 <script>
 import MenuContainer from "@/components/menu/MenuContainer.vue";
 import EventBus from "@/EventBus";
+import { LIST } from "@/api/menus/";
 
 export default {
   components: {
@@ -14,86 +15,12 @@ export default {
   },
   data() {
     return {
-      menuItems: [
-        {
-          menuTitle: "Home",
-          menuIcon: "ti-home",
-          menuLink: "/",
-          isActive: false,
-          isCollapseMenu: false
-        },
-        {
-          menuTitle: "todolists",
-          menuIcon: "ti-view-list",
-          menuLink: "/todolists/todocomponent4",
-          isActive: false,
-          isCollapseMenu: true,
-          subMenu: [
-            {
-              subMenuName: "이종화",
-              subMenuLink: "/todolists/todocomponent1",
-              isActive: false
-            },
-            {
-              subMenuName: "김광일",
-              subMenuLink: "/todolists/todocomponent2",
-              isActive: false
-            },
-            {
-              subMenuName: "임보라",
-              subMenuLink: "/todolists/todocomponent3",
-              isActive: false
-            },
-            {
-              subMenuName: "최종원",
-              subMenuLink: "/todolists/todocomponent4",
-              isActive: false
-            }
-          ]
-        },
-        {
-          menuTitle: "todolistss",
-          menuIcon: "ti-view-list",
-          menuLink: "/todolists/todocomponent4",
-          isActive: false,
-          isCollapseMenu: true,
-          subMenu: [
-            {
-              subMenuName: "이종화",
-              subMenuLink: "/todolists/todocomponent1/",
-              isActive: false
-            },
-            {
-              subMenuName: "김광일",
-              subMenuLink: "/todolists/todocomponent2/",
-              isActive: false
-            },
-            {
-              subMenuName: "임보라",
-              subMenuLink: "/todolists/todocomponent3/",
-              isActive: false
-            },
-            {
-              subMenuName: "최종원",
-              subMenuLink: "/todolists/todocomponent4/",
-              isActive: false
-            }
-          ]
-        },
-        {
-          menuTitle: "UI Elements",
-          menuIcon: "ti-settings",
-          menuLink: "/todolists/todocomponent4",
-          isActive: false,
-          isCollapseMenu: false
-        }
-      ]
+      menuItems: []
     };
   },
   methods: {
     setMnuesInactive() {
       for (let i in this.menuItems) {
-        // console.log(this.menuItems[i].isActive);
         this.menuItems[i].isActive = false;
       }
     },
@@ -113,6 +40,12 @@ export default {
         return tmpArr;
       });
       this.menuItems = modifiedArr;
+    },
+    async getMenuList() {
+      let apiUrl = LIST;
+      const response = await fetch(apiUrl);
+      const json = await response.json();
+      return json.menus;
     }
   },
   created: function() {
@@ -123,8 +56,14 @@ export default {
     });
   },
   mounted: function() {
-    this.setCurrentMenu();
-    console.log("menu mounted");
+    this.getMenuList()
+      .then(data => {
+        this.menuItems = data;
+        this.setCurrentMenu();
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }
 };
 </script>

@@ -10,6 +10,8 @@ import JsonView from '../views/tools/jsonview.vue'
 import Scrum from '../views/tools/scrumboard.vue'
 import Home from '../views/Home.vue'
 import TodoContainer from '../components/todolists/TodoContainer.vue'
+import Menu from '@/pages/menu/Index.vue'
+import Chat from '@/pages/chat/Index.vue'
 
 Vue.use(Router);
 /**
@@ -41,7 +43,19 @@ const router = new Router({
                     name: 'Scrum',
                     component: Scrum,                
                     props: true 
-                }           
+                },
+                {
+                    path:'/menu',
+                    name: 'menu',
+                    component: Menu,                
+                    props: true 
+                },
+                {
+                    path:'/chat',
+                    name: 'chat',
+                    component: Chat,                
+                    props: true 
+                }                           
             ],
             meta: { requiresAuth: true }        
         },        
@@ -74,23 +88,19 @@ const router = new Router({
  * beforeEach - 가드 전 훅
  * next() - 항상 호출
  */
-
-//  router.beforeEach((to, from, next) => {     
-//     authChk.authUser().then((user) => {  
-//         // window.console.log('guard')    
-//         if(to.matched.some(record => record.meta.requiresAuth)){
-//             if(user) next();
-//             else next('login')            
-//         }else{
-//             next()
-//         }
-//         /* if(!user) next('login');
-//         else if(user) next('main');
-//         else next(); */
-//     }, (error)=>{
-//       window.error(error)
-//     })
-//   }) 
+ router.beforeEach((to, from, next) => {     
+    authChk.authUser().then((user) => {        
+        if(to.matched.some(record => record.meta.requiresAuth)){
+            if(user) next();
+            else next('login')            
+        }else{
+            next()
+        }        
+    }, (error)=>{
+      window.error(error)
+    })
+    next()
+  }) 
 
  export default router
  

@@ -40,7 +40,6 @@
           <a
             class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center"
             id="messageDropdown"
-            href="#"
             data-toggle="dropdown"
           >
             <i class="ti-email mx-0"></i>
@@ -83,7 +82,6 @@
           <a
             class="nav-link count-indicator dropdown-toggle"
             id="notificationDropdown"
-            href="#"
             data-toggle="dropdown"
           >
             <i class="ti-bell mx-0"></i>
@@ -130,7 +128,7 @@
           </div>
         </li>
         <li class="nav-item nav-profile dropdown">
-          <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="profileDropdown">
             <img src="https://via.placeholder.com/40x40" alt="profile">
           </a>
           <div
@@ -148,7 +146,7 @@
           </div>
         </li>
         <li class="nav-item nav-settings d-none d-lg-flex">
-          <a class="nav-link" href="#">
+          <a class="nav-link">
             <i class="ti-more"></i>
           </a>
         </li>

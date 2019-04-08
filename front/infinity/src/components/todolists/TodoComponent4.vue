@@ -4,6 +4,7 @@
     <Header></Header>
     <TodoInput v-on:addTodo="addTodo"></TodoInput>
     <TodoList v-bind:propsData="todos" v-on:removeTodo="removeTodo"></TodoList>
+    {{loading ? "loading...":""}}
     <Footer></Footer>
   </div>
 </template>
@@ -15,12 +16,15 @@ import Footer from "./todolist4/Footer.vue";
 import TodoList from "./todolist4/TodoList.vue";
 import authChk from "@/auth/";
 import { LIST } from "@/api/todolist/";
+import { utils } from "@/components/mixins/utils";
 
 export default {
+  mixins: [utils],
   data() {
     return {
       todos: [],
-      user: ""
+      user: "",
+      loading: false
     };
   },
   methods: {
@@ -31,6 +35,14 @@ export default {
     //제거
     removeTodo(idx) {
       this.todos.splice(idx, 1);
+    },
+    async getTodoList() {
+      let apiUrl = LIST;
+      this.loading = true;
+      const response = await fetch(apiUrl);
+      const json = await response.json();
+
+      return json.todoList;
     }
   },
   components: {
@@ -41,15 +53,10 @@ export default {
   },
   mounted: function() {
     this.user = authChk.getUser().name;
-    async function fetch_api() {
-      let apiUrl = LIST;
-      const response = await fetch(apiUrl);
-      const json = await response.json();
-      return json.todoList;
-    }
-    this.todos = fetch_api()
+    this.getTodoList()
       .then(data => {
         this.todos = data;
+        this.loading = false;
       })
       .catch(error => {
         console.error(error);
