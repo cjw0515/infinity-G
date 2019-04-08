@@ -1,5 +1,5 @@
 <template>
-  <ul class="nav" v-if="menuItems.length">
+  <ul class="nav" >
     <collapse-menu
       v-for="(item, idx) in menuItems"
       :key="idx"
@@ -7,6 +7,7 @@
       :menuItem="item"
     ></collapse-menu>
     <normal-menu v-else :menuItem="item"></normal-menu>
+      
   </ul>
 </template>
 <script>

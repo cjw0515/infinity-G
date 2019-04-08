@@ -13,6 +13,7 @@ import Home from '../views/Home.vue'
 import TodoContainer from '../components/todolists/TodoContainer.vue'
 import Menu from '@/pages/menu/Index.vue'
 import Chat from '@/pages/chat/Index.vue'
+import Board from '@/pages/board/boardmain.vue'
 
 Vue.use(Router);
 /**
@@ -55,6 +56,12 @@ const router = new Router({
                     path:'/chat',
                     name: 'chat',
                     component: Chat,                
+                    props: true 
+                },
+                {
+                    path:'/board',
+                    name: 'board',
+                    component: Board,                
                     props: true 
                 }                           
             ],
