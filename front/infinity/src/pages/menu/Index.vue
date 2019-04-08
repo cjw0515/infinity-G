@@ -1,6 +1,13 @@
 <template>
   <div>
-    <table-paging col-size="7" :table-data="menus"></table-paging>
+    <table-paging
+      col-size="7"
+      :table-data="menus"
+      table-name="메뉴관리"
+      :thead-names="tableTheadNames"
+      :delete-function="delRowData"
+      :modify-function="modRowData"
+    ></table-paging>
     <div class="row grid-margin">
       <div class="col-lg-5">
         <div class="card">
@@ -191,7 +198,8 @@ import { LIST } from "@/api/menus/";
 export default {
   data() {
     return {
-      menus: []
+      menus: [],
+      tableTheadNames: ["메뉴이름", "link", "아이콘", "2depth"]
     };
   },
   methods: {
@@ -200,6 +208,12 @@ export default {
       const response = await fetch(apiUrl);
       const json = await response.json();
       return json.menus;
+    },
+    modRowData() {
+      alert("mod");
+    },
+    delRowData() {
+      alert("del");
     }
   },
   components: {
@@ -209,7 +223,7 @@ export default {
     this.getMenuList()
       .then(data => {
         this.menus = data;
-        // console.log(data);
+        console.log(data);
       })
       .catch(error => {
         console.error(error);

@@ -3,75 +3,25 @@
     <div class="grid-margin stretch-card" :class="sizedTableClass">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">Hoverable Table</h4>
-          <p class="card-description">
-            Add class
-            <code>.table-hover</code>
-          </p>
+          <h4 class="card-title">{{tableName}}</h4>
+          <p class="card-description"></p>
           <div class="table-responsive">
             <table class="table table-hover">
               <thead>
                 <tr>
-                  <th>User</th>
-                  <th>Product</th>
-                  <th>Sale</th>
-                  <th>Status</th>
+                  <th v-for="(theadName) in theadNames">{{theadName}}</th>
+                  <th>기타</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Jacob</td>
-                  <td>Photoshop</td>
-                  <td class="text-danger">
-                    28.76%
-                    <i class="ti-arrow-down"></i>
-                  </td>
+                <tr v-for="(row, idx) in tableData" :key="idx">
+                  <td>{{row.menuTitle}}</td>
+                  <td>{{row.menuLink}}</td>
+                  <td>{{row.menuIcon}}</td>
+                  <td>{{row.isCollapseMenu}}</td>
                   <td>
-                    <label class="badge badge-danger">Pending</label>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Messsy</td>
-                  <td>Flash</td>
-                  <td class="text-danger">
-                    21.06%
-                    <i class="ti-arrow-down"></i>
-                  </td>
-                  <td>
-                    <label class="badge badge-warning">In progress</label>
-                  </td>
-                </tr>
-                <tr>
-                  <td>John</td>
-                  <td>Premier</td>
-                  <td class="text-danger">
-                    35.00%
-                    <i class="ti-arrow-down"></i>
-                  </td>
-                  <td>
-                    <label class="badge badge-info">Fixed</label>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Peter</td>
-                  <td>After effects</td>
-                  <td class="text-success">
-                    82.00%
-                    <i class="ti-arrow-up"></i>
-                  </td>
-                  <td>
-                    <label class="badge badge-success">Completed</label>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Dave</td>
-                  <td>53275535</td>
-                  <td class="text-success">
-                    98.05%
-                    <i class="ti-arrow-up"></i>
-                  </td>
-                  <td>
-                    <label class="badge badge-warning">In progress</label>
+                    <i class="ti-trash" @click="handleDeleteRowData()"></i>
+                    <i class="ti-settings" @click="handleModifyRowData()"></i>
                   </td>
                 </tr>
               </tbody>
@@ -100,11 +50,34 @@ export default {
     tableData: {
       type: Array,
       default: () => []
+    },
+    tableName: {
+      type: String,
+      default: () => ""
+    },
+    theadNames: {
+      type: Array,
+      default: () => []
+    },
+    deleteFunction: {
+      type: Function,
+      default: () => () => alert("nofunc")
+    },
+    modifyFunction: {
+      type: Function,
+      default: () => () => alert("nofunc")
     }
   },
-  mounted: function() {
-    console.log(this.tableData);
+  methods: {
+    handleDeleteRowData() {
+      this.deleteFunction();
+    },
+    handleModifyRowData() {
+      this.modifyFunction();
+    }
   },
+  mounted: function() {},
+  created: function() {},
   computed: {
     sizedTableClass: function() {
       return `col-lg-${this.colSize}`;
@@ -116,3 +89,12 @@ export default {
 };
 </script>
 
+<style scoped>
+i {
+  display: inline-block;
+  font-size: 20px;
+  width: 40px;
+  color: #248afd;
+  cursor: pointer;
+}
+</style>

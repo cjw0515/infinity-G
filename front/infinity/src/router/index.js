@@ -1,7 +1,6 @@
 import Router from 'vue-router'
 import Vue from 'vue';
 import authChk from "@/auth/";
-import {firebase} from "@/config/"
 
 import TestComponent2 from '../components/TestComponent2.vue'
 import Login from '../components/Login/Login.vue'

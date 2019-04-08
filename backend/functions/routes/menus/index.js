@@ -17,9 +17,9 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {    
     let message = {
-        menuTitle: "chat",
+        menuTitle: "board",
         menuIcon: "ti-settings",
-        menuLink: "/chat",
+        menuLink: "/board",
         isActive: false,
         isCollapseMenu: false
     };
