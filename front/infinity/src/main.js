@@ -2,9 +2,10 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import swal from 'sweetalert'
+import Swal from 'sweetalert2'
 import '../public/js/settings'
 
+window.Swal = Swal
 Vue.config.productionTip = false
 
 new Vue({

@@ -3,18 +3,18 @@
     <div class="grid-margin stretch-card" :class="sizedTableClass">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">{{tableName}}</h4>
+          <h4 class="card-title">{{pagingTableOptions.tableName}}</h4>
           <p class="card-description"></p>
           <div class="table-responsive">
             <table class="table table-hover">
               <thead>
                 <tr>
-                  <th v-for="(theadName) in theadNames">{{theadName}}</th>
+                  <th v-for="(theadName) in pagingTableOptions.theadNames">{{theadName}}</th>
                   <th>기타</th>
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(row, idx) in tableData" :key="idx">
+                <tr v-for="(row, idx) in pagingTableOptions.tableData" :key="idx">
                   <td>{{row.menuTitle}}</td>
                   <td>{{row.menuLink}}</td>
                   <td>{{row.menuIcon}}</td>
@@ -41,49 +41,35 @@ export default {
     return {};
   },
   props: {
-    colSize: {
-      type: String,
-      default: () => {
-        return "6";
+    pagingTableOptions: {
+      type: Object,
+      default: {
+        colSize: "7",
+        tableData: [],
+        tableName: "기본제목",
+        theadNames: [],
+        onDelete: () => {
+          alert("delete");
+        },
+        onModify: () => {
+          alert("modify");
+        }
       }
-    },
-    tableData: {
-      type: Array,
-      default: () => []
-    },
-    tableName: {
-      type: String,
-      default: () => ""
-    },
-    theadNames: {
-      type: Array,
-      default: () => []
-    },
-    deleteFunction: {
-      type: Function,
-      default: () => () => alert("nofunc")
-    },
-    modifyFunction: {
-      type: Function,
-      default: () => () => alert("nofunc")
     }
   },
   methods: {
     handleDeleteRowData() {
-      swal({
-        text: "hello"
-      });
-      // this.deleteFunction();
+      this.pagingTableOptions.onDelete();
     },
     handleModifyRowData() {
-      this.modifyFunction();
+      this.pagingTableOptions.onModify();
     }
   },
   mounted: function() {},
   created: function() {},
   computed: {
     sizedTableClass: function() {
-      return `col-lg-${this.colSize}`;
+      return `col-lg-${this.pagingTableOptions.colSize}`;
     }
   },
   components: {
