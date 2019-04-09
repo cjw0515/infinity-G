@@ -70,7 +70,10 @@ export default {
   },
   methods: {
     handleDeleteRowData() {
-      this.deleteFunction();
+      swal({
+        text: "hello"
+      });
+      // this.deleteFunction();
     },
     handleModifyRowData() {
       this.modifyFunction();
