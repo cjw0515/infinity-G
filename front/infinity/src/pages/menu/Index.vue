@@ -52,10 +52,21 @@ export default {
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes"
+        confirmButtonText: "Yes",
+        showLoaderOnConfirm: true,
+        preConfirm: login => {
+          return new Promise(resolve => {
+            setTimeout(() => {
+              resolve({
+                result: true
+              });
+            }, 2000);
+          });
+        },
+        allowOutsideClick: () => !Swal.isLoading()
       }).then(result => {
         if (result.value) {
-          Swal.showLoading();
+          // Swal.enableLoading();
           Swal.fire("Deleted!", "Your file has been deleted.", "success");
         }
       });
