@@ -4,7 +4,7 @@
     <modal-form :modal-options="modalOptions">
       <validation-Form slot="modalBody"></validation-Form>
       <div slot="modalFooter">
-        <button type="button" class="btn btn-success">수정</button>
+        <button type="button" @click="handleModify()" class="btn btn-success">수정</button>
         <button type="button" class="btn btn-light" data-dismiss="modal">닫기</button>
       </div>
     </modal-form>
@@ -29,8 +29,8 @@ export default {
         tableData: [],
         tableName: "메뉴관리",
         theadNames: ["메뉴이름", "link", "아이콘", "2depth"],
-        onDelete: this.delRowData,
-        onModify: this.modRowData
+        onClickDelete: this.delRowData,
+        onClickModify: this.popupModal
       }
     };
   },
@@ -41,7 +41,7 @@ export default {
       const json = await response.json();
       return json.menus;
     },
-    modRowData() {
+    popupModal() {
       $("#menuControlModal").modal("show");
     },
     delRowData() {
@@ -70,6 +70,9 @@ export default {
           Swal.fire("Deleted!", "Your file has been deleted.", "success");
         }
       });
+    },
+    handleModify() {
+      alert();
     }
   },
   components: {

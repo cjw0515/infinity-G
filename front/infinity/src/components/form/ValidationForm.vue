@@ -1,63 +1,83 @@
 <template>
-  <form class="cmxform" id="commentForm" method="get" action="#" novalidate="novalidate">
-    <fieldset>
-      <div class="form-group has-danger">
-        <label for="cname">Name (required, at least 2 characters)</label>
-        <input
-          id="cname"
-          class="form-control form-control-danger"
-          name="name"
-          minlength="2"
-          type="text"
-          required
-          aria-invalid="true"
-        >
-        <label
-          id="cname-error"
-          class="error mt-2 text-danger"
-          for="cname"
-        >Please enter at least 2 characters.</label>
-      </div>
-      <div class="form-group has-danger">
-        <label for="cemail">E-Mail (required)</label>
-        <input
-          id="cemail"
-          class="form-control form-control-danger"
-          type="email"
-          name="email"
-          required
-          aria-invalid="true"
-        >
-        <label
-          id="cemail-error"
-          class="error mt-2 text-danger"
-          for="cemail"
-        >Please enter a valid email address.</label>
-      </div>
-      <div class="form-group has-danger">
-        <label for="curl">URL (optional)</label>
-        <input
-          id="curl"
-          class="form-control form-control-danger"
-          type="url"
-          name="url"
-          aria-invalid="true"
-        >
-        <label id="curl-error" class="error mt-2 text-danger" for="curl">Please enter a valid URL.</label>
-      </div>
-      <div class="form-group">
-        <label for="ccomment">Your comment (required)</label>
-        <textarea
-          id="ccomment"
-          class="form-control valid"
-          name="comment"
-          required
-          aria-invalid="false"
-        ></textarea>
-      </div>
-    </fieldset>
-  </form>
+  <div class="card-body">
+    <form class="cmxform" id="commentForm" method="get" action="#">
+      <fieldset>
+        <div class="form-group">
+          <label for="menuName">메뉴 이름</label>
+          <input id="menuName" class="form-control" name="menuName" type="text" required>
+        </div>
+        <div class="form-group">
+          <label for="menuUrl">링크</label>
+          <input id="menuUrl" class="form-control" type="url" name="menuUrl">
+        </div>
+        <div class="form-group">
+          <label for="menuIcon">아이콘</label>
+          <input id="menuIcon" class="form-control" type="text" name="menuIcon">
+        </div>
+        <div class="form-group">
+          <label for="menuDepth">2depth</label>
+          <input id="menuDepth" class="form-control" name="menuDepth" required>
+        </div>
+      </fieldset>
+    </form>
+  </div>
 </template>
 <script>
-export default {};
+export default {
+  mounted: function() {
+    $("#commentForm").validate({
+      rules: {
+        menuName: {
+          required: true,
+          minlength: 2
+        },
+        menuUrl: {
+          required: true,
+          minlength: 2
+        },
+        menuIcon: {
+          required: true,
+          minlength: 2
+        },
+        menuDepth: {
+          required: true,
+          minlength: 2
+        }
+        // confirm_password: {
+        //   required: true,
+        //   minlength: 5,
+        //   equalTo: "#password"
+        // },
+      },
+      messages: {
+        menuName: {
+          required: "메뉴 이름은 필수 항목입니다.",
+          minlength: "2글자 이상 입력하셔야 합니다."
+        },
+        menuUrl: {
+          required: "menuUrl은 필수 항목입니다.",
+          minlength: "2글자 이상 입력하셔야 합니다."
+        },
+        menuIcon: {
+          required: "menuIcon은 필수 항목입니다.",
+          minlength: "2글자 이상 입력하셔야 합니다."
+        },
+        menuDepth: {
+          required: "menuDepth은 필수 항목입니다.",
+          minlength: "2글자 이상 입력하셔야 합니다."
+        }
+      },
+      errorPlacement: function(label, element) {
+        label.addClass("mt-2 text-danger");
+        label.insertAfter(element);
+      },
+      highlight: function(element, errorClass) {
+        $(element)
+          .parent()
+          .addClass("has-danger");
+        $(element).addClass("form-control-danger");
+      }
+    });
+  }
+};
 </script>

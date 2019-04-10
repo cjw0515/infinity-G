@@ -48,10 +48,10 @@ export default {
         tableData: [],
         tableName: "기본제목",
         theadNames: [],
-        onDelete: () => {
+        onClickDelete: () => {
           alert("delete");
         },
-        onModify: () => {
+        onClickModify: () => {
           alert("modify");
         }
       }
@@ -59,10 +59,10 @@ export default {
   },
   methods: {
     handleDeleteRowData() {
-      this.pagingTableOptions.onDelete();
+      this.pagingTableOptions.onClickDelete();
     },
     handleModifyRowData() {
-      this.pagingTableOptions.onModify();
+      this.pagingTableOptions.onClickModify();
     }
   },
   mounted: function() {},
