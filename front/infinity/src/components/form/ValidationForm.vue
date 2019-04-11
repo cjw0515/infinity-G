@@ -3,57 +3,45 @@
     <form class="cmxform" id="commentForm" method="get" action="#">
       <fieldset v-if="validationFormOptions.inputEles.length > 0">
         <validation-input
-        v-for="( valInput, index ) in validationFormOptions.inputEles"        
-        :key="index"
-        :input-ele="valInput"        
+          v-for="( valInput, index ) in validationFormOptions.inputEles"
+          :key="index"
+          :input-ele="valInput"
         ></validation-input>
-        <!-- <div class="form-group">
-          <label for="menuName">메뉴 이름</label>
-          <input id="menuName" class="form-control" name="menuName" type="text" required>
-        </div>
-        <div class="form-group">
-          <label for="menuUrl">링크</label>
-          <input id="menuUrl" class="form-control" type="url" name="menuUrl">
-        </div>
-        <div class="form-group">
-          <label for="menuIcon">아이콘</label>
-          <input id="menuIcon" class="form-control" type="text" name="menuIcon">
-        </div>
-        <div class="form-group">
-          <label for="menuDepth">2depth</label>
-          <input id="menuDepth" class="form-control" name="menuDepth" required>
-        </div> -->
       </fieldset>
     </form>
-      <button type="button" @click="validationFormOptions.buttonEle.handleClick()" class="btn btn-success">{{validationFormOptions.buttonEle.buttonName}}</button>
-      <button type="button" class="btn btn-light" data-dismiss="modal">닫기</button>          
+    <button
+      type="button"
+      @click="validationFormOptions.buttonEle.handleClick()"
+      class="btn btn-success"
+    >{{validationFormOptions.buttonEle.buttonName}}</button>
+    <button type="button" class="btn btn-light" data-dismiss="modal">닫기</button>
   </div>
 </template>
 <script>
-import ValidationInput from './ValidationInput.vue'
+import ValidationInput from "./ValidationInput.vue";
 
 export default {
-  data(){
-    return{}
+  data() {
+    return {};
   },
   components: {
     "validation-input": ValidationInput
   },
   props: {
-    validationFormOptions:{
-      type:Object,
+    validationFormOptions: {
+      type: Object,
       default: () => ({
         rules: {},
         messages: {},
         inputEles: [],
         buttonEle: {
           buttonName: "수정",
-          handleClick: ()=>{
-            alert('handleclick');
+          handleClick: () => {
+            alert("handleclick");
           }
         }
       })
-    }    
+    }
   },
   mounted: function() {
     let validator = $("#commentForm").validate({
@@ -110,8 +98,7 @@ export default {
       }
     });
 
-    console.log(validator)
-
+    console.log(validator);
   }
 };
 </script>

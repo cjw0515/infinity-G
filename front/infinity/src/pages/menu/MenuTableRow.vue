@@ -2,11 +2,14 @@
   <tr>
     <td>{{rowData.menuTitle}}</td>
     <td>{{rowData.menuLink}}</td>
-    <td>{{rowData.menuIcon}}</td>
-    <td>{{rowData.isCollapseMenu}}</td>
     <td>
-      <i class="ti-trash" @click="handleDeleteRowData()"></i>
-      <i class="ti-settings" @click="handleModifyRowData()"></i>
+      <i :class="rowData.menuIcon"/>
+    </td>
+    <td>{{rowData.isCollapseMenu}}</td>
+    <td>{{rowData.isUsing}}</td>
+    <td>
+      <i class="btn-icon ti-trash" @click="handleDeleteRowData()"></i>
+      <i class="btn-icon ti-settings" @click="handleModifyRowData()"></i>
     </td>
   </tr>
 </template>
@@ -42,7 +45,7 @@ export default {
 };
 </script>
 <style scoped>
-i {
+.btn-icon {
   display: inline-block;
   font-size: 20px;
   width: 40px;

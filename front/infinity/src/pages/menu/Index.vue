@@ -1,9 +1,15 @@
 <template>
   <div>
     <table-paging :paging-table-options="pagingTableOptions">
-      <table-row slot="row" slot-scope="row">{{row.rowdata}}</table-row>
+      <table-row
+        slot="row"
+        slot-scope="props"
+        :row-data="props.rowData"
+        :onClickDelete="props.onClickDelete"
+        :onClickModify="props.onClickModify"
+      ></table-row>
     </table-paging>
-    <modal-form :modal-options="modalOptions">      
+    <modal-form :modal-options="modalOptions">
       <validation-form slot="modalBody" :validation-form-options="validationFormOptions"></validation-form>
       <div slot="modalFooter"></div>
     </modal-form>
@@ -12,14 +18,14 @@
 <script>
 import { utils } from "@/components/mixins/utils";
 import TableWithPaging from "@/components/table/TableWithPaging.vue";
-import { LIST } from "@/api/menus/";  
+import { LIST } from "@/api/menus/";
 import Modal from "@/components/modal/Modal.vue";
 import ValidationForm from "@/components/form/ValidationForm.vue";
-import TableWithPagingTableRow from "@/components/table/TableWithPagingTableRow.vue";
+import MenuTableRow from "@/pages/menu/MenuTableRow.vue";
 
 export default {
   data() {
-    return {      
+    return {
       modalOptions: {
         modalName: "메뉴 수정",
         modalId: "menuControlModal"
@@ -28,7 +34,7 @@ export default {
         colSize: "7",
         tableData: [],
         tableName: "메뉴관리",
-        theadNames: ["메뉴이름", "link", "아이콘", "2depth"],
+        theadNames: ["메뉴이름", "link", "아이콘", "2depth", "사용"],
         onClickDelete: this.delRowData,
         onClickModify: this.popupModal,
         isLoading: true
@@ -38,14 +44,34 @@ export default {
         messages: {},
         inputEles: [
           {
-            inputName: "default",
-            inputNameDisp: "default",                
+            inputName: "menuName",
+            inputNameDisp: "메뉴이름",
             isRequired: true
           },
+          {
+            inputName: "menuLink",
+            inputNameDisp: "링크",
+            isRequired: true
+          },
+          {
+            inputName: "menuIcon",
+            inputNameDisp: "아이콘",
+            isRequired: true
+          },
+          {
+            inputName: "2depth",
+            inputNameDisp: "2depth",
+            isRequired: true
+          },
+          {
+            inputName: "isUsing",
+            inputNameDisp: "사용",
+            isRequired: true
+          }
         ],
         buttonEle: {
           buttonName: "수정",
-          handleClick: ()=>{
+          handleClick: () => {
             alert();
           }
         }
@@ -97,7 +123,7 @@ export default {
     "table-paging": TableWithPaging,
     "modal-form": Modal,
     "validation-form": ValidationForm,
-    "table-row":TableWithPagingTableRow
+    "table-row": MenuTableRow
   },
   mounted: function() {
     this.getMenuList()

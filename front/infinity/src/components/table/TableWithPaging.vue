@@ -1,5 +1,5 @@
 <template>
-  <div class="row">    
+  <div class="row">
     <div class="grid-margin stretch-card" :class="sizedTableClass">
       <div class="card">
         <div class="card-body">
@@ -7,31 +7,25 @@
           <p class="card-description"></p>
           <div class="table-responsive">
             <table class="table table-hover">
-              <thead>                
+              <thead>
                 <tr>
                   <th v-for="(theadName) in pagingTableOptions.theadNames">{{theadName}}</th>
                   <th>기타</th>
                 </tr>
               </thead>
-              <tbody>                
-                <tr v-if="pagingTableOptions.isLoading"><td colspan="5"><div class="circle-loader"></div></td></tr>                
-                <slot 
-                name="row" 
-                v-for="(rowData) in pagingTableOptions.tableData" 
-                :row-data="rowData">
-                </slot>                
-<!--                 
-                <tr v-for="(row, idx) in pagingTableOptions.tableData" :key="idx">
-                  <td>{{row.menuTitle}}</td>
-                  <td>{{row.menuLink}}</td>
-                  <td>{{row.menuIcon}}</td>
-                  <td>{{row.isCollapseMenu}}</td>
-                  <td>
-                    <i class="ti-trash" @click="handleDeleteRowData()"></i>
-                    <i class="ti-settings" @click="handleModifyRowData()"></i>
+              <tbody>
+                <tr v-if="pagingTableOptions.isLoading">
+                  <td colspan="6">
+                    <div class="circle-loader"></div>
                   </td>
                 </tr>
- -->
+                <slot
+                  name="row"
+                  v-for="(rowData) in pagingTableOptions.tableData"
+                  :row-data="rowData"
+                  :onClickDelete="pagingTableOptions.onClickDelete"
+                  :onClickModify="pagingTableOptions.onClickModify"
+                ></slot>
               </tbody>
             </table>
           </div>
@@ -64,14 +58,6 @@ export default {
         },
         isLoading: true
       }
-    },
-  },
-  methods: {
-    handleDeleteRowData() {
-      this.pagingTableOptions.onClickDelete();
-    },
-    handleModifyRowData() {
-      this.pagingTableOptions.onClickModify();
     }
   },
   mounted: function() {},
@@ -86,13 +72,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-i {
-  display: inline-block;
-  font-size: 20px;
-  width: 40px;
-  color: #248afd;
-  cursor: pointer;
-}
-</style>
