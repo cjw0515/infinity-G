@@ -1,8 +1,13 @@
 <template>
   <div class="card-body">
     <form class="cmxform" id="commentForm" method="get" action="#">
-      <fieldset>
-        <div class="form-group">
+      <fieldset v-if="validationFormOptions.inputEles.length > 0">
+        <validation-input
+        v-for="( valInput, index ) in validationFormOptions.inputEles"        
+        :key="index"
+        :input-ele="valInput"        
+        ></validation-input>
+        <!-- <div class="form-group">
           <label for="menuName">메뉴 이름</label>
           <input id="menuName" class="form-control" name="menuName" type="text" required>
         </div>
@@ -17,15 +22,41 @@
         <div class="form-group">
           <label for="menuDepth">2depth</label>
           <input id="menuDepth" class="form-control" name="menuDepth" required>
-        </div>
+        </div> -->
       </fieldset>
     </form>
+      <button type="button" @click="validationFormOptions.buttonEle.handleClick()" class="btn btn-success">{{validationFormOptions.buttonEle.buttonName}}</button>
+      <button type="button" class="btn btn-light" data-dismiss="modal">닫기</button>          
   </div>
 </template>
 <script>
+import ValidationInput from './ValidationInput.vue'
+
 export default {
+  data(){
+    return{}
+  },
+  components: {
+    "validation-input": ValidationInput
+  },
+  props: {
+    validationFormOptions:{
+      type:Object,
+      default: () => ({
+        rules: {},
+        messages: {},
+        inputEles: [],
+        buttonEle: {
+          buttonName: "수정",
+          handleClick: ()=>{
+            alert('handleclick');
+          }
+        }
+      })
+    }    
+  },
   mounted: function() {
-    $("#commentForm").validate({
+    let validator = $("#commentForm").validate({
       rules: {
         menuName: {
           required: true,
@@ -78,6 +109,9 @@ export default {
         $(element).addClass("form-control-danger");
       }
     });
+
+    console.log(validator)
+
   }
 };
 </script>

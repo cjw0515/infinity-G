@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const { defaultApp } = require('../../config/config.js');
+const { defaultApp, firestore } = require('../../config/config.js');
 
 router.get('/', (req, res) => {
-    let todoRef = defaultApp.database().ref('menus');
-    todoRef.once('value', (snapshot) => {
+    let menuRef = defaultApp.database().ref('menus');
+    menuRef.once('value', (snapshot) => {
         let items = new Array();
         snapshot.forEach((childSnapshot) => {
             let menu = childSnapshot;
@@ -12,6 +12,32 @@ router.get('/', (req, res) => {
         })
         res.header('Content-Type', 'application/json; charset=utf-8')
         res.send({menus: items});
+    })
+})
+
+router.get('/test', (req, res) => {
+    firestore.collection('menus').get()
+    .then((snapshot) => {
+        var rows = [];
+        snapshot.forEach((doc) => {
+            var childData = doc.data();
+            rows.push(childData);
+        });
+        res.header('Content-Type', 'application/json; charset=utf-8')
+        res.send({menus: rows});
+    })
+})
+
+router.post('/test1', (req, res) => {
+    firestore.collection('menus').get()
+    .then((snapshot) => {
+        var rows = [];
+        snapshot.forEach((doc) => {
+            var childData = doc.id;
+            rows.push(childData);
+        });
+        res.header('Content-Type', 'application/json; charset=utf-8')
+        res.send({menus: rows});
     })
 })
 

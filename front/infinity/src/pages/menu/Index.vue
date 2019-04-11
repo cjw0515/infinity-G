@@ -1,12 +1,9 @@
 <template>
   <div>
     <table-paging :paging-table-options="pagingTableOptions"></table-paging>
-    <modal-form :modal-options="modalOptions">
-      <validation-Form slot="modalBody"></validation-Form>
-      <div slot="modalFooter">
-        <button type="button" @click="handleModify()" class="btn btn-success">수정</button>
-        <button type="button" class="btn btn-light" data-dismiss="modal">닫기</button>
-      </div>
+    <modal-form :modal-options="modalOptions">      
+      <validation-form slot="modalBody" :validation-form-options="validationFormOptions"></validation-form>
+      <div slot="modalFooter"></div>
     </modal-form>
   </div>
 </template>
@@ -19,7 +16,7 @@ import ValidationForm from "@/components/form/ValidationForm.vue";
 
 export default {
   data() {
-    return {
+    return {      
       modalOptions: {
         modalName: "메뉴 수정",
         modalId: "menuControlModal"
@@ -30,7 +27,25 @@ export default {
         tableName: "메뉴관리",
         theadNames: ["메뉴이름", "link", "아이콘", "2depth"],
         onClickDelete: this.delRowData,
-        onClickModify: this.popupModal
+        onClickModify: this.popupModal,
+        isLoading: true
+      },
+      validationFormOptions: {
+        rules: {},
+        messages: {},
+        inputEles: [
+          {
+            inputName: "default",
+            inputNameDisp: "default",                
+            isRequired: true
+          },
+        ],
+        buttonEle: {
+          buttonName: "수정",
+          handleClick: ()=>{
+            alert();
+          }
+        }
       }
     };
   },
@@ -78,14 +93,14 @@ export default {
   components: {
     "table-paging": TableWithPaging,
     "modal-form": Modal,
-    "validation-Form": ValidationForm
+    "validation-form": ValidationForm
   },
   mounted: function() {
     this.getMenuList()
       .then(data => {
         this.menus = data;
         this.pagingTableOptions.tableData = data;
-        console.log(data);
+        this.pagingTableOptions.isLoading = false;
       })
       .catch(error => {
         console.error(error);

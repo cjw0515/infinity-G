@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+  <div class="row">    
     <div class="grid-margin stretch-card" :class="sizedTableClass">
       <div class="card">
         <div class="card-body">
@@ -7,13 +7,14 @@
           <p class="card-description"></p>
           <div class="table-responsive">
             <table class="table table-hover">
-              <thead>
+              <thead>                
                 <tr>
                   <th v-for="(theadName) in pagingTableOptions.theadNames">{{theadName}}</th>
                   <th>기타</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody>                
+                <tr v-if="pagingTableOptions.isLoading"><td colspan="5"><div class="circle-loader"></div></td></tr>                
                 <tr v-for="(row, idx) in pagingTableOptions.tableData" :key="idx">
                   <td>{{row.menuTitle}}</td>
                   <td>{{row.menuLink}}</td>
@@ -53,9 +54,10 @@ export default {
         },
         onClickModify: () => {
           alert("modify");
-        }
+        },
+        isLoading: true
       }
-    }
+    },
   },
   methods: {
     handleDeleteRowData() {
