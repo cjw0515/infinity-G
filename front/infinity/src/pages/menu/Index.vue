@@ -1,6 +1,8 @@
 <template>
   <div>
-    <table-paging :paging-table-options="pagingTableOptions"></table-paging>
+    <table-paging :paging-table-options="pagingTableOptions">
+      <table-row slot="row" slot-scope="row">{{row.rowdata}}</table-row>
+    </table-paging>
     <modal-form :modal-options="modalOptions">      
       <validation-form slot="modalBody" :validation-form-options="validationFormOptions"></validation-form>
       <div slot="modalFooter"></div>
@@ -10,9 +12,10 @@
 <script>
 import { utils } from "@/components/mixins/utils";
 import TableWithPaging from "@/components/table/TableWithPaging.vue";
-import { LIST } from "@/api/menus/";
+import { LIST } from "@/api/menus/";  
 import Modal from "@/components/modal/Modal.vue";
 import ValidationForm from "@/components/form/ValidationForm.vue";
+import TableWithPagingTableRow from "@/components/table/TableWithPagingTableRow.vue";
 
 export default {
   data() {
@@ -93,7 +96,8 @@ export default {
   components: {
     "table-paging": TableWithPaging,
     "modal-form": Modal,
-    "validation-form": ValidationForm
+    "validation-form": ValidationForm,
+    "table-row":TableWithPagingTableRow
   },
   mounted: function() {
     this.getMenuList()

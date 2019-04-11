@@ -15,6 +15,12 @@
               </thead>
               <tbody>                
                 <tr v-if="pagingTableOptions.isLoading"><td colspan="5"><div class="circle-loader"></div></td></tr>                
+                <slot 
+                name="row" 
+                v-for="(rowData) in pagingTableOptions.tableData" 
+                :row-data="rowData">
+                </slot>                
+<!--                 
                 <tr v-for="(row, idx) in pagingTableOptions.tableData" :key="idx">
                   <td>{{row.menuTitle}}</td>
                   <td>{{row.menuLink}}</td>
@@ -25,6 +31,7 @@
                     <i class="ti-settings" @click="handleModifyRowData()"></i>
                   </td>
                 </tr>
+ -->
               </tbody>
             </table>
           </div>
