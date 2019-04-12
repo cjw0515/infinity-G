@@ -6,9 +6,12 @@ const app = express();
 const cors = require('cors')({origin: true});
 const todolist = require('./routes/todolist/')
 const menus = require('./routes/menus/')
+const test = require('./routes/test/')
+
 
 app.use(cors);
 app.use('/todolist', todolist)
 app.use('/menus', menus)
+app.use('/test', test)
 
 exports.v1 = functions.https.onRequest(app);
