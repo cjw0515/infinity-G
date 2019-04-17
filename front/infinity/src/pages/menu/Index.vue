@@ -1,6 +1,76 @@
 <template>
-  <div>
-    <table-paging :paging-table-options="pagingTableOptions">
+  <div class="container">
+    <div class="card">
+      <div class="card-header">
+        <h4>제목</h4>
+      </div>
+    </div>
+    <div class="card-group" style>
+      <div class="card child">
+        <div class="card-header">
+          <h4 class="card-title">Card title</h4>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Cras justo odio</li>
+          <li class="list-group-item">Dapibus ac facilisis in</li>
+          <li class="list-group-item">Vestibulum at eros</li>
+        </ul>
+      </div>
+      <div class="card child">
+        <div class="card-header">
+          <h4 class="card-title">Card title</h4>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Cras justo odio</li>
+          <li class="list-group-item">Dapibus ac facilisis in</li>
+          <li class="list-group-item">Vestibulum at eros</li>
+          <li class="list-group-item">Cras justo odio</li>
+          <li class="list-group-item">Dapibus ac facilisis in</li>
+          <li class="list-group-item">Vestibulum at eros</li>
+          <li class="list-group-item">Cras justo odio</li>
+          <li class="list-group-item">Dapibus ac facilisis in</li>
+          <li class="list-group-item">Vestibulum at eros</li>
+          <li class="list-group-item">Cras justo odio</li>
+          <li class="list-group-item">Dapibus ac facilisis in</li>
+          <li class="list-group-item">Vestibulum at eros</li>
+          <li class="list-group-item">Cras justo odio</li>
+          <li class="list-group-item">Dapibus ac facilisis in</li>
+          <li class="list-group-item">Vestibulum at eros</li>
+        </ul>
+      </div>
+      <div class="card child">
+        <div class="card-header">
+          <h4 class="card-title">Card title</h4>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Cras justo odio</li>
+          <li class="list-group-item">Dapibus ac facilisis in</li>
+          <li class="list-group-item">Vestibulum at eros</li>
+        </ul>
+      </div>
+    </div>
+    <!-- <div class="col-12 grid-margin">
+      <div class="card">
+        <div class="row">
+          <div class="col-md-12 col-sm-6 d-flex justify-content-center border-bottom">
+            <div class="card-body">바디</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 col-sm-6 d-flex justify-content-center border-right">
+            <div class="card-body"></div>
+          </div>
+          <div class="col-md-4 col-sm-6 d-flex justify-content-center border-right">
+            <div class="card-body"></div>
+          </div>
+          <div class="col-md-4 col-sm-6 d-flex justify-content-center">
+            <div class="card-body">카드바디</div>
+          </div>
+        </div>
+      </div>
+    </div>-->
+
+    <!-- <table-paging :paging-table-options="pagingTableOptions">
       <table-row
         slot="row"
         slot-scope="props"
@@ -12,7 +82,7 @@
     <modal-form :modal-options="modalOptions">
       <validation-form slot="modalBody" :validation-form-options="validationFormOptions"></validation-form>
       <div slot="modalFooter"></div>
-    </modal-form>
+    </modal-form>-->
   </div>
 </template>
 <script>
@@ -138,3 +208,15 @@ export default {
   }
 };
 </script>
+<style scoped>
+.list-group-item {
+  cursor: pointer;
+}
+.list-group-item:hover {
+  background-color: lightgray;
+}
+.card.child {
+  overflow-y: auto;
+  height: 400px;
+}
+</style>
