@@ -8,7 +8,9 @@ const todolist = require('./routes/todolist/')
 const menus = require('./routes/menus/')
 const test = require('./routes/test/')
 
-
+/* 
+express 라우트 문서 : https://expressjs.com/ko/guide/routing.html
+ */
 app.use(cors);
 app.use('/todolist', todolist)
 app.use('/menus', menus)
