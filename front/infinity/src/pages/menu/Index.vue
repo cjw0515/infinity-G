@@ -2,74 +2,125 @@
   <div class="container">
     <div class="card">
       <div class="card-header">
-        <h4>제목</h4>
+        <h4>메뉴 관리</h4>
       </div>
     </div>
-    <div class="card-group" style>
-      <div class="card child">
+    <!-- 상단메뉴 -->
+    <div class="card-group">
+      <div class="card child text-left">
         <div class="card-header">
-          <h4 class="card-title">Card title</h4>
+          <h4 class="card-title">메뉴</h4>
         </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">Cras justo odio</li>
-          <li class="list-group-item">Dapibus ac facilisis in</li>
-          <li class="list-group-item">Vestibulum at eros</li>
+        <ul class="list-group list-group-flush" v-if="menus.length > 0">
+          <li class="list-group-item" @click="popupModal">
+            <i class="btn-icon ti-plus"></i>
+            <span style="color:#248afd">메뉴추가</span>
+          </li>
+          <li
+            class="list-group-item"
+            v-for="(menu, idx) in menus"
+            :key="idx"
+            @click="handleMenuClick(idx, 1)"
+          >{{menu.menuTitle}}</li>
         </ul>
       </div>
-      <div class="card child">
+      <!-- 서브메뉴 -->
+      <div class="card child text-left">
         <div class="card-header">
-          <h4 class="card-title">Card title</h4>
+          <h4 class="card-title">2depth메뉴</h4>
         </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">Cras justo odio</li>
-          <li class="list-group-item">Dapibus ac facilisis in</li>
-          <li class="list-group-item">Vestibulum at eros</li>
-          <li class="list-group-item">Cras justo odio</li>
-          <li class="list-group-item">Dapibus ac facilisis in</li>
-          <li class="list-group-item">Vestibulum at eros</li>
-          <li class="list-group-item">Cras justo odio</li>
-          <li class="list-group-item">Dapibus ac facilisis in</li>
-          <li class="list-group-item">Vestibulum at eros</li>
-          <li class="list-group-item">Cras justo odio</li>
-          <li class="list-group-item">Dapibus ac facilisis in</li>
-          <li class="list-group-item">Vestibulum at eros</li>
-          <li class="list-group-item">Cras justo odio</li>
-          <li class="list-group-item">Dapibus ac facilisis in</li>
-          <li class="list-group-item">Vestibulum at eros</li>
+        <ul class="list-group list-group-flush" v-if="selectedMenu.menu.isCollapseMenu">
+          <li
+            class="list-group-item"
+            v-for="(subMenu, idx) in selectedMenu.menu.subMenu"
+            :key="idx"
+          >{{subMenu.subMenuName}}</li>
         </ul>
       </div>
-      <div class="card child">
+      <!-- 상세 -->
+      <div class="card child text-left">
         <div class="card-header">
           <h4 class="card-title">Card title</h4>
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">Cras justo odio</li>
-          <li class="list-group-item">Dapibus ac facilisis in</li>
-          <li class="list-group-item">Vestibulum at eros</li>
+          <li class="list-group-item">메뉴이름 : {{selectedMenu.menu.menuTitle}}</li>
+          <li class="list-group-item">링크 : {{selectedMenu.menu.menuLink}}</li>
+          <li class="list-group-item">아이콘 : {{selectedMenu.menu.menuIcon}}</li>
+          <li class="list-group-item">2depth : {{selectedMenu.menu.isCollapseMenu}}</li>
+          <li class="list-group-item">사용 : {{selectedMenu.menu.isUsing}}</li>
         </ul>
       </div>
     </div>
-    <!-- <div class="col-12 grid-margin">
-      <div class="card">
+    <modal-form :modal-options="modalOptions">
+      <div slot="modalBody">
         <div class="row">
-          <div class="col-md-12 col-sm-6 d-flex justify-content-center border-bottom">
-            <div class="card-body">바디</div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4 col-sm-6 d-flex justify-content-center border-right">
-            <div class="card-body"></div>
-          </div>
-          <div class="col-md-4 col-sm-6 d-flex justify-content-center border-right">
-            <div class="card-body"></div>
-          </div>
-          <div class="col-md-4 col-sm-6 d-flex justify-content-center">
-            <div class="card-body">카드바디</div>
+          <div class="card-body">
+            <h4 class="card-title">메뉴 삽입</h4>
+            <p class="card-description"></p>
+            <form class="forms-sample">
+              <div class="form-group row">
+                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">메뉴이름</label>
+                <div class="col-sm-9">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="exampleInputUsername2"
+                    placeholder="Username"
+                  >
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="exampleInputEmail2" class="col-sm-3 col-form-label">링크</label>
+                <div class="col-sm-9">
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="exampleInputEmail2"
+                    placeholder="Email"
+                  >
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="exampleInputMobile" class="col-sm-3 col-form-label">depth</label>
+                <div class="col-sm-9">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="exampleInputMobile"
+                    placeholder="Mobile number"
+                  >
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="exampleInputPassword2" class="col-sm-3 col-form-label">아이콘</label>
+                <div class="col-sm-9">
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="exampleInputPassword2"
+                    placeholder="Password"
+                  >
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="exampleInputConfirmPassword2" class="col-sm-3 col-form-label">사용유무</label>
+                <div class="col-sm-9">
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="exampleInputConfirmPassword2"
+                    placeholder="Password"
+                  >
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary mr-2">생성</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+            </form>
           </div>
         </div>
       </div>
-    </div>-->
-
+      <div slot="modalFooter"></div>
+    </modal-form>
     <!-- <table-paging :paging-table-options="pagingTableOptions">
       <table-row
         slot="row"
@@ -96,9 +147,15 @@ import MenuTableRow from "@/pages/menu/MenuTableRow.vue";
 export default {
   data() {
     return {
+      menus: [],
+      selectedMenu: {
+        idx: 0,
+        depth: 1,
+        menu: {}
+      },
       modalOptions: {
-        modalName: "메뉴 수정",
-        modalId: "menuControlModal"
+        modalName: "메뉴 삽입",
+        modalId: "menuInsertModal"
       },
       pagingTableOptions: {
         colSize: "7",
@@ -156,7 +213,7 @@ export default {
       return json.menus;
     },
     popupModal() {
-      $("#menuControlModal").modal("show");
+      $("#menuInsertModal").modal("show");
     },
     delRowData() {
       Swal.fire({
@@ -187,6 +244,11 @@ export default {
     },
     handleModify() {
       alert();
+    },
+    handleMenuClick(idx, depth) {
+      this.selectedMenu.idx = idx;
+      this.selectedMenu.depth = depth;
+      this.selectedMenu.menu = this.menus[idx];
     }
   },
   components: {
@@ -218,5 +280,15 @@ export default {
 .card.child {
   overflow-y: auto;
   height: 400px;
+}
+.list-group {
+  background-color: white;
+}
+.btn-icon {
+  display: inline-block;
+  font-size: 15px;
+  width: 40px;
+  color: #248afd;
+  cursor: pointer;
 }
 </style>
