@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const { defaultApp, firestore } = require('../../config/config.js');
+const utils = require('../../utils/utils') ;
 
+
+// 리스트
 router.get('/', (req, res) => {
     let menuRef = defaultApp.database().ref('menus');
     menuRef.once('value', (snapshot) => {
@@ -15,7 +18,7 @@ router.get('/', (req, res) => {
     })
 })
 
-router.get('/test', (req, res) => {
+router.get('/', (req, res) => {
     firestore.collection('menus').get()
     .then((snapshot) => {
         var rows = [];
@@ -24,39 +27,61 @@ router.get('/test', (req, res) => {
             rows.push(childData);
         });
         res.header('Content-Type', 'application/json; charset=utf-8')
-        res.send({menus: rows});
+        res.status(200).send({menu: rows});
     })
 })
 
-router.post('/test1', (req, res) => {
-    firestore.collection('menus').get()
-    .then((snapshot) => {
-        var rows = [];
-        snapshot.forEach((doc) => {
-            var childData = doc.id;
-            rows.push(childData);
-        });
-        res.header('Content-Type', 'application/json; charset=utf-8')
-        res.send({menus: rows});
-    })
-})
-
+// 삽입
 router.post('/', (req, res) => {    
-    let message = {
-        menuTitle: "board",
-        menuIcon: "ti-settings",
-        menuLink: "/board",
-        isActive: false,
-        isCollapseMenu: false
-    };
-    let messagesRef = defaultApp.database().ref(`menus`);
-    messagesRef.push(message);
-    res.header('Content-Type', 'application/json; charset=utf-8');
-    res.status(201).send({result: "ok"});
+    let menuData = req.body
+
+    if(!utils.isEmptyObject(menuData)){
+        let doc = firestore.collection("menus").doc();
+        menuData.id = doc.id;
+        doc.set(menuData)
+        res.header('Content-Type', 'application/json; charset=utf-8');
+        res.status(201).send({result: "ok"});        
+    }else{
+        res.status(400).send({result: "bad request"});        
+    }    
 });
 
-router.get('/haha', (req, res) => {
-    res.send('haha')
+//업데이트
+router.put('/', (req, res) => {        
+    let menuData = req.body
+    res.header('Content-Type', 'application/json; charset=utf-8');
+    console.log("menuId" + req.params.id)
+    if(menuData.id){
+        let doc = firestore.collection("menus").doc(menuData.id);
+        doc.update(menuData)
+        res.status(201).send({result: "ok"});
+    }else{
+        res.status(400).send({result: "bad request"});        
+    }
+});
+
+//삭제
+router.delete('/:id?*', (req, res) => {
+    if(!req.params.id){
+        res.status(400).send({result: "bad request"});
+    }else{
+        firestore.collection("menus").doc(req.params.id).delete();
+        res.status(201).send({result: "delete complete"});                
+    }
+})
+
+//read
+router.get('/:id',(req, res) => {      
+    firestore.collection("menus").doc(req.params.id).get()
+    .then((doc)=>{
+        let menu = doc.data();
+        if(true){
+            res.header('Content-Type', 'application/json; charset=utf-8');
+            res.status(200).send({menu: menu})
+        }else{
+            res.status(400).send({result: "bad request"});
+        }
+    })
 })
 
 module.exports = router;
