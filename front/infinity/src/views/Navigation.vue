@@ -27,9 +27,9 @@ export default {
     setCurrentMenu() {
       const modifiedArr = this.menuItems.map(item => {
         let tmpArr = [];
-        let tmpSubArr = [];
-
-        if (!item.isCollapseMenu) {
+      
+        if (item.menuDepth != 2) {
+          
           tmpArr =
             item.menuLink == this.$router.currentRoute.fullPath
               ? { ...item, isActive: true }
@@ -59,6 +59,10 @@ export default {
     this.getMenuList()
       .then(data => {
         this.menuItems = data;
+        this.menuItems.forEach(menuItem => {
+          menuItem.isActive = false;          
+        });        
+        
         this.setCurrentMenu();
       })
       .catch(error => {

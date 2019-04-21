@@ -11,7 +11,7 @@
         <div class="card-header">
           <h4 class="card-title">메뉴</h4>
         </div>
-        <ul class="list-group list-group-flush" v-if="menus.length > 0">
+        <ul class="list-group list-group-flush">
           <li class="list-group-item" @click="popupModal">
             <i class="btn-icon ti-plus"></i>
             <span style="color:#248afd">메뉴추가</span>
@@ -21,7 +21,7 @@
             v-for="(menu, idx) in menus"
             :key="idx"
             @click="handleMenuClick(idx, 1)"
-          >{{menu.menuTitle}}</li>
+          >{{menu.menuName}}</li>
         </ul>
       </div>
       <!-- 서브메뉴 -->
@@ -29,7 +29,7 @@
         <div class="card-header">
           <h4 class="card-title">2depth메뉴</h4>
         </div>
-        <ul class="list-group list-group-flush" v-if="selectedMenu.menu.isCollapseMenu">
+        <ul class="list-group list-group-flush" v-if="selectedMenu.menu.menuDepth = 2">
           <li
             class="list-group-item"
             v-for="(subMenu, idx) in selectedMenu.menu.subMenu"
@@ -42,7 +42,7 @@
         <div class="card-header">
           <h4 class="card-title">Card title</h4>
         </div>
-        <ul class="list-group list-group-flush" v-if="!isEmptyObject(selectedMenu.menu)" >
+        <ul class="list-group list-group-flush" v-if="isEmptyObject(selectedMenu.menu)" >
           <li class="list-group-item">메뉴이름 : {{selectedMenu.menu.menuTitle}}</li>
           <li class="list-group-item">링크 : {{selectedMenu.menu.menuLink}}</li>
           <li class="list-group-item">아이콘 : {{selectedMenu.menu.menuIcon}}</li>
@@ -116,8 +116,8 @@ export default {
           'Content-Type': 'application/json'
         }
       })
-      const resultJson = await response.json;
-      console.log(resultJson.result)
+      const resultJson = await response.json();
+      
       if(resultJson.result == "ok"){
         Swal.fire('메뉴가 추가되었습니다.')
       }else{

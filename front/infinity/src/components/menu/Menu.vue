@@ -2,7 +2,7 @@
   <li class="nav-item one" v-bind:class="{active: menuItem.isActive }" @click="setMenuActive()">
     <a class="nav-link" @click="linkTo(menuItem.menuLink)">
       <i v-bind:class="menuItem.menuIcon" class="menu-icon"></i>
-      <span class="menu-title">{{menuItem.menuTitle}}</span>
+      <span class="menu-title">{{menuItem.menuName}}</span>
     </a>
   </li>
 </template>

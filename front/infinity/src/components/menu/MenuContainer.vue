@@ -3,7 +3,7 @@
     <collapse-menu
       v-for="(item, idx) in menuItems"
       :key="idx"
-      v-if="item.isCollapseMenu"
+      v-if="item.menuDepth == 2"
       :menuItem="item"
     ></collapse-menu>
     <normal-menu v-else :menuItem="item"></normal-menu>

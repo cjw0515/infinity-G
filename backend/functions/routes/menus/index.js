@@ -3,23 +3,10 @@ const router = express.Router();
 const { defaultApp, firestore } = require('../../config/config.js');
 const utils = require('../../utils/utils') ;
 
-
-// 리스트
 router.get('/', (req, res) => {
-    let menuRef = defaultApp.database().ref('menus');
-    menuRef.once('value', (snapshot) => {
-        let items = new Array();
-        snapshot.forEach((childSnapshot) => {
-            let menu = childSnapshot;
-            items.push(menu);
-        })
-        res.header('Content-Type', 'application/json; charset=utf-8')
-        res.send({menus: items});
-    })
-})
-
-router.get('/', (req, res) => {
-    firestore.collection('menus').get()
+    firestore.collection('menus')
+    .orderBy("menuOrder", "asc")
+    .get()
     .then((snapshot) => {
         var rows = [];
         snapshot.forEach((doc) => {
@@ -27,7 +14,7 @@ router.get('/', (req, res) => {
             rows.push(childData);
         });
         res.header('Content-Type', 'application/json; charset=utf-8')
-        res.status(200).send({menu: rows});
+        res.status(200).send({menus: rows});
     })
 })
 
