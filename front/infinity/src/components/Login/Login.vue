@@ -29,7 +29,7 @@ export default {
     };
   },
   methods: {
-    logOut() {
+    logOut() {      
       firebase
         .auth()
         .signOut()

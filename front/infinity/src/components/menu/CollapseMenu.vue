@@ -4,14 +4,14 @@
       class="nav-link"
       data-toggle="collapse"
       aria-expanded="false"
-      :aria-controls="menuItem.menuTitle"
-      :href="`#${menuItem.menuTitle}`"
+      :aria-controls="menuItem.menuName"
+      :href="`#${menuItem.menuName}`"
     >
       <i class="menu-icon" v-bind:class="menuItem.menuIcon"></i>
-      <span class="menu-title">{{menuItem.menuTitle}}</span>
+      <span class="menu-title">{{menuItem.menuName}}</span>
       <i class="menu-arrow"></i>
     </a>
-    <div class="collapse" :id="menuItem.menuTitle">
+    <div class="collapse" :id="menuItem.menuName">
       <ul class="nav flex-column sub-menu" v-if="menuItem.subMenu">
         <li class="nav-item" v-for="(item) in menuItem.subMenu">
           <a

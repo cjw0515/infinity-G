@@ -1,7 +1,7 @@
 <template>
   <div class="row">
-    <div class="card-body">
-      <h4 class="card-title"></h4>
+    <div class="card-body text-left">
+      <h4 class="card-title">/home</h4>
       <p class="card-description"></p>
       <form class="forms-sample">
         <div class="form-group row">
