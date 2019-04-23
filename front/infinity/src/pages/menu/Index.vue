@@ -1,82 +1,122 @@
 <template>
-  <div class="container">
-    <div class="card">
-      <div class="card-header">
-        <h4>메뉴 관리</h4>
+  <div>
+<!-- 
+    <div class="container">
+      <div class="card">
+        <div class="card-header">
+          <h4>메뉴 관리</h4>
+        </div>
+      </div>
+
+      <div class="card-group">
+        <div class="card child text-left">
+          <div class="card-header">
+            <h4 class="card-title">메뉴</h4>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" @click="popupModal(`menuInsertModal`, `메뉴 삽입`)">
+              <i class="btn-icon ti-plus"></i>
+              <span style="color:#248afd">메뉴추가</span>
+            </li>
+            <li
+              class="list-group-item"
+              v-for="(menu, idx) in menus"
+              :key="idx"
+              @click="handleMenuClick(idx, 1)"
+            >
+              <div class="float-left">{{menu.menuName}}</div>
+              <div class="float-right">
+                <i class="btn-icon ti-trash" @click="handleDeleteRowData()"></i>
+              </div>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="card child text-left">
+          <div class="card-header">
+            <h4 class="card-title">서브메뉴</h4>
+          </div>
+          <ul class="list-group list-group-flush" v-if="selectedMenu.menu.menuDepth == 2">
+            <li class="list-group-item" @click="popupModal(`subMenuInsertModal`, `서브메뉴 삽입`)">
+              <i class="btn-icon ti-plus"></i>
+              <span style="color:#248afd">서브메뉴추가</span>
+            </li>
+            <li
+              class="list-group-item"
+              v-for="(subMenu, idx) in selectedMenu.menu.subMenu"
+              :key="idx"
+            >
+              <div class="float-left">{{subMenu.subMenuName}}</div>
+              <div class="float-right">
+                <i class="btn-icon ti-trash" @click="handleDeleteRowData()"></i>
+              </div>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="card child text-left">
+          <div class="card-header">
+            <h4 class="card-title">{{selectedMenu.menu.menuName}}</h4>
+          </div>
+          <ul class="list-group list-group-flush" v-if="!isEmptyObject(selectedMenu.menu)">
+            <li class="list-group-item">
+              <div class="float-left">메뉴이름 : {{selectedMenu.menu.menuName}}</div>
+              <div class="float-right">
+                <i class="btn-icon ti-settings" @click="handleModifyRowData()"></i>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="float-left">링크 : {{selectedMenu.menu.menuLink}}</div>
+              <div class="float-right">
+                <i class="btn-icon ti-settings" @click="handleModifyRowData()"></i>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="float-left">
+                아이콘 :
+                <i v-bind:class="selectedMenu.menu.menuIcon"/>
+              </div>
+              <div class="float-right">
+                <i class="btn-icon ti-settings" @click="handleModifyRowData()"></i>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="float-left">depth : {{selectedMenu.menu.menuDepth}}</div>
+              <div class="float-right">
+                <i class="btn-icon ti-settings" @click="handleModifyRowData()"></i>
+              </div>
+            </li>
+
+            <li class="list-group-item">
+              <div class="float-left">사용 : {{selectedMenu.menu.menuIsUsing}}</div>
+              <div class="float-right">
+                <i class="btn-icon ti-settings" @click="handleModifyRowData()"></i>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
-    <!-- 상단메뉴 -->
-    <div class="card-group">
-      <div class="card child text-left">
-        <div class="card-header">
-          <h4 class="card-title">메뉴</h4>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item" @click="popupModal(`menuInsertModal`, `메뉴 삽입`)">
-            <i class="btn-icon ti-plus"></i>
-            <span style="color:#248afd">메뉴추가</span>
-          </li>
-          <li
-            class="list-group-item"
-            v-for="(menu, idx) in menus"
-            :key="idx"
-            @click="handleMenuClick(idx, 1)"
-          >{{menu.menuName}}</li>
-        </ul>
-      </div>
-      <!-- 서브메뉴 -->
-      <div class="card child text-left">
-        <div class="card-header">
-          <h4 class="card-title">서브메뉴</h4>
-        </div>
-        <ul class="list-group list-group-flush" v-if="selectedMenu.menu.menuDepth == 2">
-          <li class="list-group-item" @click="popupModal(`subMenuInsertModal`, `서브메뉴 삽입`)">
-            <i class="btn-icon ti-plus"></i>
-            <span style="color:#248afd">서브메뉴추가</span>
-          </li>          
-          <li
-            class="list-group-item"
-            v-for="(subMenu, idx) in selectedMenu.menu.subMenu"
-            :key="idx"
-          >{{subMenu.subMenuName}}</li>
-        </ul>
-      </div>
-      <!-- 상세 -->
-      <div class="card child text-left">
-        <div class="card-header">
-          <h4 class="card-title">Card title</h4>
-        </div>
-        <ul class="list-group list-group-flush" v-if="!isEmptyObject(selectedMenu.menu)" >
-          <li class="list-group-item">메뉴이름 : {{selectedMenu.menu.menuName}}</li>
-          <li class="list-group-item">링크 : {{selectedMenu.menu.menuLink}}</li>
-          <li class="list-group-item">
-            <i v-bind:class="selectedMenu.menu.menuIcon"/>
-          </li>
-          <li class="list-group-item">depth : {{selectedMenu.menu.menuDepth}}</li>
-          <li class="list-group-item">사용 : {{selectedMenu.menu.menuIsUsing}}</li>
-        </ul>
-      </div>
-    </div>
+ -->    
+    <menu-management-container>      
+    </menu-management-container>
     <modal-form :modal-options="modalOptions">
       <div slot="modalBody">
-        <menu-insert-form :insert-form-props="insertFormProps" :max-menu-number="menus.length" :key="componentKey" v-if="modalOptions.modalId == `menuInsertModal`"></menu-insert-form>        
-        <submenu-insert-form :insert-form-props="insertFormProps" :max-menu-number="menus.length" :key="componentKey" v-if="modalOptions.modalId == `subMenuInsertModal`"></submenu-insert-form>        
+        <menu-insert-form
+          :insert-form-props="insertFormProps"
+          :max-menu-number="menus.length"
+          :key="componentKey"
+          v-if="modalOptions.modalId == `menuInsertModal`"
+        ></menu-insert-form>
+        <submenu-insert-form
+          :insert-form-props="insertFormProps"
+          :key="componentKey"
+          :parent-menu-link="selectedMenu.menu.menuLink"
+          v-if="modalOptions.modalId == `subMenuInsertModal`"
+        ></submenu-insert-form>
       </div>
       <div slot="modalFooter"></div>
-    </modal-form>
-    <!-- <table-paging :paging-table-options="pagingTableOptions">
-      <table-row
-        slot="row"
-        slot-scope="props"
-        :row-data="props.rowData"
-        :onClickDelete="props.onClickDelete"
-        :onClickModify="props.onClickModify"
-      ></table-row>
-    </table-paging>
-    <modal-form :modal-options="modalOptions">
-      <validation-form slot="modalBody" :validation-form-options="validationFormOptions"></validation-form>
-      <div slot="modalFooter"></div>
-    </modal-form>-->
+    </modal-form>    
   </div>
 </template>
 <script>
@@ -85,7 +125,7 @@ import { LIST, MENU } from "@/api/menus/";
 import Modal from "@/components/modal/Modal.vue";
 import MenuInsertForm from "./MenuInsertForm.vue";
 import SubMenuInsertForm from "./SubMenuInsertForm.vue";
-
+import MenuManagementContainer from "./MenuManagementContainer.vue"
 
 export default {
   mixins: [utils],
@@ -96,12 +136,12 @@ export default {
         idx: 0,
         depth: 1,
         menu: {}
-      },      
+      },
       modalOptions: {
         modalName: "",
         modalId: ""
       },
-      insertFormProps:{
+      insertFormProps: {
         handleInsertMenu: this.insertMenu
       },
       componentKey: 0
@@ -113,35 +153,48 @@ export default {
       const response = await fetch(apiUrl);
       const json = await response.json();
       return json.menus;
-    },    
-    async insertMenu(formData){   
-      let apiUrl = MENU;   
+    },
+    async insertMenu(formData, depth) {
+      let apiUrl;
+      apiUrl =
+        depth == 1
+          ? MENU
+          : `${MENU}/${this.selectedMenu.menu.menuId}/subMenus/`;
+
       const response = await fetch(apiUrl, {
-        method: 'POST',
+        method: "POST",
         body: JSON.stringify(formData),
         headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
+          Accept: "application/json",
+          "Content-Type": "application/json"
         }
-      })
+      });
       const resultJson = await response.json();
-      
-      if(resultJson.result == "ok"){
-        Swal.fire('메뉴가 추가되었습니다.')
-      }else{
-        Swal.fire('오류가 발생했습니다.')
+      const status = await response.status;
+
+      if (resultJson.result == "ok") {
+        this.getMenuList()
+          .then(data => {
+            this.menus = data;
+          })
+          .catch(error => {
+            console.error(error);
+          });
+        Swal.fire("메뉴가 추가되었습니다.");
+      } else {
+        Swal.fire("오류가 발생했습니다.");
       }
-    },    
-    popupModal(modalId, modalName){
+    },
+    popupModal(modalId, modalName) {
       let _this = this;
-      new Promise(function(resolve, reject){
-        _this.componentKey = new Date().getSeconds()
-        _this.modalOptions.modalName = modalName
-        _this.modalOptions.modalId = modalId
-        resolve()
-      }).then(function(){
-        $(`#${modalId}`).modal("show");      
-      })
+      new Promise(function(resolve, reject) {
+        _this.componentKey = new Date().getSeconds();
+        _this.modalOptions.modalName = modalName;
+        _this.modalOptions.modalId = modalId;
+        resolve();
+      }).then(function() {
+        $(`#${modalId}`).modal("show");
+      });
     },
     delRowData() {
       Swal.fire({
@@ -182,12 +235,13 @@ export default {
   components: {
     "modal-form": Modal,
     "menu-insert-form": MenuInsertForm,
-    "submenu-insert-form": SubMenuInsertForm
+    "submenu-insert-form": SubMenuInsertForm,
+    "menu-management-container": MenuManagementContainer
   },
-  mounted: function() {       
+  mounted: function() {
     this.getMenuList()
       .then(data => {
-        this.menus = data;        
+        this.menus = data;
       })
       .catch(error => {
         console.error(error);

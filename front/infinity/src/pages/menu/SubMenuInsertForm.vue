@@ -1,72 +1,48 @@
 <template>
   <div class="row">
-    <div class="card-body text-left">
-      <h4 class="card-title">/home</h4>
+    <div class="card-body">
+      <h4 class="card-title">{{`${parentMenuLink}/`}}</h4>
       <p class="card-description"></p>
       <form class="forms-sample">
         <div class="form-group row">
-          <label for="menuName" class="col-sm-3 col-form-label">메뉴이름</label>
+          <label for="subMenuName" class="col-sm-3 col-form-label">메뉴이름</label>
           <div class="col-sm-9">
             <input
               type="text"
               class="form-control"
-              id="menuName"
+              id="subMenuName"
               placeholder="메뉴이름"
-              v-model="formData.menuName"
+              v-model="formData.subMenuName"
             >
           </div>
         </div>
         <div class="form-group row">
-          <label for="menuLink" class="col-sm-3 col-form-label">링크</label>
+          <label for="subMenuLink" class="col-sm-3 col-form-label">링크</label>
           <div class="col-sm-9">
             <input
               type="text"
               class="form-control"
-              id="menuLink"
+              id="subMenuLink"
               placeholder="/"
-              v-model="formData.menuLink"
+              v-model="formData.subMenuLink"
             >
           </div>
-        </div>
-        <div class="form-group row">
-          <label for="depth" class="col-sm-3 col-form-label">depth</label>
-          <div class="col-sm-9">
-            <input
-              type="number"
-              class="form-control"
-              id="depth"
-              placeholder="1"
-              v-model="formData.menuDepth"
-            >
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="exampleInputMobile2" class="col-sm-3 col-form-label">아이콘</label>
-          <div class="col-sm-9">
-            <input
-              type="text"
-              class="form-control"
-              id="exampleInputMobile2"
-              placeholder="Mobile number"
-              v-model="formData.menuIcon"
-            >
-          </div>
-        </div>
+        </div>                
         <div class="form-group row">
           <label for="exampleInputMobile3" class="col-sm-3 col-form-label">사용유무</label>
           <div class="col-sm-9">
-            <input type="checkbox" v-model="formData.menuIsUsing">
+            <input type="checkbox" v-model="formData.subMenuIsUsing">
           </div>
         </div>
         <div class="form-group row">
-          <label for="menuOrder" class="col-sm-3 col-form-label">메뉴순서</label>
+          <label for="subMenuOrder" class="col-sm-3 col-form-label">메뉴순서</label>
           <div class="col-sm-9">
             <input
               type="number"
               class="form-control"
-              id="menuOrder"
+              id="subMenuOrder"
               placeholder="1"
-              v-model="formData.menuOrder"
+              v-model="formData.subMenuOrder"
             >
           </div>
         </div>        
@@ -82,13 +58,10 @@ export default {
   data() {
     return {
       formData: {
-        menuName: "",
-        menuLink: "",
-        menuDepth: "",
-        menuIcon: "",
-        menuIsUsing: false,
-        subMenu: {},
-        menuOrder: this.maxMenuNumber + 1
+        subMenuName: "",
+        subMenuLink: "",
+        subMenuIsUsing: false,
+        subMenuOrder: 1        
       }
     };
   },
@@ -104,6 +77,10 @@ export default {
     maxMenuNumber: {
       type: Number,
       default: 0
+    },
+    parentMenuLink: {
+      type: String,
+      defualt: ""
     }
   },
   methods: {
@@ -112,7 +89,7 @@ export default {
       if (false) {
         return false;
       }
-      this.insertFormProps.handleInsertMenu(this.formData);
+      this.insertFormProps.handleInsertMenu(this.formData, 2);
     },
     validationCheck() {
       Swal.fire("validation failed");

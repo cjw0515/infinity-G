@@ -112,7 +112,7 @@ export default {
       if (false) {
         return false;
       }
-      this.insertFormProps.handleInsertMenu(this.formData);
+      this.insertFormProps.handleInsertMenu(this.formData, 1);
     },
     validationCheck() {
       Swal.fire("validation failed");
