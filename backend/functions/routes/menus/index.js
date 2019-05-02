@@ -49,7 +49,9 @@ router.put('/', (req, res) => {
 });
 
 //삭제
-router.delete('/:id?*', (req, res) => {
+router.delete('/:id', (req, res) => {
+    console.log(req.params.id);
+    
     if(!req.params.id){
         res.status(400).send({result: "bad request"});
     }else{
@@ -112,4 +114,26 @@ router.post('/:id/submenus/', (req, res) => {
     }
 })
 
+// 삭제
+router.delete('/:id/submenus/:submenuid', (req, res) => {
+    let subMenuRef 
+    const id = req.params.id;
+    const subMenuId = req.params.submenuid;
+
+    if(!id || !subMenuId){
+        res.status(400).send({result: "bad request"});
+    }else{
+        subMenuRef = firestore
+        .collection("menus")
+        .doc(id)
+        .collection("subMenus")
+        .doc(subMenuId)
+        
+        subMenuRef
+        .delete()
+        .then((result)=>{
+            res.status(201).send({result: "delete complete"});    
+        });
+    }
+})
 module.exports = router;

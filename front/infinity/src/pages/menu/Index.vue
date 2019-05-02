@@ -1,104 +1,13 @@
 <template>
   <div>
-<!-- 
-    <div class="container">
-      <div class="card">
-        <div class="card-header">
-          <h4>메뉴 관리</h4>
-        </div>
-      </div>
-
-      <div class="card-group">
-        <div class="card child text-left">
-          <div class="card-header">
-            <h4 class="card-title">메뉴</h4>
-          </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item" @click="popupModal(`menuInsertModal`, `메뉴 삽입`)">
-              <i class="btn-icon ti-plus"></i>
-              <span style="color:#248afd">메뉴추가</span>
-            </li>
-            <li
-              class="list-group-item"
-              v-for="(menu, idx) in menus"
-              :key="idx"
-              @click="handleMenuClick(idx, 1)"
-            >
-              <div class="float-left">{{menu.menuName}}</div>
-              <div class="float-right">
-                <i class="btn-icon ti-trash" @click="handleDeleteRowData()"></i>
-              </div>
-            </li>
-          </ul>
-        </div>
-        
-        <div class="card child text-left">
-          <div class="card-header">
-            <h4 class="card-title">서브메뉴</h4>
-          </div>
-          <ul class="list-group list-group-flush" v-if="selectedMenu.menu.menuDepth == 2">
-            <li class="list-group-item" @click="popupModal(`subMenuInsertModal`, `서브메뉴 삽입`)">
-              <i class="btn-icon ti-plus"></i>
-              <span style="color:#248afd">서브메뉴추가</span>
-            </li>
-            <li
-              class="list-group-item"
-              v-for="(subMenu, idx) in selectedMenu.menu.subMenu"
-              :key="idx"
-            >
-              <div class="float-left">{{subMenu.subMenuName}}</div>
-              <div class="float-right">
-                <i class="btn-icon ti-trash" @click="handleDeleteRowData()"></i>
-              </div>
-            </li>
-          </ul>
-        </div>
-        
-        <div class="card child text-left">
-          <div class="card-header">
-            <h4 class="card-title">{{selectedMenu.menu.menuName}}</h4>
-          </div>
-          <ul class="list-group list-group-flush" v-if="!isEmptyObject(selectedMenu.menu)">
-            <li class="list-group-item">
-              <div class="float-left">메뉴이름 : {{selectedMenu.menu.menuName}}</div>
-              <div class="float-right">
-                <i class="btn-icon ti-settings" @click="handleModifyRowData()"></i>
-              </div>
-            </li>
-            <li class="list-group-item">
-              <div class="float-left">링크 : {{selectedMenu.menu.menuLink}}</div>
-              <div class="float-right">
-                <i class="btn-icon ti-settings" @click="handleModifyRowData()"></i>
-              </div>
-            </li>
-            <li class="list-group-item">
-              <div class="float-left">
-                아이콘 :
-                <i v-bind:class="selectedMenu.menu.menuIcon"/>
-              </div>
-              <div class="float-right">
-                <i class="btn-icon ti-settings" @click="handleModifyRowData()"></i>
-              </div>
-            </li>
-            <li class="list-group-item">
-              <div class="float-left">depth : {{selectedMenu.menu.menuDepth}}</div>
-              <div class="float-right">
-                <i class="btn-icon ti-settings" @click="handleModifyRowData()"></i>
-              </div>
-            </li>
-
-            <li class="list-group-item">
-              <div class="float-left">사용 : {{selectedMenu.menu.menuIsUsing}}</div>
-              <div class="float-right">
-                <i class="btn-icon ti-settings" @click="handleModifyRowData()"></i>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
- -->    
-    <menu-management-container>      
+    <menu-management-container
+      :menus="menus"
+      :sub-menus="subMenus"
+      :selected-menu="selectedMenu"
+      :popup-modal="popupModal"
+      :handle-menu-click="handleMenuClick"
+      :handle-delete-rowdata="handleDeleteRowdata"
+    >      
     </menu-management-container>
     <modal-form :modal-options="modalOptions">
       <div slot="modalBody">
@@ -116,7 +25,7 @@
         ></submenu-insert-form>
       </div>
       <div slot="modalFooter"></div>
-    </modal-form>    
+    </modal-form>       
   </div>
 </template>
 <script>
@@ -132,6 +41,7 @@ export default {
   data() {
     return {
       menus: [],
+      subMenus: [],
       selectedMenu: {
         idx: 0,
         depth: 1,
@@ -149,11 +59,19 @@ export default {
   },
   methods: {
     async getMenuList() {
-      let apiUrl = LIST;
+      let apiUrl = MENU;
       const response = await fetch(apiUrl);
       const json = await response.json();
       return json.menus;
     },
+    async getSubMenuList() {
+      let apiUrl = `${MENU}/${this.selectedMenu.menu.menuId}/submenus`;
+      
+      const response = await fetch(apiUrl);
+      const json = await response.json();
+      // console.log(json)
+      return json.subMenus;
+    },    
     async insertMenu(formData, depth) {
       let apiUrl;
       apiUrl =
@@ -171,32 +89,44 @@ export default {
       });
       const resultJson = await response.json();
       const status = await response.status;
+      const modalId = this.modalOptions.modalId;
 
       if (resultJson.result == "ok") {
-        this.getMenuList()
-          .then(data => {
+        await this.getSubMenuList().then((subMenuData)=>{          
+          this.subMenus = subMenuData;        
+        })
+        await this.getMenuList().then(data => {
+            Swal.fire("메뉴가 추가되었습니다.");
             this.menus = data;
-          })
-          .catch(error => {
-            console.error(error);
-          });
-        Swal.fire("메뉴가 추가되었습니다.");
+        })          
+        $(`#${modalId}`).modal('hide');
       } else {
         Swal.fire("오류가 발생했습니다.");
       }
     },
-    popupModal(modalId, modalName) {
-      let _this = this;
-      new Promise(function(resolve, reject) {
-        _this.componentKey = new Date().getSeconds();
-        _this.modalOptions.modalName = modalName;
-        _this.modalOptions.modalId = modalId;
+    async deleteMenu(key, depth){
+      if(key == "" || depth =="") return false;
+      let apiUrl = 
+      depth == 1 
+      ? `${MENU}/${key}` 
+      : `${MENU}/${this.selectedMenu.menu.menuId}/submenus/${key}`;
+
+      const response = await fetch(apiUrl, {
+        method: "DELETE"
+      })
+      return response.status;
+    },
+    popupModal(modalId, modalName) {      
+      new Promise((resolve, reject) => {
+        this.componentKey = new Date().getSeconds();
+        this.modalOptions.modalName = modalName;
+        this.modalOptions.modalId = modalId;
         resolve();
       }).then(function() {
         $(`#${modalId}`).modal("show");
       });
     },
-    delRowData() {
+    async handleDeleteRowdata(key, depth) {      
       Swal.fire({
         title: "정말 삭제하시겠습니까?",
         text: "한번 삭제하면 되돌릴 수 없습니다.",
@@ -206,30 +136,61 @@ export default {
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes",
         showLoaderOnConfirm: true,
-        preConfirm: login => {
+        preConfirm: () => {
           return new Promise(resolve => {
             setTimeout(() => {
-              resolve({
-                result: true
-              });
-            }, 2000);
+              this.deleteMenu(key, depth).then(function(status){
+                resolve(status)
+              })            
+            }, 1000);
           });
         },
         allowOutsideClick: () => !Swal.isLoading()
       }).then(result => {
-        if (result.value) {
-          // Swal.enableLoading();
-          Swal.fire("Deleted!", "Your file has been deleted.", "success");
+        if(result.dismiss == "cancel") return false;
+        if(result.value == 201) {
+          this.getMenuList()
+            .then(data => {
+              Swal.fire("Deleted!", "메뉴가 삭제되었습니다.", "success");
+              this.menus = data;
+            })
+            .then(()=>{
+              this.getSubMenuList()
+                .then((subMenuData)=>{
+                this.subMenus = subMenuData;
+              })
+            })
+            .catch(error => {
+              console.error(error);
+            });          
+        }else{
+          // console.log(result)
+          Swal.fire({
+              title: 'Error!',
+              text: 'Do you want to continue',
+              type: 'warning',
+              confirmButtonText: 'Cool'  
+          });          
         }
       });
-    },
+    },    
     handleModify() {
-      alert();
+      Swal.fire({
+        type: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+        footer: '<a href>Why do I have this issue?</a>'
+      })
     },
     handleMenuClick(idx, depth) {
       this.selectedMenu.idx = idx;
       this.selectedMenu.depth = depth;
-      this.selectedMenu.menu = this.menus[idx];
+      this.selectedMenu.menu = depth == 1 ? this.menus[idx] : this.subMenus[idx];
+      
+      this.getSubMenuList()
+      .then((subMenuData)=>{
+        this.subMenus = subMenuData;
+      })
     }
   },
   components: {
@@ -249,25 +210,4 @@ export default {
   }
 };
 </script>
-<style scoped>
-.list-group-item {
-  cursor: pointer;
-}
-.list-group-item:hover {
-  background-color: lightgray;
-}
-.card.child {
-  overflow-y: auto;
-  height: 400px;
-}
-.list-group {
-  background-color: white;
-}
-.btn-icon {
-  display: inline-block;
-  font-size: 15px;
-  width: 40px;
-  color: #248afd;
-  cursor: pointer;
-}
-</style>
+
