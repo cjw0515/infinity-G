@@ -45,7 +45,8 @@ export default {
       selectedMenu: {
         idx: 0,
         depth: 1,
-        menu: {}
+        menu: {          
+        }
       },
       modalOptions: {
         modalName: "",
@@ -184,13 +185,17 @@ export default {
     },
     handleMenuClick(idx, depth) {
       this.selectedMenu.idx = idx;
-      this.selectedMenu.depth = depth;
-      this.selectedMenu.menu = depth == 1 ? this.menus[idx] : this.subMenus[idx];
+      this.selectedMenu.depth = depth;      
       
-      this.getSubMenuList()
-      .then((subMenuData)=>{
-        this.subMenus = subMenuData;
-      })
+      if(depth == 1){
+        this.selectedMenu.menu = this.menus[idx];     
+        this.getSubMenuList()
+        .then((subMenuData)=>{          
+          this.subMenus = subMenuData;          
+        })
+      }else if(depth == 2){
+        this.selectedMenu.menu.subMenu = this.subMenus[idx];
+      }
     }
   },
   components: {

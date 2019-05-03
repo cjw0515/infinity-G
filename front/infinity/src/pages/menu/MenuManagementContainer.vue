@@ -33,7 +33,7 @@
           <div class="card-header">
             <h4 class="card-title">서브메뉴</h4>
           </div>
-          <ul class="list-group list-group-flush" v-if="selectedMenu.menu.menuDepth == 2">
+          <ul class="list-group list-group-flush" v-if="selectedMenu.depth == 2 || selectedMenu.menu.menuDepth == 2">
             <li class="list-group-item" @click="popupModal(`subMenuInsertModal`, `서브메뉴 삽입`)">
               <i class="btn-icon ti-plus"></i>
               <span style="color:#248afd">서브메뉴추가</span>
@@ -54,7 +54,7 @@
         
         <div class="card child text-left">
           <div class="card-header">
-            <h4 class="card-title">{{selectedMenu.menu.menuName}}</h4>
+            <h4 class="card-title">{{menuPath}}</h4>
           </div>
           <ul class="list-group list-group-flush" 
             v-if="!isEmptyObject(selectedMenu.menu) && selectedMenu.depth == 1"            
@@ -91,19 +91,19 @@
             v-else-if="!isEmptyObject(selectedMenu.menu) && selectedMenu.depth == 2"            
           >
             <li class="list-group-item">
-              <div class="float-left">메뉴이름 : {{selectedMenu.menu.menuName}}</div>
+              <div class="float-left">메뉴이름 : {{selectedMenu.menu.subMenu.subMenuName}}</div>
               <div class="float-right">
                 <i class="btn-icon ti-settings" @click="handleModifyRowData()"></i>
               </div>
             </li>
             <li class="list-group-item">
-              <div class="float-left">링크 : {{selectedMenu.menu.menuLink}}</div>
+              <div class="float-left">링크 : {{selectedMenu.menu.subMenu.subMenuLink}}</div>
               <div class="float-right">
                 <i class="btn-icon ti-settings" @click="handleModifyRowData()"></i>
               </div>
             </li>
             <li class="list-group-item">
-              <div class="float-left">사용 : {{selectedMenu.menu.menuIsUsing}}</div>
+              <div class="float-left">사용 : {{selectedMenu.menu.subMenu.subMenuIsUsing}}</div>
               <div class="float-right">
                 <i class="btn-icon ti-settings" @click="handleModifyRowData()"></i>
               </div>
@@ -121,7 +121,11 @@ export default {
   props: {
     selectedMenu: {
       type: Object,
-      default: ()=>({})
+      default: ()=>({
+        menu:{
+          subMenu:{}
+        }
+      })
     },
     menus: {
       type: Array,
@@ -152,7 +156,17 @@ export default {
   },
   mounted: function(){
     
-  }    
+  },
+   computed: {
+       menuPath: function () {
+        let path = this.selectedMenu.menu.menuName;
+        let selectedSubMenu = this.selectedMenu.menu.subMenu;
+        console.log(selectedSubMenu)
+        path += selectedSubMenu ? `/${selectedSubMenu}` : ``;
+
+        return path
+       }
+   }
 }
 </script>
 <style scoped>
