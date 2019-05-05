@@ -188,7 +188,8 @@ export default {
       this.selectedMenu.depth = depth;      
       
       if(depth == 1){
-        this.selectedMenu.menu = this.menus[idx];     
+        this.selectedMenu.menu = this.menus[idx]; 
+        this.selectedMenu.menu.subMenu = {}    
         this.getSubMenuList()
         .then((subMenuData)=>{          
           this.subMenus = subMenuData;          

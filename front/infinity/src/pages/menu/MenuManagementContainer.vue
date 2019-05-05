@@ -159,10 +159,10 @@ export default {
   },
    computed: {
        menuPath: function () {
-        let path = this.selectedMenu.menu.menuName;
-        let selectedSubMenu = this.selectedMenu.menu.subMenu;
-        console.log(selectedSubMenu)
-        path += selectedSubMenu ? `/${selectedSubMenu}` : ``;
+        let path = this.selectedMenu.menu.menuName;     
+        let selectedSubMenu = this.selectedMenu.menu.subMenu
+
+        path += selectedSubMenu ? `/${selectedSubMenu.subMenuName}` : ``;
 
         return path
        }
