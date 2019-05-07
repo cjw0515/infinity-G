@@ -47,7 +47,7 @@
               type="text"
               class="form-control"
               id="exampleInputMobile2"
-              placeholder="Mobile number"
+              placeholder
               v-model="formData.menuIcon"
             >
           </div>
@@ -69,7 +69,7 @@
               v-model="formData.menuOrder"
             >
           </div>
-        </div>        
+        </div>
         <button type="button" @click="handleSubmit()" class="btn btn-primary mr-2">생성</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
       </form>

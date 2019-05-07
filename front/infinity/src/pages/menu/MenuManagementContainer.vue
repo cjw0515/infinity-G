@@ -4,114 +4,115 @@
       <div class="card-header">
         <h4>메뉴 관리</h4>
       </div>
-    </div>    
+    </div>
     <div class="card-group">
-       <div class="card child text-left">
-          <div class="card-header">
-            <h4 class="card-title">메뉴</h4>
-          </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item" @click="popupModal(`menuInsertModal`, `메뉴 삽입`)">
-              <i class="btn-icon ti-plus"></i>
-              <span style="color:#248afd">메뉴추가</span>
-            </li>
-            <li
-              class="list-group-item"
-              v-for="(menu, idx) in menus"
-              :key="idx"
-              @click="handleMenuClick(idx, 1)"
-            >
-              <div class="float-left">{{menu.menuName}}</div>
-              <div class="float-right">
-                <i class="btn-icon ti-trash" @click.stop="handleDeleteRowdata(menu.id, 1)"></i>
-              </div>
-            </li>
-          </ul>
+      <div class="card child text-left">
+        <div class="card-header">
+          <h4 class="card-title">메뉴</h4>
         </div>
-        
-        <div class="card child text-left">
-          <div class="card-header">
-            <h4 class="card-title">서브메뉴</h4>
-          </div>
-          <ul class="list-group list-group-flush" v-if="selectedMenu.depth == 2 || selectedMenu.menu.menuDepth == 2">
-            <li class="list-group-item" @click="popupModal(`subMenuInsertModal`, `서브메뉴 삽입`)">
-              <i class="btn-icon ti-plus"></i>
-              <span style="color:#248afd">서브메뉴추가</span>
-            </li>
-            <li
-              class="list-group-item"
-              v-for="(subMenu, idx) in subMenus"
-              :key="idx"
-              @click="handleMenuClick(idx, 2)"
-            >
-              <div class="float-left">{{subMenu.subMenuName}}</div>
-              <div class="float-right">
-                <i class="btn-icon ti-trash" @click.stop="handleDeleteRowdata(subMenu.id, 2)"></i>
-              </div>
-            </li>
-          </ul>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item" @click="popupModal(`menuInsertModal`, `메뉴 삽입`)">
+            <i class="btn-icon ti-plus"></i>
+            <span style="color:#248afd">메뉴추가</span>
+          </li>
+          <li
+            class="list-group-item"
+            v-for="(menu, idx) in menus"
+            :key="idx"
+            @click="handleMenuClick(idx, 1)"
+          >
+            <div class="float-left">{{menu.menuName}}</div>
+            <div class="float-right">
+              <i class="btn-icon ti-trash" @click.stop="handleDeleteRowdata(menu.id, 1)"></i>
+              <i class="ti-angle-right" v-if="menu.id == selectedMenu.menu.id"></i>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card child text-left">
+        <div class="card-header">
+          <h4 class="card-title">서브메뉴</h4>
         </div>
-        
-        <div class="card child text-left">
-          <div class="card-header">
+        <ul
+          class="list-group list-group-flush"
+          v-if="selectedMenu.depth == 2 || selectedMenu.menu.menuDepth == 2"
+        >
+          <li class="list-group-item" @click="popupModal(`subMenuInsertModal`, `서브메뉴 삽입`)">
+            <i class="btn-icon ti-plus"></i>
+            <span style="color:#248afd">서브메뉴추가</span>
+          </li>
+          <li
+            class="list-group-item"
+            v-for="(subMenu, idx) in subMenus"
+            :key="idx"
+            @click="handleMenuClick(idx, 2)"
+          >
+            <div class="float-left">{{subMenu.subMenuName}}</div>
+            <div class="float-right">
+              <i class="btn-icon ti-trash" @click.stop="handleDeleteRowdata(subMenu.id, 2)"></i>
+              <i class="ti-angle-right" v-if="subMenu.id == selectedSubMenu.subMenu.id"></i>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card child text-left">
+        <div class="card-header">
+          <div class="float-left">
             <h4 class="card-title">{{menuPath}}</h4>
           </div>
-          <ul class="list-group list-group-flush" 
-            v-if="!isEmptyObject(selectedMenu.menu) && selectedMenu.depth == 1"            
-          >
-            <li class="list-group-item">
-              <div class="float-left">메뉴이름 : {{selectedMenu.menu.menuName}}</div>
-              <div class="float-right">
-                <i class="btn-icon ti-settings" @click="handleModifyRowData()"></i>
-              </div>
-            </li>
-            <li class="list-group-item">
-              <div class="float-left">링크 : {{selectedMenu.menu.menuLink}}</div>
-              <div class="float-right">
-                <i class="btn-icon ti-settings" @click="handleModifyRowData()"></i>
-              </div>
-            </li>
-            <li class="list-group-item">
-              <div class="float-left">
-                아이콘 :
-                <i v-bind:class="selectedMenu.menu.menuIcon"/>
-              </div>
-              <div class="float-right">
-                <i class="btn-icon ti-settings" @click="handleModifyRowData()"></i>
-              </div>
-            </li>
-            <li class="list-group-item">
-              <div class="float-left">사용 : {{selectedMenu.menu.menuIsUsing}}</div>
-              <div class="float-right">
-                <i class="btn-icon ti-settings" @click="handleModifyRowData()"></i>
-              </div>
-            </li>
-          </ul>
-          <ul class="list-group list-group-flush" 
-            v-else-if="!isEmptyObject(selectedMenu.menu) && selectedMenu.depth == 2"            
-          >
-            <li class="list-group-item">
-              <div class="float-left">메뉴이름 : {{selectedMenu.menu.subMenu.subMenuName}}</div>
-              <div class="float-right">
-                <i class="btn-icon ti-settings" @click="handleModifyRowData()"></i>
-              </div>
-            </li>
-            <li class="list-group-item">
-              <div class="float-left">링크 : {{selectedMenu.menu.subMenu.subMenuLink}}</div>
-              <div class="float-right">
-                <i class="btn-icon ti-settings" @click="handleModifyRowData()"></i>
-              </div>
-            </li>
-            <li class="list-group-item">
-              <div class="float-left">사용 : {{selectedMenu.menu.subMenu.subMenuIsUsing}}</div>
-              <div class="float-right">
-                <i class="btn-icon ti-settings" @click="handleModifyRowData()"></i>
-              </div>
-            </li>
-          </ul>          
         </div>
+        <ul
+          class="list-group list-group-flush"
+          v-if="!isEmptyObject(selectedMenu.menu) && selectedMenu.depth == 1"
+        >
+          <li class="list-group-item" @click="handleClickModify()">
+            <i class="btn-icon ti-settings"></i>
+            <span style="color:#248afd">수정</span>
+          </li>
+          <li class="list-group-item" v-for="(value, key) in selectedMenu.menu" :key="key">
+            <div class="float-left">{{key}} : {{value}}</div>
+          </li>
+          <!-- 
+          <li class="list-group-item">
+            <div class="float-left">메뉴이름 : {{selectedMenu.menu.menuName}}</div>
+          </li>
+          <li class="list-group-item">
+            <div class="float-left">메뉴이름 : {{selectedMenu.menu.menuName}}</div>
+          </li>
+          <li class="list-group-item">
+            <div class="float-left">링크 : {{selectedMenu.menu.menuLink}}</div>
+          </li>
+          <li class="list-group-item">
+            <div class="float-left">
+              아이콘 :
+              <i v-bind:class="selectedMenu.menu.menuIcon"/>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="float-left">사용 : {{selectedMenu.menu.menuIsUsing}}</div>
+          </li>
+          -->
+        </ul>
+        <ul class="list-group list-group-flush" v-else-if="!isEmptyObject(selectedSubMenu.subMenu)">
+          <li class="list-group-item" @click="handleClickModify()">
+            <i class="btn-icon ti-settings"></i>
+            <span style="color:#248afd">수정</span>
+          </li>
+          <li class="list-group-item">
+            <div class="float-left">메뉴이름 : {{selectedSubMenu.subMenu.subMenuName}}</div>
+          </li>
+          <li class="list-group-item">
+            <div class="float-left">링크 : {{selectedSubMenu.subMenu.subMenuLink}}</div>
+          </li>
+          <li class="list-group-item">
+            <div class="float-left">사용 : {{selectedSubMenu.subMenu.subMenuIsUsing}}</div>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>    
+  </div>
 </template>
 <script>
 import { utils } from "@/components/mixins/utils";
@@ -121,10 +122,14 @@ export default {
   props: {
     selectedMenu: {
       type: Object,
-      default: ()=>({
-        menu:{
-          subMenu:{}
-        }
+      default: () => ({
+        menu: {}
+      })
+    },
+    selectedSubMenu: {
+      type: Object,
+      default: () => ({
+        subMenu: {}
       })
     },
     menus: {
@@ -133,41 +138,74 @@ export default {
     },
     popupModal: {
       type: Function,
-      default: ()=>{
-        alert('default');
+      default: () => {
+        alert("default");
       }
     },
-    handleMenuClick:{
+    handleMenuClick: {
       type: Function,
-      default: ()=>{
-        alert('default');
+      default: () => {
+        alert("default");
       }
     },
-    handleDeleteRowdata:{
+    handleDeleteRowdata: {
       type: Function,
-      default: ()=>{
-        alert('default delete')
+      default: () => {
+        alert("default delete");
       }
     },
-    subMenus:{
+    subMenus: {
       type: Array,
       default: []
+    },
+    handleModify: {
+      type: Function,
+      default: () => {
+        alert("default modify");
+      }
     }
   },
-  mounted: function(){
-    
+  data() {
+    return {
+      depth1FormData: [
+        "menuName",
+        "menuLink",
+        "menuIcon",
+        "menuIsUsing",
+        "menuOrder"
+      ],
+      depth2FormData: []
+    };
   },
-   computed: {
-       menuPath: function () {
-        let path = this.selectedMenu.menu.menuName;     
-        let selectedSubMenu = this.selectedMenu.menu.subMenu
+  methods: {
+    handleClickModify: function() {
+      console.log(this.selectedMenu.menu);
+      this.handleModify();
+    }
+  },
+  mounted: function() {},
+  computed: {
+    menuPath: function() {
+      let selectedMenu = this.selectedMenu.menu;
+      let selectedSubMenu = this.selectedSubMenu.subMenu;
+      let path = selectedMenu.menuName ? selectedMenu.menuName : "";
 
-        path += selectedSubMenu ? `/${selectedSubMenu.subMenuName}` : ``;
+      path += selectedSubMenu.subMenuName
+        ? `/${selectedSubMenu.subMenuName}`
+        : ``;
+      return path;
+    }
+  },
+  menuData: function() {
+    let data = [];
 
-        return path
-       }
-   }
-}
+    for(){
+      
+    }
+
+    return data;
+  }
+};
 </script>
 <style scoped>
 .list-group-item {

@@ -3,12 +3,13 @@
     <menu-management-container
       :menus="menus"
       :sub-menus="subMenus"
+      :selected-sub-menu="selectedSubMenu"
       :selected-menu="selectedMenu"
       :popup-modal="popupModal"
       :handle-menu-click="handleMenuClick"
       :handle-delete-rowdata="handleDeleteRowdata"
-    >      
-    </menu-management-container>
+      :handle-modify="handleModify"
+    ></menu-management-container>
     <modal-form :modal-options="modalOptions">
       <div slot="modalBody">
         <menu-insert-form
@@ -25,7 +26,7 @@
         ></submenu-insert-form>
       </div>
       <div slot="modalFooter"></div>
-    </modal-form>       
+    </modal-form>
   </div>
 </template>
 <script>
@@ -34,7 +35,7 @@ import { LIST, MENU } from "@/api/menus/";
 import Modal from "@/components/modal/Modal.vue";
 import MenuInsertForm from "./MenuInsertForm.vue";
 import SubMenuInsertForm from "./SubMenuInsertForm.vue";
-import MenuManagementContainer from "./MenuManagementContainer.vue"
+import MenuManagementContainer from "./MenuManagementContainer.vue";
 
 export default {
   mixins: [utils],
@@ -44,9 +45,12 @@ export default {
       subMenus: [],
       selectedMenu: {
         idx: 0,
-        depth: 1,
-        menu: {          
-        }
+        depth: 0,
+        menu: {}
+      },
+      selectedSubMenu: {
+        idx: 0,
+        subMenu: {}
       },
       modalOptions: {
         modalName: "",
@@ -67,12 +71,12 @@ export default {
     },
     async getSubMenuList() {
       let apiUrl = `${MENU}/${this.selectedMenu.menu.menuId}/submenus`;
-      
+
       const response = await fetch(apiUrl);
       const json = await response.json();
       // console.log(json)
       return json.subMenus;
-    },    
+    },
     async insertMenu(formData, depth) {
       let apiUrl;
       apiUrl =
@@ -93,31 +97,31 @@ export default {
       const modalId = this.modalOptions.modalId;
 
       if (resultJson.result == "ok") {
-        await this.getSubMenuList().then((subMenuData)=>{          
-          this.subMenus = subMenuData;        
-        })
+        await this.getSubMenuList().then(subMenuData => {
+          this.subMenus = subMenuData;
+        });
         await this.getMenuList().then(data => {
-            Swal.fire("메뉴가 추가되었습니다.");
-            this.menus = data;
-        })          
-        $(`#${modalId}`).modal('hide');
+          Swal.fire("메뉴가 추가되었습니다.");
+          this.menus = data;
+        });
+        $(`#${modalId}`).modal("hide");
       } else {
         Swal.fire("오류가 발생했습니다.");
       }
     },
-    async deleteMenu(key, depth){
-      if(key == "" || depth =="") return false;
-      let apiUrl = 
-      depth == 1 
-      ? `${MENU}/${key}` 
-      : `${MENU}/${this.selectedMenu.menu.menuId}/submenus/${key}`;
+    async deleteMenu(key, depth) {
+      if (key == "" || depth == "") return false;
+      let apiUrl =
+        depth == 1
+          ? `${MENU}/${key}`
+          : `${MENU}/${this.selectedMenu.menu.menuId}/submenus/${key}`;
 
       const response = await fetch(apiUrl, {
         method: "DELETE"
-      })
+      });
       return response.status;
     },
-    popupModal(modalId, modalName) {      
+    popupModal(modalId, modalName) {
       new Promise((resolve, reject) => {
         this.componentKey = new Date().getSeconds();
         this.modalOptions.modalName = modalName;
@@ -127,7 +131,7 @@ export default {
         $(`#${modalId}`).modal("show");
       });
     },
-    async handleDeleteRowdata(key, depth) {      
+    async handleDeleteRowdata(key, depth) {
       Swal.fire({
         title: "정말 삭제하시겠습니까?",
         text: "한번 삭제하면 되돌릴 수 없습니다.",
@@ -140,62 +144,65 @@ export default {
         preConfirm: () => {
           return new Promise(resolve => {
             setTimeout(() => {
-              this.deleteMenu(key, depth).then(function(status){
-                resolve(status)
-              })            
+              this.deleteMenu(key, depth).then(function(status) {
+                resolve(status);
+              });
             }, 1000);
           });
         },
         allowOutsideClick: () => !Swal.isLoading()
       }).then(result => {
-        if(result.dismiss == "cancel") return false;
-        if(result.value == 201) {
+        if (result.dismiss == "cancel") return false;
+        if (result.value == 201) {
           this.getMenuList()
             .then(data => {
               Swal.fire("Deleted!", "메뉴가 삭제되었습니다.", "success");
               this.menus = data;
             })
-            .then(()=>{
-              this.getSubMenuList()
-                .then((subMenuData)=>{
+            .then(() => {
+              this.getSubMenuList().then(subMenuData => {
                 this.subMenus = subMenuData;
-              })
+              });
             })
             .catch(error => {
               console.error(error);
-            });          
-        }else{
+            });
+        } else {
           // console.log(result)
           Swal.fire({
-              title: 'Error!',
-              text: 'Do you want to continue',
-              type: 'warning',
-              confirmButtonText: 'Cool'  
-          });          
+            title: "Error!",
+            text: "Do you want to continue",
+            type: "warning",
+            confirmButtonText: "Cool"
+          });
         }
       });
-    },    
-    handleModify() {
-      Swal.fire({
-        type: 'error',
-        title: 'Oops...',
-        text: 'Something went wrong!',
-        footer: '<a href>Why do I have this issue?</a>'
-      })
+    },
+    handleModify(idx, depth) {
+      // Swal.fire({
+      //   type: "warning",
+      //   title: "Oops...",
+      //   text: "Something went wrong!",
+      //   footer: "<a href>Why do I have this issue?</a>"
+      // });
     },
     handleMenuClick(idx, depth) {
+      this.selectedSubMenu.subMenu = {};
       this.selectedMenu.idx = idx;
-      this.selectedMenu.depth = depth;      
-      
-      if(depth == 1){
-        this.selectedMenu.menu = this.menus[idx]; 
-        this.selectedMenu.menu.subMenu = {}    
-        this.getSubMenuList()
-        .then((subMenuData)=>{          
-          this.subMenus = subMenuData;          
-        })
-      }else if(depth == 2){
-        this.selectedMenu.menu.subMenu = this.subMenus[idx];
+      this.selectedMenu.depth = depth;
+
+      if (depth == 1) {
+        this.selectedMenu.menu = { ...this.menus[idx], isModify: false };
+
+        this.getSubMenuList().then(subMenuData => {
+          this.subMenus = subMenuData;
+        });
+      } else if (depth == 2) {
+        this.selectedSubMenu.idx = idx;
+        this.selectedSubMenu.subMenu = {
+          ...this.subMenus[idx],
+          isModify: false
+        };
       }
     }
   },
