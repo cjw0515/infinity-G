@@ -19,7 +19,7 @@
             class="list-group-item"
             v-for="(menu, idx) in menus"
             :key="idx"
-            @click="handleMenuClick(idx, 1)"
+            @click="_handleMenuClick(idx, 1)"
           >
             <div class="float-left">{{menu.menuName}}</div>
             <div class="float-right">
@@ -46,7 +46,7 @@
             class="list-group-item"
             v-for="(subMenu, idx) in subMenus"
             :key="idx"
-            @click="handleMenuClick(idx, 2)"
+            @click="_handleMenuClick(idx, 2)"
           >
             <div class="float-left">{{subMenu.subMenuName}}</div>
             <div class="float-right">
@@ -71,13 +71,10 @@
             <i class="btn-icon ti-settings"></i>
             <span style="color:#248afd">수정</span>
           </li>
-          <li class="list-group-item" v-for="(value, key) in selectedMenu.menu" :key="key">
-            <div class="float-left">{{key}} : {{value}}</div>
+          <li class="list-group-item" v-for="(item, key) in depth1ColData" :key="key">
+            <div class="float-left">{{Object.keys(item)[0]}} : {{Object.values(item)[0]}}</div>
           </li>
-          <!-- 
-          <li class="list-group-item">
-            <div class="float-left">메뉴이름 : {{selectedMenu.menu.menuName}}</div>
-          </li>
+          <!--           
           <li class="list-group-item">
             <div class="float-left">메뉴이름 : {{selectedMenu.menu.menuName}}</div>
           </li>
@@ -100,14 +97,8 @@
             <i class="btn-icon ti-settings"></i>
             <span style="color:#248afd">수정</span>
           </li>
-          <li class="list-group-item">
-            <div class="float-left">메뉴이름 : {{selectedSubMenu.subMenu.subMenuName}}</div>
-          </li>
-          <li class="list-group-item">
-            <div class="float-left">링크 : {{selectedSubMenu.subMenu.subMenuLink}}</div>
-          </li>
-          <li class="list-group-item">
-            <div class="float-left">사용 : {{selectedSubMenu.subMenu.subMenuIsUsing}}</div>
+          <li class="list-group-item" v-for="(item, key) in depth2ColData" :key="key">
+            <div class="float-left">{{Object.keys(item)[0]}} : {{Object.values(item)[0]}}</div>
           </li>
         </ul>
       </div>
@@ -175,43 +166,43 @@ export default {
         "menuOrder"
       ],
       depth2FormData: [],
-      depth1ColData:{
-        menuName: "name",
-        menuIcon: "icon",
-        menuOrder: "order"
+      depth1ColData: [],
+      depth2ColData: [],
+      depth1ColKeyName: {
+        menuName: "메뉴이름",
+        menuLink: "링크",
+        menuIcon: "아이콘",
+        menuIsUsing: "사용",
+        menuOrder: "순서"
       },
-      depth2ColData:{
-        menuName: "name",
-        menuIcon: "icon",
-        menuOrder: "order"
+      depth2ColKeyName: {
+        subMenuName: "메뉴이름",
+        subMenuLink: "링크",
+        subMenuIsUsing: "사용",
+        subMenuOrder: "순서"
       }
     };
   },
   methods: {
-    handleClickModify: function() {
-      console.log(this.selectedMenu.menu);
+    handleClickModify() {
       this.handleModify();
     },
-    getSelectedData: (targetObj, selectedData)=>{
-      let colArr = [];      
-
-      for (let iKey in targetObj) {
-        for(let jKey in selectedData){
-          if(iKey == jKey){
-            colArr.push({
-              [selectedData[jKey]]: targetObj[iKey]
-            });
-          }
-        }          
+    _handleMenuClick(idx, depth) {
+      this.handleMenuClick(idx, depth);
+      if (depth == 1) {
+        this.depth1ColData = utils.methods.getArrayFromObject(
+          this.selectedMenu.menu,
+          this.depth1ColKeyName
+        );
+      } else {
+        this.depth2ColData = utils.methods.getArrayFromObject(
+          this.selectedSubMenu.subMenu,
+          this.depth2ColKeyName
+        );
       }
-
-      console.log(colArr);  
-      return colArr;  
     }
   },
-  mounted: function() {         
-    console.log(this.selectedColData)
-  },
+  mounted: function() {},
   computed: {
     menuPath: function() {
       let selectedMenu = this.selectedMenu.menu;
@@ -223,12 +214,15 @@ export default {
         : ``;
       return path;
     },
-    selectedColData: function(){
-      console.log(this.getSelectedData(this.menus[0], this.depth1ColData))
-    }    
+    selectedColData: function() {
+      // utils.getArrayFromObject(this.menus[0], this.depth1ColData)
+      console.log(
+        utils.methods.getArrayFromObject(this.menus[0], this.depth1ColKeyName)
+      );
+    }
   },
   menuData: function() {
-    let data = [];   
+    let data = [];
 
     return data;
   }
