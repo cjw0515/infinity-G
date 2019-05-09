@@ -174,16 +174,44 @@ export default {
         "menuIsUsing",
         "menuOrder"
       ],
-      depth2FormData: []
+      depth2FormData: [],
+      depth1ColData:{
+        menuName: "name",
+        menuIcon: "icon",
+        menuOrder: "order"
+      },
+      depth2ColData:{
+        menuName: "name",
+        menuIcon: "icon",
+        menuOrder: "order"
+      }
     };
   },
   methods: {
     handleClickModify: function() {
       console.log(this.selectedMenu.menu);
       this.handleModify();
+    },
+    getSelectedData: (targetObj, selectedData)=>{
+      let colArr = [];      
+
+      for (let iKey in targetObj) {
+        for(let jKey in selectedData){
+          if(iKey == jKey){
+            colArr.push({
+              [selectedData[jKey]]: targetObj[iKey]
+            });
+          }
+        }          
+      }
+
+      console.log(colArr);  
+      return colArr;  
     }
   },
-  mounted: function() {},
+  mounted: function() {         
+    console.log(this.selectedColData)
+  },
   computed: {
     menuPath: function() {
       let selectedMenu = this.selectedMenu.menu;
@@ -194,14 +222,13 @@ export default {
         ? `/${selectedSubMenu.subMenuName}`
         : ``;
       return path;
-    }
+    },
+    selectedColData: function(){
+      console.log(this.getSelectedData(this.menus[0], this.depth1ColData))
+    }    
   },
   menuData: function() {
-    let data = [];
-
-    for(){
-      
-    }
+    let data = [];   
 
     return data;
   }

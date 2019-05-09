@@ -215,7 +215,7 @@ export default {
   mounted: function() {
     this.getMenuList()
       .then(data => {
-        this.menus = data;
+        this.menus = data;        
       })
       .catch(error => {
         console.error(error);
