@@ -12,6 +12,7 @@ import Home from '../views/Home.vue'
 import TodoContainer from '../components/todolists/TodoContainer.vue'
 import Menu from '@/pages/menu/Index.vue'
 import Chat from '@/pages/chat/Index.vue'
+import Calendar from '@/pages/calendar/Index.vue'
 
 Vue.use(Router);
 /**
@@ -55,10 +56,16 @@ const router = new Router({
                     name: 'chat',
                     component: Chat,                
                     props: true 
+                },                            
+                {
+                    path:'/calendar',
+                    name: 'calendar',
+                    component: Calendar,                
+                    props: true 
                 }                           
             ],
             meta: { requiresAuth: true }        
-        },        
+        },               
         {
             path: '/login',
             name: 'login',
